@@ -17,37 +17,35 @@ const skills: Skill[] = [
   { name: "JavaScript", level: 70, category: "Frontend" },
   { name: "React", level: 70, category: "Frontend" },
   { name: "TypeScript", level: 60, category: "Frontend" },
-  
+
   // Backend
   { name: "Java", level: 85, category: "Backend" },
   { name: "C#", level: 80, category: "Backend" },
   { name: "Node.js", level: 75, category: "Backend" },
   { name: "Python", level: 70, category: "Backend" },
   { name: "Express", level: 50, category: "Backend" },
-  
+
   // Database
   { name: "SQL Developer", level: 80, category: "Database" },
   { name: "PostgreSQL", level: 75, category: "Database" },
   { name: "MongoDB", level: 75, category: "Database" },
   { name: "Oracle", level: 70, category: "Database" },
-  
-  
-  
-  // Tools 
-  { name: "Git", level: 85, category: "Tools" },
-  { name: "Postman", level: 80, category: "Tools" },
-  { name: "Docker", level: 65, category: "Tools" },
-  { name: "Azure DevOps", level: 60, category: "Tools" },
 
 
   // Frameworks
-  { name: "Spring", level: 80, category: "Frameworks" },
-  { name: "ASP.NET", level: 70, category: "Frameworks" },
-  { name: ".NET", level: 70, category: "Frameworks" },
+  { name: "Spring", level: 60, category: "Frameworks" },
+  { name: "ASP.NET", level: 60, category: "Frameworks" },
+  { name: ".NET", level: 60, category: "Frameworks" },
   { name: "Entity Framework", level: 60, category: "Frameworks" },
-  ];
 
-const categories = ["Frontend", "Backend", "Database", "Tools", "Frameworks"];
+  // Tools
+  { name: "Git", level: 85, category: "Tools" },
+  { name: "Azure DevOps", level: 70, category: "Tools" },
+  { name: "Postman", level: 60, category: "Tools" },
+  { name: "Docker", level: 25, category: "Tools" },
+];
+
+const categories = ["Frontend", "Backend", "Database", "Frameworks", "Tools"];
 
 export function SkillsSection() {
   const getSkillsByCategory = (category: string) => {
@@ -114,10 +112,10 @@ export function SkillsSection() {
                   <h3 className="text-2xl font-bold text-gradient mb-6 text-center group-hover:scale-105 transition-transform duration-300">
                     {category === "Frontend" ? "Frontend" :
                      category === "Backend" ? "Backend" :
-                     category === "Database" ? "DataBase" : 
-                     category === "Tools" ? "Tools" : "Frameworks"}
+                     category === "Database" ? "DataBase" :
+                     category === "Frameworks" ? "Frameworks" : "Tools"}
                   </h3>
-                  
+
                   <div className="space-y-4">
                     {getSkillsByCategory(category).map((skill, index) => (
                       <SkillBar key={skill.name} skill={skill} index={index} />

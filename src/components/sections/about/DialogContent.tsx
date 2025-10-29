@@ -23,6 +23,6 @@ export function DialogContent({ title, dialogData }: DialogContentProps) {
       return <SimpleDialog data={dialogData.Colaboração} />;
 
     default:
-      return <p className="text-slate-300">Informações não disponíveis.</p>;
+      return <p className="text-muted-foreground text-sm">Informações não disponíveis.</p>;
   }
 }

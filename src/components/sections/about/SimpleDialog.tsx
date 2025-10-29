@@ -5,5 +5,5 @@ interface SimpleDialogProps {
 }
 
 export function SimpleDialog({ data }: SimpleDialogProps) {
-  return <p className="text-slate-300">{data.description}</p>;
+  return <p className="text-muted-foreground text-sm leading-relaxed">{data.description}</p>;
 }

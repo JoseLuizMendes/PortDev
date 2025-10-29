@@ -6,7 +6,7 @@ interface FormationDialogProps {
 
 export function FormationDialog({ data }: FormationDialogProps) {
   const renderLabel = (text: string) => (
-    <span className="font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+    <span className="font-semibold text-primary">
       {text}:
     </span>
   );
@@ -14,26 +14,26 @@ export function FormationDialog({ data }: FormationDialogProps) {
   return (
     <div className="grid grid-cols-2 gap-6">
       <div className="space-y-3">
-        <p>
-          {renderLabel("Modalidade")} {data.mode}
+        <p className="text-sm">
+          {renderLabel("Modalidade")} <span className="text-foreground">{data.mode}</span>
         </p>
-        <p>
-          {renderLabel("Curso")} {data.course}
+        <p className="text-sm">
+          {renderLabel("Curso")} <span className="text-foreground">{data.course}</span>
         </p>
-        <p>
-          {renderLabel("Instituição")} {data.institution}
+        <p className="text-sm">
+          {renderLabel("Instituição")} <span className="text-foreground">{data.institution}</span>
         </p>
       </div>
       <div className="space-y-3">
-        <p>
-          {renderLabel("Período")} {data.start} - {data.end}
+        <p className="text-sm">
+          {renderLabel("Período")} <span className="text-foreground">{data.start} - {data.end}</span>
         </p>
-        <p>
-          {renderLabel("Período Atual")} {data.currentPeriod}
+        <p className="text-sm">
+          {renderLabel("Período Atual")} <span className="text-foreground">{data.currentPeriod}</span>
         </p>
-        <p>
+        <p className="text-sm">
           {renderLabel("Status")}{" "}
-          <span className="text-green-400">{data.status}</span>
+          <span className="text-chart-2 font-medium">{data.status}</span>
         </p>
       </div>
     </div>

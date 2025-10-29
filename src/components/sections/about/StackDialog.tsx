@@ -6,7 +6,7 @@ interface StackDialogProps {
 
 export function StackDialog({ data }: StackDialogProps) {
   const renderLabel = (text: string) => (
-    <span className="font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+    <span className="font-semibold text-primary">
       {text}:
     </span>
   );
@@ -16,57 +16,57 @@ export function StackDialog({ data }: StackDialogProps) {
       {/* Dois dialogs lado a lado */}
       <div className="grid grid-cols-2 gap-4">
         {/* Dialog Frontend */}
-        <div className="glass-card border border-slate-700/50 rounded-lg p-4 bg-slate-900/50">
-          <h4 className="text-lg font-semibold text-blue-400 mb-3 text-center border-b border-blue-400/30 pb-2">
+        <div className="border border-border rounded-lg p-4 bg-card">
+          <h4 className="text-lg font-semibold text-primary mb-3 text-center border-b border-border pb-2">
             Frontend
           </h4>
           <div className="space-y-2">
             <p className="text-sm">
-              {renderLabel("Linguagens")} {data.frontend.language}
+              {renderLabel("Linguagens")} <span className="text-foreground">{data.frontend.language}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("Frameworks")} {data.frontend.framework}
+              {renderLabel("Frameworks")} <span className="text-foreground">{data.frontend.framework}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("Estilização")} {data.frontend.styling}
+              {renderLabel("Estilização")} <span className="text-foreground">{data.frontend.styling}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("Deploy")} {data.frontend.tools}
+              {renderLabel("Deploy")} <span className="text-foreground">{data.frontend.tools}</span>
             </p>
           </div>
         </div>
 
         {/* Dialog Backend */}
-        <div className="glass-card border border-slate-700/50 rounded-lg p-4 bg-slate-900/50">
-          <h4 className="text-lg font-semibold text-purple-400 mb-3 text-center border-b border-purple-400/30 pb-2">
+        <div className="border border-border rounded-lg p-4 bg-card">
+          <h4 className="text-lg font-semibold text-primary mb-3 text-center border-b border-border pb-2">
             Backend
           </h4>
           <div className="space-y-2">
             <p className="text-sm">
-              {renderLabel("Linguagens")} {data.backend.language}
+              {renderLabel("Linguagens")} <span className="text-foreground">{data.backend.language}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("Frameworks")} {data.backend.framework}
+              {renderLabel("Frameworks")} <span className="text-foreground">{data.backend.framework}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("APIs")} {data.backend.api}
+              {renderLabel("APIs")} <span className="text-foreground">{data.backend.api}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("Banco de Dados")} {data.backend.database}
+              {renderLabel("Banco de Dados")} <span className="text-foreground">{data.backend.database}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("Ferramentas")} {data.backend.tools}
+              {renderLabel("Ferramentas")} <span className="text-foreground">{data.backend.tools}</span>
             </p>
             <p className="text-sm">
-              {renderLabel("Infraestrutura")} {data.backend.infra}
+              {renderLabel("Infraestrutura")} <span className="text-foreground">{data.backend.infra}</span>
             </p>
           </div>
         </div>
       </div>
 
       {/* Área de descrição embaixo */}
-      <div className="glass-card border border-slate-700/50 rounded-lg p-3 bg-slate-900/30 h-16 flex items-center">
-        <p className="text-slate-300 text-sm leading-relaxed">
+      <div className="border border-border rounded-lg p-3 bg-muted/30 min-h-16 flex items-center">
+        <p className="text-muted-foreground text-sm leading-relaxed">
           {data.description}
         </p>
       </div>

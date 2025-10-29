@@ -57,7 +57,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="text-slate-400 hover:text-blue-400 hover:bg-slate-800/80 tech-hover"
-              onClick={() => window.open("https://github.com", "_blank")}
+              onClick={() => window.open("https://github.com/H1PEZECA", "_blank")}
             >
               <Github className="h-5 w-5" />
             </Button>
