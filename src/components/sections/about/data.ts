@@ -10,7 +10,7 @@ export const achievements: Achievement[] = [
   {
     icon: Code2,
     title: "Stack",
-    description: "Experiência em projetos web e mobile",
+    description: "Experiência em projetos web fullstack",
   },
   {
     icon: Target,
@@ -54,7 +54,8 @@ export const dialogAchievements: DialogAchievements = {
   },
   Foco: {
     description:
-      "Sempre buscando aprender novas tecnologias, mantendo-me atualizado com as tendências do mercado e aplicando boas práticas de desenvolvimento.",
+      "Tenho prioridade em entregar soluções com foco em performance, manutenibilidade e experiência do usuário." +
+      " Busco aprender continuamente através de projetos práticos e cursos, e aplico testes e boas práticas de desenvolvimento."
   },
   Colaboração: {
     description:
