@@ -131,7 +131,7 @@ export function SkillsSection() {
                   {/* Tools card: mostrar habilidades em grid 2 colunas; outros: lista vertical */}
                   {category === "Tools" ? (
                     <div className="grid grid-cols-2 gap-6">
-                      {getSkillsByCategory(category).map((skill, index) => (
+                      {getSkillsByCategory(category).map((skill) => (
                         <motion.div
                           key={skill.name}
                           initial={{ opacity: 0, y: 30 }}
