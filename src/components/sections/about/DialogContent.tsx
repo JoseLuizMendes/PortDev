@@ -1,6 +1,7 @@
 import { FormationDialog } from "./FormationDialog";
-import { SimpleDialog } from "./SimpleDialog";
 import { StackDialog } from "./StackDialog";
+import { FocusDialog } from "./FocusDialog";
+import { ColabDialog } from "./ColabDialog";
 import { DialogAchievements } from "./types";
 
 interface DialogContentProps {
@@ -17,10 +18,10 @@ export function DialogContent({ title, dialogData }: DialogContentProps) {
       return <StackDialog data={dialogData.Stack} />;
 
     case "Foco":
-      return <SimpleDialog data={dialogData.Foco} />;
+      return <FocusDialog data={dialogData.Foco} />;
 
     case "Colaboração":
-      return <SimpleDialog data={dialogData.Colaboração} />;
+      return <ColabDialog data={dialogData.Colaboração} />;
 
     default:
       return <p className="text-muted-foreground text-sm">Informações não disponíveis.</p>;
