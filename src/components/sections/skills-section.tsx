@@ -31,7 +31,6 @@ const skills: Skill[] = [
   { name: "MongoDB", level: 75, category: "Database" },
   { name: "Oracle", level: 70, category: "Database" },
 
-
   // Frameworks
   { name: "Spring", level: 60, category: "Frameworks" },
   { name: "ASP.NET", level: 60, category: "Frameworks" },
@@ -49,7 +48,7 @@ const categories = ["Frontend", "Backend", "Database", "Frameworks", "Tools"];
 
 export function SkillsSection() {
   const getSkillsByCategory = (category: string) => {
-    return skills.filter(skill => skill.category === category);
+    return skills.filter((skill) => skill.category === category);
   };
 
   const SkillBar = ({ skill, index }: { skill: Skill; index: number }) => (
@@ -68,7 +67,11 @@ export function SkillsSection() {
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${skill.level}%` }}
-          transition={{ duration: 1.5, delay: index * 0.1 + 0.2, ease: "easeOut" }}
+          transition={{
+            duration: 1.5,
+            delay: index * 0.1 + 0.2,
+            ease: "easeOut",
+          }}
           viewport={{ once: true }}
           className="bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 h-3 rounded-full shadow-lg shadow-blue-500/25 relative overflow-hidden"
         >
@@ -79,7 +82,10 @@ export function SkillsSection() {
   );
 
   return (
-    <section id="skills" className="py-20 bg-slate-900/30 relative tech-pattern">
+    <section
+      id="skills"
+      className="py-20 bg-slate-900/30 relative tech-pattern"
+    >
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -105,22 +111,63 @@ export function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
+              className={category === "Tools" ? "lg:col-span-2" : ""}
             >
               <Card className="glass-card backdrop-blur-md tech-hover group">
                 <CardContent className="p-8 relative">
                   <div className="absolute top-4 right-4 w-2 h-2 bg-blue-500 rounded-full animate-pulse opacity-60"></div>
                   <h3 className="text-2xl font-bold text-gradient mb-6 text-center group-hover:scale-105 transition-transform duration-300">
-                    {category === "Frontend" ? "Frontend" :
-                     category === "Backend" ? "Backend" :
-                     category === "Database" ? "DataBase" :
-                     category === "Frameworks" ? "Frameworks" : "Tools"}
+                    {category === "Frontend"
+                      ? "Frontend"
+                      : category === "Backend"
+                      ? "Backend"
+                      : category === "Database"
+                      ? "DataBase"
+                      : category === "Frameworks"
+                      ? "Frameworks"
+                      : "Tools"}
                   </h3>
 
-                  <div className="space-y-4">
-                    {getSkillsByCategory(category).map((skill, index) => (
-                      <SkillBar key={skill.name} skill={skill} index={index} />
-                    ))}
-                  </div>
+                  {/* Tools card: mostrar habilidades em grid 2 colunas; outros: lista vertical */}
+                  {category === "Tools" ? (
+                    <div className="grid grid-cols-2 gap-6">
+                      {getSkillsByCategory(category).map((skill, index) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6 }}
+                          viewport={{ once: true }}
+                          className="text-center mb-16"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-slate-200 font-medium">
+                              {skill.name}
+                            </span>
+                            <span className="text-blue-400 text-sm">
+                              {skill.level}%
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-800/60 rounded-full h-3 backdrop-blur-sm border border-slate-700/50">
+                            <div
+                              style={{ width: `${skill.level}%` }}
+                              className="bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 h-3 rounded-full shadow-lg shadow-blue-500/25 relative overflow-hidden"
+                            />
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {getSkillsByCategory(category).map((skill, index) => (
+                        <SkillBar
+                          key={skill.name}
+                          skill={skill}
+                          index={index}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
@@ -147,12 +194,21 @@ export function SkillsSection() {
                 </h3>
               </div>
               <p className="text-slate-300 text-lg max-w-2xl mx-auto text-center">
-                A tecnologia está em constante evolução, e eu também! Atualmente estou 
-                explorando novas tecnologias e expandindo meus conhecimentos.
+                A tecnologia está em constante evolução, e eu também! Atualmente
+                estou explorando novas tecnologias e expandindo meus
+                conhecimentos.
               </p>
-              
+
               <div className="flex flex-wrap justify-center gap-3 mt-8">
-                {["Rust", "GraphQL", "Machine Learning", "React Native", "AWS"].map((tech, index) => (
+                {[
+                  "Rest API",
+                  "Java",
+                  "Spring Boot",
+                  "JavaScript",
+                  "Next.js",
+                  "React",
+                  "PostgreSQL",
+                ].map((tech, index) => (
                   <motion.span
                     key={tech}
                     initial={{ opacity: 0, scale: 0 }}
