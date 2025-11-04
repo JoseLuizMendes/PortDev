@@ -6,6 +6,7 @@ import { Beams } from "@/components/ui/beams";
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
 import Image from "next/image";
+import { Dialog } from "../ui/dialog";
 
 export function HeroSection() {
   const scrollToSection = (id: string) => {
@@ -16,9 +17,12 @@ export function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       <Beams />
-      
+
       <div className="relative z-10 container mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -29,7 +33,13 @@ export function HeroSection() {
           <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl pulse-tech relative overflow-hidden">
             {/*<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 animate-pulse"></div>
             <span className="relative z-10">DEV</span>*/}
-            <Image className="mx-auto rounded-full overflow-hidden mt-10" src="/Dev.jpeg" alt="Logo" width={130} height={60} />
+            <Image
+              className="mx-auto rounded-full overflow-hidden mt-10"
+              src="/Dev.jpeg"
+              alt="Logo"
+              width={130}
+              height={60}
+            />
           </div>
         </motion.div>
 
@@ -39,7 +49,7 @@ export function HeroSection() {
             className="text-2xl md:text-3xl text-slate-300 mb-4 justify-center"
             delay={0.5}
           />
-          
+
           <SplitText
             text="Estudante de Ciência da Computação"
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 justify-center"
@@ -54,8 +64,8 @@ export function HeroSection() {
           className="mb-8"
         >
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Desenvolvedor apaixonado por tecnologia, sempre em busca de novos desafios
-            e oportunidades para crescer profissionalmente.
+            Desenvolvedor apaixonado por tecnologia, sempre em busca de novos
+            desafios e oportunidades para crescer profissionalmente.
           </p>
         </motion.div>
 
@@ -73,7 +83,7 @@ export function HeroSection() {
             Ver Projetos
             <ArrowDown className="ml-2 h-4 w-4" />
           </Button>
-          
+
           <Button
             size="lg"
             variant="outline"
@@ -95,7 +105,7 @@ export function HeroSection() {
           <ArrowDown className="h-6 w-6 text-slate-400 mx-auto" />
         </motion.div>
       </div>
-      
+
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/50" />
     </section>
