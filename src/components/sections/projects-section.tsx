@@ -4,12 +4,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SplitText } from "@/components/ui/split-text";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
+import { StaticImageData } from "next/image";
+import Image from "next/image";
+import proj1 from "../../../public/Capa.png";
 
 interface Project {
   id: number;
   title: string;
   description: string;
-  image: string;
+  image: string | StaticImageData;
   demoUrl: string;
   githubUrl?: string;
   technologies: string[];
@@ -19,14 +22,14 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Projeto 1",
+    title: "Barber Pro",
     description: "Descrição do seu primeiro projeto. Uma aplicação web moderna com funcionalidades incríveis.",
-    image: "",
+    image: proj1,
     demoUrl: "https://seu-projeto-1.com",
     githubUrl: "https://github.com/seu-usuario/projeto-1",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
   },
-  {
+  /*{
     id: 2,
     title: "Projeto 2",
     description: "Descrição do seu segundo projeto. Uma aplicação mobile com design responsivo.",
@@ -52,7 +55,7 @@ const projects: Project[] = [
     demoUrl: "https://seu-projeto-4.com",
     githubUrl: "https://github.com/seu-usuario/projeto-4",
     technologies: ["Node.js", "Express", "MongoDB", "Swagger"],
-  },
+  },*/
 ];
 
 export function ProjectsSection() {
@@ -109,11 +112,23 @@ export function ProjectsSection() {
               <Card className="glass-card hover:border-blue-500/50 transition-all duration-500 overflow-hidden group cursor-pointer tech-hover">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
-                    <div className="w-full h-64 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 flex items-center justify-center relative">
-                      {/* Placeholder para imagem */}
-                      <div className="text-slate-400 text-lg font-mono">
-                        {"<Project"} {project.id} {"/>"}
-                      </div>
+                    <div className="w-full h-64 relative overflow-hidden bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
+                      {/* Imagem do projeto */}
+                      {project.image && typeof project.image === 'object' ? (
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      ) : typeof project.image === 'string' ? (
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      ) : null}
                       {/* Efeito tech de fundo */}
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       
