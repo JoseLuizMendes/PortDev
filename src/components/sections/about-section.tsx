@@ -82,7 +82,7 @@ export function AboutSection() {
           viewport={{ once: true }}
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { number: "2+", label: "Anos de Estudo" },
+            { number: "2+", label: "Anos de Experiência" },
             { number: "10+", label: "Projetos Desenvolvidos" },
             { number: "5+", label: "Tecnologias Dominadas" },
             { number: "∞", label: "Vontade de Aprender" },
