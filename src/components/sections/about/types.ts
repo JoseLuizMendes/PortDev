@@ -13,15 +13,12 @@ export interface StackData {
     language: string;
     framework: string;
     styling: string;
-    tools: string;
   };
   backend: {
     language: string;
     framework: string;
     database: string;
-    tools: string;
     api: string;
-    infra: string;
   };
   description: string;
 }

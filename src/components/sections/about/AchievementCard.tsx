@@ -35,7 +35,6 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
               <p><span className="text-slate-400">Linguagens:</span> {data.frontend.language}</p>
               <p><span className="text-slate-400">Frameworks:</span> {data.frontend.framework}</p>
               <p><span className="text-slate-400">Estilo:</span> {data.frontend.styling}</p>
-              <p><span className="text-slate-400">Ferramentas:</span> {data.frontend.tools}</p>
             </div>
           </div>
           <div>
@@ -45,7 +44,6 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
               <p><span className="text-slate-400">Frameworks:</span> {data.backend.framework}</p>
               <p><span className="text-slate-400">Banco de Dados:</span> {data.backend.database}</p>
               <p><span className="text-slate-400">APIs:</span> {data.backend.api}</p>
-              <p><span className="text-slate-400">Infra:</span> {data.backend.infra}</p>
             </div>
           </div>
         </div>
@@ -111,6 +109,11 @@ export function AchievementCard({
             WebkitBackfaceVisibility: "hidden",
           }}
           className="w-full h-full"
+          animate={{
+            opacity: isFlipped ? 0 : 1,
+            pointerEvents: isFlipped ? "none" : "auto",
+          }}
+          transition={{ duration: 0.3 }}
         >
           <Card className="glass-card hover:border-blue-500/50 transition-all duration-300 h-full tech-hover group">
             <CardContent className="p-6 text-center relative flex flex-col justify-between h-full">
@@ -137,12 +140,17 @@ export function AchievementCard({
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
+            rotateY: 180,
             position: "absolute",
             top: 0,
             left: 0,
-            rotateY: 180,
           }}
           className="w-full h-full"
+          animate={{
+            opacity: isFlipped ? 1 : 0,
+            pointerEvents: isFlipped ? "auto" : "none",
+          }}
+          transition={{ duration: 0.3 }}
         >
           <Card className="glass-card border-blue-500/30 transition-all duration-300 h-full tech-hover group bg-slate-900/60">
             <CardContent className="p-6 h-full flex flex-col justify-between overflow-hidden">

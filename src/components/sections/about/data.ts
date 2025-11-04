@@ -36,18 +36,15 @@ export const dialogAchievements: DialogAchievements = {
   },
   Stack: {
     frontend: {
-      language: "JavaScript / TypeScript",
+      language: "JavaScript",
       framework: "Next.js / React",
       styling: "Tailwind CSS / Framer Motion",
-      tools: "Vercel / Vite",
     },
     backend: {
-      language: "Java / Node.js",
+      language: "Java",
       framework: "Spring Boot / Express",
-      database: "PostgreSQL / SQL Developer",
-      tools: "Docker / Postman / Git",
-      api: "GraphQL / REST",
-      infra: "AWS / Railway",
+      database: "PostgreSQL",
+      api: "REST",
     },
     description:
       "Desenvolvimento de aplicações web fullstack com foco em performance e usabilidade.",
