@@ -12,14 +12,14 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
       const data = dialogData.Formação;
       return (
         <div className="space-y-1">
-          <div>
-            <p className="font-semibold text-blue-300">{data.course}</p>
-            <p className="text-slate-400">{data.institution}</p>
-          </div>
-          <div className="text-xs text-slate-400 space-y-0">
+          <p className="font-semibold text-blue-300">{data.course}</p>
+          <div className="grid grid-cols-2 text-slate-400">
+            <p>Universidade: {data.institution}</p>
+            <p>
+              Status: <span className="text-emerald-400">{data.status}</span>
+            </p>
             {data.start && <p>Desde: {data.start}</p>}
             {data.end && <p>Até: {data.end}</p>}
-            <p>{data.status}</p>
           </div>
         </div>
       );
@@ -28,42 +28,31 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
     case "Stack": {
       const data = dialogData.Stack;
       return (
-        <div className="grid grid-cols-2 gap-2 text-xs">
+        <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <h4 className="font-semibold text-blue-300 mb-1">Frontend</h4>
             <div className="space-y-0 text-slate-300">
-              <p>
-                <span className="text-slate-400">Linguagens:</span>{" "}
-                {data.frontend.language}
-              </p>
-              <p>
-                <span className="text-slate-400">Frameworks:</span>{" "}
-                {data.frontend.framework}
-              </p>
-              <p>
-                <span className="text-slate-400">Estilo:</span>{" "}
-                {data.frontend.styling}
-              </p>
+              <p>{data.frontend.language}</p>
+              <p className="ml-4 text-slate-400">+</p>
+              {data.frontend.framework.map((item, idx) => (
+                <p key={idx}>{item}</p>
+              ))}
+              <p className="ml-4 text-slate-400">+</p>
+              {data.frontend.styling.map((item, idx) => (
+                <p key={idx}>{item}</p>
+              ))}
             </div>
           </div>
           <div>
             <h4 className="font-semibold text-blue-300 mb-1">Backend</h4>
             <div className="space-y-0 text-slate-300">
-              <p>
-                <span className="text-slate-400">Linguagens:</span>{" "}
-                {data.backend.language}
-              </p>
-              <p>
-                <span className="text-slate-400">Frameworks:</span>{" "}
-                {data.backend.framework}
-              </p>
-              <p>
-                <span className="text-slate-400">Banco de Dados:</span>{" "}
-                {data.backend.database}
-              </p>
-              <p>
-                <span className="text-slate-400">APIs:</span> {data.backend.api}
-              </p>
+              <p>{data.backend.language}</p>
+              <p className="ml-4 text-slate-400">+</p>
+              {data.backend.framework.map((item, idx) => (
+                <p key={idx}>{item}</p>
+              ))}
+              <p className="ml-4 text-slate-400">+</p>
+              <p>{data.backend.database}</p>
             </div>
           </div>
         </div>
@@ -111,7 +100,7 @@ export function AchievementCard({
     <div
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
-      className="w-full aspect-square"
+      className="w-full h-64"
       style={{
         perspective: "1200px",
       }}
@@ -184,7 +173,7 @@ export function AchievementCard({
               <h3 className="text-white font-semibold mb-2 text-center pb-2 border-b border-slate-700/50">
                 {achievement.title}
               </h3>
-              <div className="text-slate-300 text-sm space-y-1 flex-grow overflow-y-auto">
+              <div className="text-slate-300 text-sm font-semibold space-y-1 flex-grow overflow-y-auto">
                 {renderDialogContent(achievement.title, dialogData)}
               </div>
             </CardContent>

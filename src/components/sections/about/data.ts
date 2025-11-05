@@ -37,12 +37,12 @@ export const dialogAchievements: DialogAchievements = {
   Stack: {
     frontend: {
       language: "JavaScript",
-      framework: "Next.js / React",
-      styling: "Tailwind CSS / Framer Motion",
+      framework: ["Next.js", "React"],
+      styling: ["Tailwind CSS", "Motion"],
     },
     backend: {
       language: "Java",
-      framework: "Spring Boot / Express",
+      framework: ["Spring", "Express"],
       database: "PostgreSQL",
       api: "REST",
     },

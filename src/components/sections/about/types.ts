@@ -11,12 +11,12 @@ export interface FormationData {
 export interface StackData {
   frontend: {
     language: string;
-    framework: string;
-    styling: string;
+    framework: string[];
+    styling: string[];
   };
   backend: {
     language: string;
-    framework: string;
+    framework: string[];
     database: string;
     api: string;
   };
