@@ -19,20 +19,10 @@ export function Footer() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between">
-          <div className="text-slate-400 text-sm mb-4 md:mb-0 font-mono">
-            <span className="text-blue-400">©</span> 2024
-            <span className="text-gradient font-semibold"> DevPortfolio</span>
-            <span className="text-slate-500">. All rights reserved.</span>
-          </div>
-
-          <div className="flex items-center text-slate-400 text-sm">
-            <span>Crafted with</span>
-            <Heart className="h-4 w-4 mx-1 text-red-500 fill-red-500 animate-pulse" />
-            <span>& lots of</span>
-            <span className="text-blue-400 font-mono mx-1">{"<code/>"}</span>
-            <span>by a CS student</span>
-          </div>
+        <div className="text-slate-400 text-sm mb-4 md:mb-0 font-mono text-center">
+          <span className="text-blue-400">©</span> 2024
+          <span className="text-gradient font-semibold"> DevPortfolio</span>
+          <span className="text-slate-500">. All rights reserved.</span>
         </div>
 
         {/* Tech footer decoration */}
