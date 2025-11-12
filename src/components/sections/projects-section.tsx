@@ -173,7 +173,7 @@ export function ProjectsSection() {
                         {project.description}
                       </p>
                       
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 items-center justify-center">
                         {project.technologies.map((tech, index) => (
                           <span
                             key={index}
