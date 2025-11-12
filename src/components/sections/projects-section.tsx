@@ -27,7 +27,7 @@ const projects: Project[] = [
     image: proj1,
     demoUrl: "https://seu-projeto-1.com",
     githubUrl: "https://github.com/seu-usuario/projeto-1",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma"],
   },
   /*{
     id: 2,
