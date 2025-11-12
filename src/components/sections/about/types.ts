@@ -12,7 +12,7 @@ export interface StackData {
   frontend: {
     language: string;
     framework: string[];
-    styling: string[];
+    styling: string;
   };
   backend: {
     language: string;

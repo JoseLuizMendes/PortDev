@@ -3,6 +3,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { SplitText } from "@/components/ui/split-text";
 import { motion } from "framer-motion";
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 interface Skill {
   name: string;
@@ -32,10 +41,10 @@ const skills: Skill[] = [
   { name: "Oracle", level: 70, category: "Database" },
 
   // Frameworks
-  { name: "Spring", level: 60, category: "Frameworks" },
+  { name: "Spring", level: 75, category: "Frameworks" },
   { name: "ASP.NET", level: 60, category: "Frameworks" },
-  { name: ".NET", level: 60, category: "Frameworks" },
-  { name: "Entity Framework", level: 60, category: "Frameworks" },
+  { name: ".NET", level: 55, category: "Frameworks" },
+  { name: "Entity Framework", level: 55, category: "Frameworks" },
 
   // Tools
   { name: "Git", level: 85, category: "Tools" },
@@ -51,35 +60,14 @@ export function SkillsSection() {
     return skills.filter((skill) => skill.category === category);
   };
 
-  const SkillBar = ({ skill, index }: { skill: Skill; index: number }) => (
-    <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="mb-6"
-    >
-      <div className="flex justify-between mb-2">
-        <span className="text-slate-300 font-medium">{skill.name}</span>
-        <span className="text-blue-400 text-sm">{skill.level}%</span>
-      </div>
-      <div className="w-full bg-slate-800/60 rounded-full h-3 backdrop-blur-sm border border-slate-700/50">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          transition={{
-            duration: 1.5,
-            delay: index * 0.1 + 0.2,
-            ease: "easeOut",
-          }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 h-3 rounded-full shadow-lg shadow-blue-500/25 relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
+  // Preparar dados radar para uma categoria específica
+  const getCategoryRadarData = (category: string) => {
+    return getSkillsByCategory(category).map((skill) => ({
+      skill: skill.name,
+      level: skill.level,
+      fullMark: 100,
+    }));
+  };
 
   return (
     <section
@@ -128,46 +116,37 @@ export function SkillsSection() {
                       : "Tools"}
                   </h3>
 
-                  {/* Tools card: mostrar habilidades em grid 2 colunas; outros: lista vertical */}
-                  {category === "Tools" ? (
-                    <div className="grid grid-cols-2 gap-6">
-                      {getSkillsByCategory(category).map((skill) => (
-                        <motion.div
-                          key={skill.name}
-                          initial={{ opacity: 0, y: 30 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6 }}
-                          viewport={{ once: true }}
-                          className="text-center mb-16"
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-slate-200 font-medium">
-                              {skill.name}
-                            </span>
-                            <span className="text-blue-400 text-sm">
-                              {skill.level}%
-                            </span>
-                          </div>
-                          <div className="w-full bg-slate-800/60 rounded-full h-3 backdrop-blur-sm border border-slate-700/50">
-                            <div
-                              style={{ width: `${skill.level}%` }}
-                              className="bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 h-3 rounded-full shadow-lg shadow-blue-500/25 relative overflow-hidden"
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {getSkillsByCategory(category).map((skill, index) => (
-                        <SkillBar
-                          key={skill.name}
-                          skill={skill}
-                          index={index}
-                        />
-                      ))}
-                    </div>
-                  )}
+                  {/* Gráfico Radar para cada categoria */}
+                  <ResponsiveContainer width="100%" height={300}>
+                    <RadarChart data={getCategoryRadarData(category)}>
+                      <PolarGrid stroke="#475569" />
+                      <PolarAngleAxis
+                        dataKey="skill"
+                        tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                        tickSize={17}
+                      />
+                      <PolarRadiusAxis
+                        angle={90}
+                        domain={[10, 100]}
+                        tick={{ fill: "#94a3b8", fontSize: 10 }}
+                      />
+                      <Radar
+                        name="Nível"
+                        dataKey="level"
+                        stroke="#3b82f6"
+                        fill="#3b82f6"
+                        fillOpacity={0.6}
+                      />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "#1e293b",
+                          border: "1px solid #3b82f6",
+                          borderRadius: "8px",
+                          color: "#e2e8f0",
+                        }}
+                      />
+                    </RadarChart>
+                  </ResponsiveContainer>
                 </CardContent>
               </Card>
             </motion.div>

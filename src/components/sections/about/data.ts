@@ -38,7 +38,7 @@ export const dialogAchievements: DialogAchievements = {
     frontend: {
       language: "JavaScript",
       framework: ["Next.js", "React"],
-      styling: ["Tailwind CSS", "Motion"],
+      styling: "Tailwind CSS",
     },
     backend: {
       language: "Java",
