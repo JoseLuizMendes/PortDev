@@ -57,7 +57,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="text-slate-400 hover:text-blue-400 hover:bg-slate-800/80 tech-hover"
-              onClick={() => window.open("https://github.com/H1PEZECA", "_blank")}
+              onClick={() => window.open("https://github.com/JoseLuizMendes", "_blank")}
             >
               <Github className="h-5 w-5" />
             </Button>
@@ -65,7 +65,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="text-slate-400 hover:text-blue-400 hover:bg-slate-800/80 tech-hover"
-              onClick={() => window.open("https://linkedin.com", "_blank")}
+              onClick={() => window.open("https://www.linkedin.com/in/jos%C3%A9-luiz-dos-santos-azeredo-mendes-ab5a10283/", "_blank")}
             >
               <Linkedin className="h-5 w-5" />
             </Button>
