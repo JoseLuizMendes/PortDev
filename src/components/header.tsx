@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { ModeToggle } from "@/components/ui/toggle-theme";
 
 export function Header() {
   const scrollToSection = (id: string) => {
@@ -77,6 +78,7 @@ export function Header() {
             >
               <Mail className="h-5 w-5" />
             </Button>
+            <ModeToggle />
           </motion.div>
         </div>
       </div>

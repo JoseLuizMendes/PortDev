@@ -8,7 +8,7 @@ import { TechEffects, SectionDivider } from "@/components/ui/tech-effects";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+    <div className="min-h-screen bg-background relative overflow-hidden">
       <TechEffects />
       <Header />
       <main className="relative z-10">
