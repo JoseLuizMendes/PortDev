@@ -85,7 +85,7 @@ export function HeroSection() {
             size="lg"
             variant="outline"
             className="border-slate-600/50 text-slate-300 hover:bg-slate-800/80 hover:border-blue-500/50 px-8 py-3 rounded-full tech-hover backdrop-blur-sm"
-            onClick={() => window.open("#", "_blank")}
+            onClick={() => window.open("/curriculo", "_blank")}
           >
             <Download className="mr-2 h-4 w-4" />
             Download CV
