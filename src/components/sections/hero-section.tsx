@@ -6,7 +6,6 @@ import { Beams } from "@/components/ui/beams";
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
 import Image from "next/image";
-import { Dialog } from "../ui/dialog";
 
 export function HeroSection() {
   const scrollToSection = (id: string) => {
@@ -31,8 +30,6 @@ export function HeroSection() {
           className="mb-6"
         >
           <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl pulse-tech relative overflow-hidden">
-            {/*<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 animate-pulse"></div>
-            <span className="relative z-10">DEV</span>*/}
             <Image
               className="mx-auto rounded-full overflow-hidden mt-10"
               src="/Dev.jpeg"
