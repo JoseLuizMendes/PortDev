@@ -159,7 +159,7 @@ export function SkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-10 text-center"
         >
           <Card className="glass-card border-blue-500/20 backdrop-blur-md relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5"></div>
@@ -186,6 +186,7 @@ export function SkillsSection() {
                   "JavaScript",
                   "Next.js",
                   "React",
+                  "Prisma",
                   "PostgreSQL",
                 ].map((tech, index) => (
                   <motion.span
