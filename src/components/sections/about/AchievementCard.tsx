@@ -28,31 +28,54 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
     case "Stack": {
       const data = dialogData.Stack;
       return (
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div>
-            <h4 className="font-semibold text-blue-300 mb-1">Frontend</h4>
-            <div className="space-y-0 text-slate-300">
-              <p>{data.frontend.language}</p>
-              <p className="ml-4 text-slate-400">+</p>
-              {data.frontend.framework.map((item, idx) => (
-                <p key={idx}>{item}</p>
-              ))}
-              <p className="ml-4 text-slate-400">+</p>
-              {data.frontend.styling.map((item, idx) => (
-                <p key={idx}>{item}</p>
-              ))}
+        <div className="h-full flex flex-col justify-center">
+          <div className="grid grid-cols-2 gap-3">
+            {/* Frontend */}
+            <div className="space-y-1">
+              <h4 className="font-bold text-blue-300 mb-2 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
+                Frontend
+              </h4>
+              <div className="space-y-0 text-slate-300 pl-2">
+                <p className="text-slate-400">Lang:</p>
+                <p className="font-medium">{data.frontend.language}</p>
+                <p className="text-slate-400 mt-1">Framework:</p>
+                <div className="flex flex-wrap gap-1">
+                  {data.frontend.framework.map((item, idx) => (
+                    <span key={idx} className=" py-0">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-slate-400 mt-1">Style:</p>
+                <div className="flex flex-wrap gap-1">
+                  {data.frontend.styling && (
+                    <span className="py-0">{data.frontend.styling}</span>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            <h4 className="font-semibold text-blue-300 mb-1">Backend</h4>
-            <div className="space-y-0 text-slate-300">
-              <p>{data.backend.language}</p>
-              <p className="ml-4 text-slate-400">+</p>
-              {data.backend.framework.map((item, idx) => (
-                <p key={idx}>{item}</p>
-              ))}
-              <p className="ml-4 text-slate-400">+</p>
-              <p>{data.backend.database}</p>
+
+            {/* Backend */}
+            <div className="space-y-1">
+              <h4 className="font-bold text-cyan-300 mb-2 flex items-center gap-1">
+                <span className="w-1.5 h-1 bg-cyan-400 rounded-full"></span>
+                Backend
+              </h4>
+              <div className="space-y-0 text-slate-300 pl-2">
+                <p className="text-slate-400">Lang:</p>
+                <p className="font-medium">{data.backend.language}</p>
+                <p className="text-slate-400 mt-1">Framework:</p>
+                <div className="flex flex-wrap gap-1">
+                  {data.backend.framework.map((item, idx) => (
+                    <span key={idx} className="py-0">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-slate-400 mt-1">Database:</p>
+                <p className="font-medium">{data.backend.database}</p>
+              </div>
             </div>
           </div>
         </div>
