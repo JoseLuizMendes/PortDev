@@ -19,7 +19,7 @@
 
 # production
 /build
-
+/_prompts
 # misc
 .DS_Store
 *.pem
