@@ -23,7 +23,7 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Barber Pro",
-    description: "Descrição do seu primeiro projeto. Uma aplicação web moderna com funcionalidades incríveis.",
+    description: "Barber Pro — sistema de gestão para barbearias com agendamento online, controle de clientes e pagamentos.",
     image: proj1,
     demoUrl: "https://seu-projeto-1.com",
     githubUrl: "https://github.com/seu-usuario/projeto-1",
@@ -81,7 +81,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-slate-900/50 relative tech-pattern overflow-hidden">
+    <section id="projects" className="py- bg-slate-900/50 relative tech-pattern overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -198,7 +198,7 @@ export function ProjectsSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <p className="text-slate-400 text-lg">
+          <p className="text-slate-400 text-lg py-6">
             Mais projetos em desenvolvimento... 🚀
           </p>
         </motion.div>
