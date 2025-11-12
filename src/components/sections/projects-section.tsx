@@ -81,7 +81,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py- bg-slate-900/50 relative tech-pattern overflow-hidden">
+    <section id="projects" className="py-10 relative tech-pattern overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
