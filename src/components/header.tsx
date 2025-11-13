@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import { ModeToggle } from "@/components/ui/toggle-theme";
 
 export function Header() {
@@ -30,7 +30,7 @@ export function Header() {
           >
             {"<PortDev/>"}
           </motion.div>
-          
+
           <nav className="hidden md:flex items-center space-x-8">
             {["home", "about", "skills", "projects"].map((item, index) => (
               <motion.button
@@ -41,44 +41,48 @@ export function Header() {
                 onClick={() => scrollToSection(item)}
                 className="text-muted-foreground hover:text-primary transition-colors duration-300 capitalize relative group"
               >
-                {item === "home" ? "Início" : 
-                 item === "about" ? "Sobre" :
-                 item === "skills" ? "Habilidades" : "Projetos"}
+                {item === "home"
+                  ? "Início"
+                  : item === "about"
+                  ? "Sobre"
+                  : item === "skills"
+                  ? "Habilidades"
+                  : "Projetos"}
               </motion.button>
             ))}
           </nav>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex items-center space-x-4"
           >
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-muted-foreground hover:text-primary hover:bg-card/80 tech-hover"
-              onClick={() => window.open("https://github.com/JoseLuizMendes", "_blank")}
-            >
-              <Github className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-muted-foreground hover:text-primary hover:bg-card/80 tech-hover"
-              onClick={() => window.open("https://www.linkedin.com/in/jos%C3%A9-luiz-dos-santos-azeredo-mendes-ab5a10283/", "_blank")}
-            >
-              <Linkedin className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-muted-foreground hover:text-primary hover:bg-card/80 tech-hover"
-              onClick={() => window.open("mailto:seu@email.com")}
-            >
-              <Mail className="h-5 w-5" />
-            </Button>
-            <ModeToggle />
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-muted-foreground hover:text-primary hover:bg-card/80 tech-hover"
+                onClick={() =>
+                  window.open("https://github.com/JoseLuizMendes", "_blank")
+                }
+              >
+                <Github className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-muted-foreground hover:text-primary hover:bg-card/80 tech-hover"
+                onClick={() =>
+                  window.open(
+                    "https://www.linkedin.com/in/jos%C3%A9-luiz-dos-santos-azeredo-mendes-ab5a10283/",
+                    "_blank"
+                  )
+                }
+              >
+                <Linkedin className="h-5 w-5" />
+              </Button>
+              <ModeToggle />
+            </div>
           </motion.div>
         </div>
       </div>
