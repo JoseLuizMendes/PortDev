@@ -56,8 +56,8 @@
   /* Tema Claro */
   --background: #ffffff;
   --foreground: #0f172a;
-  --card: #1e3a5f;
-  --card-foreground: #f1f5f9;
+  --card: rgba(255, 255, 255, 0.7);
+  --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
   --primary: var(--primary-blue);
@@ -89,9 +89,9 @@
 
 .dark {
   /* Tema Escuro */
-  --background: #0f172a;
+  --background: #020617;
   --foreground: #f1f5f9;
-  --card: #1e3a5f;
+  --card: rgba(15, 23, 42, 0.6);
   --card-foreground: #f1f5f9;
   --popover: #1e293b;
   --popover-foreground: #f1f5f9;
@@ -181,13 +181,24 @@ body {
   overflow: hidden;
 }
 
-/* Efeitos de glassmorphism para cards - mantém azul em ambos os temas */
+/* Efeitos de glassmorphism para cards */
 .glass-card {
   background: var(--card);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
   transition: all 0.3s ease;
+}
+
+.dark .glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
 }
 
 /* Efeito de hover para elementos interativos */
