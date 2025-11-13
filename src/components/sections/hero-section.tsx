@@ -43,13 +43,13 @@ export function HeroSection() {
         <div className="mb-6">
           <SplitTextChar
             text="Olá, eu sou o José Luiz!"
-            className="text-2xl md:text-3xl text-slate-300 mb-4 justify-center"
+            className="text-2xl md:text-3xl text-muted-foreground mb-4 justify-center"
             delay={0.5}
           />
 
           <SplitText
             text="Estudante de Ciência da Computação"
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 justify-center"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 justify-center"
             delay={1.2}
           />
         </div>
@@ -60,7 +60,7 @@ export function HeroSection() {
           transition={{ delay: 2.5, duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Desenvolvedor apaixonado por tecnologia, sempre em busca de novos
             desafios e oportunidades para crescer profissionalmente.
           </p>
@@ -84,7 +84,7 @@ export function HeroSection() {
           <Button
             size="lg"
             variant="outline"
-            className="border-slate-600/50 text-slate-300 hover:bg-slate-800/80 hover:border-blue-500/50 px-8 py-3 rounded-full tech-hover backdrop-blur-sm"
+            className="border-border text-foreground hover:bg-card/80 hover:border-primary/50 px-8 py-3 rounded-full tech-hover backdrop-blur-sm"
             onClick={() => window.open("/curriculo", "_blank")}
           >
             <Download className="mr-2 h-4 w-4" />
@@ -99,7 +99,7 @@ export function HeroSection() {
           className="animate-bounce cursor-pointer"
           onClick={() => scrollToSection("about")}
         >
-          <ArrowDown className="h-6 w-6 text-slate-400 mx-auto" />
+          <ArrowDown className="h-6 w-6 text-muted-foreground mx-auto" />
         </motion.div>
       </div>
 

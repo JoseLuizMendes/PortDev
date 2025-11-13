@@ -72,7 +72,7 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="py-20 bg-slate-900/30 relative tech-pattern"
+      className="py-20 bg-background/95 relative tech-pattern"
     >
       <div className="container mx-auto px-6">
         <motion.div
@@ -84,9 +84,9 @@ export function SkillsSection() {
         >
           <SplitText
             text="Habilidades Técnicas"
-            className="text-4xl md:text-5xl font-bold text-white mb-6 justify-center"
+            className="text-4xl md:text-5xl font-bold text-foreground mb-6 justify-center"
           />
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Tecnologias e ferramentas que domino e utilizo em meus projetos
           </p>
         </motion.div>
@@ -172,7 +172,7 @@ export function SkillsSection() {
                   Sempre Aprendendo
                 </h3>
               </div>
-              <p className="text-slate-300 text-lg max-w-2xl mx-auto text-center">
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-center">
                 A tecnologia está em constante evolução, e eu também! Atualmente
                 estou explorando novas tecnologias e expandindo meus
                 conhecimentos.
@@ -195,7 +195,7 @@ export function SkillsSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="px-4 py-2 glass-card text-slate-200 rounded-full text-sm border-blue-500/20 tech-hover cursor-default"
+                    className="px-4 py-2 glass-card text-card-foreground rounded-full text-sm border-primary/20 tech-hover cursor-default"
                   >
                     {tech}
                   </motion.span>

@@ -15,7 +15,7 @@ export function ModeToggle() {
 
   if (!mounted) {
     return (
-      <div className="h-9 w-9 rounded-md bg-slate-800/50 animate-pulse" />
+      <div className="h-9 w-9 rounded-md bg-card/50 animate-pulse" />
     )
   }
 
@@ -31,12 +31,12 @@ export function ModeToggle() {
       aria-label="Alternar tema"
       size="sm"
       variant="outline"
-      className="bg-slate-800/50 hover:bg-slate-700/50 border-slate-600/50 data-[state=on]:bg-slate-700/70 data-[state=on]:border-blue-500/50"
+      className="bg-card/80 hover:bg-card border-primary/30 data-[state=on]:bg-card data-[state=on]:border-primary/50 transition-all duration-300"
     >
       {isDark ? (
-        <Moon className="h-4 w-4 text-blue-400" />
+        <Moon className="h-4 w-4 text-primary transition-transform duration-300 hover:rotate-12" />
       ) : (
-        <Sun className="h-4 w-4 text-yellow-500" />
+        <Sun className="h-4 w-4 text-yellow-500 transition-transform duration-300 hover:rotate-90" />
       )}
     </Toggle>
   )

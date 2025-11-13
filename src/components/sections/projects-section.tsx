@@ -81,7 +81,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-10 relative tech-pattern overflow-hidden">
+    <section id="projects" className="py-10 bg-background relative tech-pattern overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -92,9 +92,9 @@ export function ProjectsSection() {
         >
           <SplitText
             text="Meus Projetos"
-            className="text-4xl md:text-5xl font-bold text-white mb-6 justify-center"
+            className="text-4xl md:text-5xl font-bold text-foreground mb-6 justify-center"
           />
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Aqui estão alguns dos projetos que desenvolvi durante minha jornada como estudante.
             Clique em qualquer projeto para ver mais detalhes.
           </p>
@@ -109,7 +109,7 @@ export function ProjectsSection() {
         >
           {projects.map((project) => (
             <motion.div key={project.id} variants={itemVariants}>
-              <Card className="glass-card hover:border-blue-500/50 transition-all duration-500 overflow-hidden group cursor-pointer tech-hover">
+              <Card className="glass-card hover:border-primary/50 transition-all duration-500 overflow-hidden group cursor-pointer tech-hover">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <div className="w-full h-64 relative overflow-hidden bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
@@ -165,11 +165,11 @@ export function ProjectsSection() {
                     </div>
                     
                     <div className="p-6 bg-gradient-to-t from-slate-900/50 to-transparent">
-                      <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-gradient transition-all duration-300">
+                      <h3 className="text-xl font-semibold text-card-foreground mb-3 group-hover:text-gradient transition-all duration-300">
                         {project.title}
                       </h3>
                       
-                      <p className="text-slate-400 mb-4 line-clamp-3 group-hover:text-slate-300 transition-colors duration-300">
+                      <p className="text-card-foreground/70 mb-4 line-clamp-3 group-hover:text-card-foreground transition-colors duration-300">
                         {project.description}
                       </p>
                       
@@ -177,7 +177,7 @@ export function ProjectsSection() {
                         {project.technologies.map((tech, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 text-xs font-medium bg-slate-800/60 text-slate-300 rounded-full border border-slate-700/50 group-hover:border-blue-500/30 transition-colors duration-300"
+                            className="px-3 py-1 text-xs font-medium bg-card/60 text-card-foreground rounded-full border border-primary/20 group-hover:border-primary/50 transition-colors duration-300"
                           >
                             {tech}
                           </span>
@@ -198,7 +198,7 @@ export function ProjectsSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <p className="text-slate-400 text-lg py-6">
+          <p className="text-muted-foreground text-lg py-6">
             Mais projetos em desenvolvimento... 🚀
           </p>
         </motion.div>
