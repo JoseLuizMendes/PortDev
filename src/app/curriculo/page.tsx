@@ -11,12 +11,22 @@ export default function CurriculoPage() {
     window.print();
   };
 
+  const handleBack = () => {
+    // Se foi aberto em nova aba/janela, fecha a janela
+    if (window.opener) {
+      window.close();
+    } else {
+      // Se não, navega de volta
+      router.push("/");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Botões de ação - não aparecem na impressão */}
       <div className="print:hidden fixed top-6 right-6 z-50 flex gap-3">
         <Button
-          onClick={() => router.push("/")}
+          onClick={handleBack}
           className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600/50 shadow-lg"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
