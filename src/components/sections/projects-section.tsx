@@ -164,7 +164,7 @@ export function ProjectsSection() {
                       </div>
                     </div>
                     
-                    <div className="p-6 bg-gradient-to-t from-slate-900/50 to-transparent">
+                    <div className="p-6 bg-gradient-to-t  to-transparent">
                       <h3 className="text-xl font-semibold text-card-foreground mb-3 group-hover:text-gradient transition-all duration-300">
                         {project.title}
                       </h3>
