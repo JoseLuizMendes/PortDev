@@ -36,7 +36,7 @@ export function ModeToggle() {
       {isDark ? (
         <Moon className="h-4 w-4 text-primary transition-transform duration-300 hover:rotate-12" />
       ) : (
-        <Sun className="h-4 w-4 text-yellow-500 transition-transform duration-300 hover:rotate-90" />
+        <Sun className="h-4 w-4 transition-transform duration-300 hover:rotate-90" />
       )}
     </Toggle>
   )
