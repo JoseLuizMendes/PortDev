@@ -1,9 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import LogoLoop from "@/components/LogoLoop";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiFramer,
+  SiReact,
+  SiNodedotjs,
+  SiPostgresql,
+} from "react-icons/si";
 
 export function Footer() {
+  const techLogos = [
+    { node: <SiNextdotjs className="w-8 h-8" />, title: "Next.js", ariaLabel: "Next.js" },
+    { node: <SiReact className="w-8 h-8" />, title: "React", ariaLabel: "React" },
+    { node: <SiTypescript className="w-8 h-8" />, title: "TypeScript", ariaLabel: "TypeScript" },
+    { node: <SiTailwindcss className="w-8 h-8" />, title: "Tailwind CSS", ariaLabel: "Tailwind CSS" },
+    { node: <SiFramer className="w-8 h-8" />, title: "Framer Motion", ariaLabel: "Framer Motion" },
+    { node: <SiNodedotjs className="w-8 h-8" />, title: "Node.js", ariaLabel: "Node.js" },
+    { node: <SiPostgresql className="w-8 h-8" />, title: "PostgreSQL", ariaLabel: "PostgreSQL" },
+  ];
+
   return (
     <motion.footer
       initial={{ opacity: 0, y: 50 }}
@@ -26,16 +45,21 @@ export function Footer() {
         </div>
 
         {/* Tech footer decoration */}
-        <div className="flex justify-center mt-4 pt-4 border-t border-slate-800/50">
-          <div className="flex space-x-2 text-slate-600 text-xs font-mono">
-            <span className="opacity-60">Next.js</span>
-            <span>•</span>
-            <span className="opacity-60">TypeScript</span>
-            <span>•</span>
-            <span className="opacity-60">Tailwind</span>
-            <span>•</span>
-            <span className="opacity-60">Framer Motion</span>
-          </div>
+        <div className="mt-8 pt-6 border-t border-slate-800/50">
+          <p className="text-slate-500 text-xs text-center mb-4 font-mono">
+            Desenvolvido com
+          </p>
+          <LogoLoop
+            logos={techLogos}
+            speed={20}
+            direction="left"
+            logoHeight={32}
+            gap={48}
+            pauseOnHover={true}
+            scaleOnHover={true}
+            fadeOut={false}
+            className="text-slate-400 hover:text-blue-400 transition-colors"
+          />
         </div>
       </div>
     </motion.footer>
