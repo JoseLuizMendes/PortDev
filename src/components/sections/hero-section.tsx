@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { SplitText, SplitTextChar } from "@/components/ui/split-text";
+import { SplitTextChar } from "@/components/ui/split-text";
+import DecryptedText from "@/components/DecryptedText";
 import { Beams } from "@/components/ui/beams";
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
@@ -42,21 +43,47 @@ export function HeroSection() {
 
         <div className="mb-6">
           <SplitTextChar
-            text="Olá, eu sou o José Luiz!"
+            text="Olá, eu sou o"
             className="text-2xl md:text-3xl text-slate-300 mb-4 justify-center"
             delay={0.5}
           />
 
-          <SplitText
-            text="Desenvolvedor"
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 justify-center"
-            delay={1.2}
-          />
-          <SplitText
-            text="Full Stack"
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 justify-center"
-            delay={1.2}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            className="mb-6"
+          >
+            <DecryptedText
+              text="José Luiz"
+              speed={60}
+              maxIterations={20}
+              sequential={true}
+              revealDirection="start"
+              animateOn="hover"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white"
+              encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold "
+              parentClassName="inline-block"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.6 }}
+          >
+            <DecryptedText
+              text="Desenvolvedor Full Stack"
+              speed={30}
+              maxIterations={20}
+              sequential={true}
+              revealDirection="start"
+              animateOn="hover"
+              className="text-3xl md:text-5xl lg:text-6xl font-bold text-white"
+              encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold"
+              parentClassName="inline-block"
+            />
+          </motion.div>
         </div>
 
         <motion.div
@@ -66,7 +93,7 @@ export function HeroSection() {
           className="mb-8"
         >
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Desenvolvedor apaixonado por tecnologia, sempre em busca de novos
+            Sou apaixonado por tecnologia, sempre em busca de novos
             desafios e oportunidades para crescer profissionalmente.
           </p>
         </motion.div>
