@@ -3,43 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { SplitText } from "@/components/ui/split-text";
-import ElectricBorder from "@/components/ElectricBorder";
-import personal from "../../../public/personal.png";
-import { Code2, Coffee, Music, Gamepad2, BookOpen, Laptop, BadgeCheck, icons } from "lucide-react";
-import { Card, CardContent } from "../ui/card";
-
-const curiosities = [
-  {
-    icon: Coffee,
-    title: "Café & Código",
-    description: "Acredito que café e código são a combinação perfeita",
-  },
-  {
-    icon: Music,
-    title: "Música ao Programar",
-    description: "Lo-fi e música eletrônica são minha trilha sonora favorita",
-  },
-  {
-    icon: Gamepad2,
-    title: "Gamer nas Horas Vagas",
-    description: "Jogos também são uma forma de entender lógica e design",
-  },
-  {
-    icon: BookOpen,
-    title: "Leitor Assíduo",
-    description: "Sempre aprendendo com livros técnicos e blogs de tech",
-  },
-  {
-    icon: Code2,
-    title: "Open Source",
-    description: "Contribuo para projetos open source sempre que possível",
-  },
-  {
-    icon: Laptop,
-    title: "Trabalho Remoto",
-    description: "Flexibilidade e produtividade são minha prioridade",
-  },
-];
+import personal from "../../../../public/personal.png";
+import { BadgeCheck } from "lucide-react";
+import { Card, CardContent } from "../../ui/card";
+import { CuriosityCard } from "./CuriosityCard";
+import { curiosities } from "./data";
 
 export default function Curiosities() {
   return (
@@ -61,42 +29,17 @@ export default function Curiosities() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-6 lg:gap-6 items-center mx-auto">
           {/* Cards de Curiosidades */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 order-2 lg:order-1">
             {curiosities.map((item, index) => (
-              <motion.div
+              <CuriosityCard
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-                className="group"
-              >
-                <ElectricBorder
-                  color="#06b6d4"
-                  speed={1}
-                  chaos={0.3}
-                  thickness={2}
-                  className="h-full bg-card/50 backdrop-blur-sm rounded-xl p-5 transition-all duration-300"
-                  style={{ borderRadius: "0.75rem" }}
-                >
-                  <div className="relative">
-                    <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors duration-300">
-                      <item.icon className="w-5 h-5 text-primary" />
-                    </div>
-
-                    <h3 className="text-base font-semibold text-foreground mb-2">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </ElectricBorder>
-              </motion.div>
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+                index={index}
+              />
             ))}
           </div>
 
@@ -179,7 +122,7 @@ export default function Curiosities() {
                             />
                           </svg>
                           <span className="font-semibold text-xs sm:text-sm">
-                            5+ Tecnologias
+                            5+ Tecnologias OOOOOOOOOOOOO
                           </span>
                         </div>
                       </div>
