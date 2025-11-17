@@ -5,6 +5,7 @@ import { SkillsSection } from "@/components/sections/skills-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { Footer } from "@/components/footer";
 import { TechEffects, SectionDivider } from "@/components/ui/tech-effects";
+import Curiosities from "@/components/sections/curiosities";
 
 export default function Home() {
   return (
@@ -15,6 +16,8 @@ export default function Home() {
         <HeroSection />
         <SectionDivider />
         <AboutSection />
+        <SectionDivider />
+        <Curiosities />
         <SectionDivider />
         <SkillsSection />
         <SectionDivider />
