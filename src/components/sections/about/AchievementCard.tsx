@@ -168,7 +168,7 @@ export function AchievementCard({
                 </p>
               </div>
               <p className="text-slate-400 text-xs group-hover:text-slate-300 text-center italic">
-                Passe o mouse para mais detalhes ✨
+                Passe o mouse para mais detalhes
               </p>
             </CardContent>
           </Card>
