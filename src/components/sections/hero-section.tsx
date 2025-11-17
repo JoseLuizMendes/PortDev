@@ -48,7 +48,12 @@ export function HeroSection() {
           />
 
           <SplitText
-            text="Estudante de Ciência da Computação"
+            text="Desenvolvedor"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 justify-center"
+            delay={1.2}
+          />
+          <SplitText
+            text="Full Stack"
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 justify-center"
             delay={1.2}
           />
