@@ -12,7 +12,7 @@ interface DecryptedTextProps extends HTMLMotionProps<'span'> {
   className?: string;
   encryptedClassName?: string;
   parentClassName?: string;
-  animateOn?: 'view' | 'hover' | 'both';
+  animateOn?: 'view' | 'hover' | 'both' | 'mount';
 }
 
 export default function DecryptedText({
@@ -35,6 +35,23 @@ export default function DecryptedText({
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
   const containerRef = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (animateOn === 'mount' && !hasAnimated) {
+      // initialize with scrambled characters so the decrypt effect is visible immediately
+      const availableChars = useOriginalCharsOnly
+        ? Array.from(new Set(text.split(''))).filter(char => char !== ' ')
+        : characters.split('');
+
+      const scrambled = text
+        .split('')
+        .map(ch => (ch === ' ' ? ' ' : availableChars[Math.floor(Math.random() * availableChars.length)]))
+        .join('');
+
+      setDisplayText(scrambled);
+      setIsHovering(true);
+      setHasAnimated(true);
+    }
+  }, [animateOn, hasAnimated, text, characters, useOriginalCharsOnly]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;

@@ -60,7 +60,7 @@ export function HeroSection() {
               maxIterations={20}
               sequential={true}
               revealDirection="start"
-              animateOn="hover"
+              animateOn="both"
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-white"
               encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold "
               parentClassName="inline-block"
@@ -78,7 +78,7 @@ export function HeroSection() {
               maxIterations={20}
               sequential={true}
               revealDirection="start"
-              animateOn="hover"
+              animateOn="both"
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white"
               encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold"
               parentClassName="inline-block"
