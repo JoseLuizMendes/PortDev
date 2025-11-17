@@ -110,11 +110,11 @@ export default function Curiosities() {
           >
             <div className="relative max-w-[340px] w-full">
               {/* Card Container com imagem de fundo */}
-              <Card>
+              <Card className="rounded-4xl h-[530px]">
                 <CardContent>
-                  <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl">
+                  <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-4xl overflow-hidden border border-slate-700/50 shadow-2xl">
                     {/* Imagem como background */}
-                    <div className="relative h-[530px]">
+                    <div className="relative h-[480px]">
                       <Image
                         src={personal}
                         alt="José Luiz - Desenvolvedor Full Stack"
