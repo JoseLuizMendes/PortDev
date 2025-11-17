@@ -30,9 +30,9 @@ export function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="pr-26">
-            <div className="space-y-10 mb-2">
-              <p className="text-lg text-muted-foreground leading-relaxed">
+            className="text-center md:text-left lg:pr-26">
+            <div className="space-y-6 mb-6">
+              <p className="text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Sou um estudante apaixonado por tecnologia, sempre em busca de
                 novos conhecimentos e desafios. Durante minha jornada acadêmica
                 em Ciência da Computação, tenho me dedicado a desenvolver
@@ -40,7 +40,7 @@ export function AboutSection() {
                 criatividade.
               </p>
 
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Minha paixão pela programação começou cedo, e desde então tenho
                 explorado diversas áreas do desenvolvimento de software, desde
                 desenvolvimento web até aplicações mobile. Acredito que a
@@ -48,7 +48,7 @@ export function AboutSection() {
                 parte dessa transformação.
               </p>
 
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Quando não estou codificando, gosto de estudar novas
                 tecnologias, participar de comunidades de desenvolvedores e
                 trabalhar em projetos pessoais que me desafiam a crescer
@@ -84,7 +84,7 @@ export function AboutSection() {
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { number: "2+", label: "Anos de Experiência" },
-            { number: "10+", label: "Projetos Desenvolvidos" },
+            { number: "5+", label: "Projetos Desenvolvidos" },
             { number: "5+", label: "Tecnologias Dominadas" },
             { number: "∞", label: "Vontade de Aprender" },
           ].map((stat, index) => (
