@@ -110,9 +110,8 @@ export default function Curiosities() {
           >
             <div className="relative max-w-[340px] w-full">
               {/* Card Container com imagem de fundo */}
-              <Card className="rounded-4xl h-[530px]">
-                <CardContent>
-                  <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-4xl overflow-hidden border border-slate-700/50 shadow-2xl">
+              <Card className="rounded-4xl h-[530px] p-2">
+                  <CardContent className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl h-full">
                     {/* Imagem como background */}
                     <div className="relative h-[480px]">
                       <Image
@@ -206,8 +205,7 @@ export default function Curiosities() {
                         </svg>
                       </button>
                     </div>
-                  </div>
-                </CardContent>
+                  </CardContent>
               </Card>
             </div>
           </motion.div>
