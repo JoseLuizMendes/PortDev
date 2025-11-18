@@ -1,4 +1,4 @@
-import { Coffee, Music, Gamepad2, BookOpen, Laptop, Music2 } from "lucide-react";
+import { Coffee, Headphones, ClockPlus, BookOpen, Laptop, Music2 } from "lucide-react";
 import { CuriosityItem } from "./types";
 
 export const curiosities: CuriosityItem[] = [
@@ -8,14 +8,14 @@ export const curiosities: CuriosityItem[] = [
     description: "Manhãs e tardes produtivas começam sempre com um bom café",
   },
   {
-    icon: Music,
+    icon: Headphones,
     title: "Música ao Programar",
     description: "Lo-fi e eletrônica são minha trilha sonora, mas silêncio quando preciso focar",
   },
   {
-    icon: Gamepad2,
-    title: "Gamer nas Horas Vagas",
-    description: "FPS é minha válvula de escape para relaxar depois do código",
+    icon: ClockPlus,
+    title: "Horas Vagas",
+    description: "Gosto de relaxar depois do código, pode ser um jogo ou um filme",
   },
   {
     icon: BookOpen,
@@ -25,7 +25,7 @@ export const curiosities: CuriosityItem[] = [
   {
     icon: Music2,
     title: "Música na Veia",
-    description: "Violão, guitarra, teclado e cavaquinho fazem parte do meu dia a dia",
+    description: "Violão, guitarra, teclado fazem parte do meu dia a dia",
   },
   {
     icon: Laptop,
