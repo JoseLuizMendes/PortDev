@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import LogoLoop from "@/components/LogoLoop";
+import LogoLoop from "@/components/ui/LogoLoop";
 import {
   SiNextdotjs,
   SiTypescript,

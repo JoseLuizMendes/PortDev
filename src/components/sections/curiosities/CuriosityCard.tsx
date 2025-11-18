@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
-import ElectricBorder from "@/components/ElectricBorder";
+import ElectricBorder from "@/components/ui/ElectricBorder";
 
 interface CuriosityCardProps {
   icon: LucideIcon;

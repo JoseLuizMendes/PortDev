@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { SplitTextChar } from "@/components/ui/split-text";
-import DecryptedText from "@/components/DecryptedText";
+import DecryptedText from "@/components/ui/DecryptedText";
 import { Beams } from "@/components/ui/beams";
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
