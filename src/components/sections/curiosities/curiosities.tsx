@@ -29,9 +29,9 @@ export default function Curiosities() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-6 lg:gap-6 items-center mx-auto">
+        <div className="grid lg:grid-cols-[auto_340px_1fr] gap-6 md:gap-8 lg:gap-0 items-start mx-auto">
           {/* Cards de Curiosidades */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 order-2 lg:order-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 order-2 lg:order-1 max-w-[600px] lg:pr-8">
             {curiosities.map((item, index) => (
               <CuriosityCard
                 key={index}
@@ -152,6 +152,31 @@ export default function Curiosities() {
                     </div>
                   </CardContent>
               </Card>
+            </div>
+          </motion.div>
+
+          {/* Área de texto à direita */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="order-3 hidden lg:block lg:pl-40"
+          >
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-foreground">
+                Sobre Mim
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Sou um desenvolvedor determinado, criativo e sociável, apaixonado por transformar
+                ideias em soluções reais. O que me move é identificar problemas e criar maneiras
+                de resolvê-los — e quando não sei como, eu aprendo.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Além da programação, sou curioso por natureza: neurociência, finanças e música
+                fazem parte da minha rotina. Toco violão, guitarra, teclado e carron — afinal,
+                criatividade não tem limites!
+              </p>
             </div>
           </motion.div>
         </div>
