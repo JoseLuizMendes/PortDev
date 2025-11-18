@@ -56,13 +56,13 @@ export function HeroSection() {
           >
             <DecryptedText
               text="José Luiz"
-              speed={60}
-              maxIterations={20}
+              speed={40}
+              maxIterations={12}
               sequential={true}
               revealDirection="start"
-              animateOn="both"
+              animateOn="mount"
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-white"
-              encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold "
+              encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-500"
               parentClassName="inline-block"
             />
           </motion.div>
@@ -74,13 +74,13 @@ export function HeroSection() {
           >
             <DecryptedText
               text="Desenvolvedor Full Stack"
-              speed={30}
-              maxIterations={20}
+              speed={50}
+              maxIterations={5}
               sequential={true}
               revealDirection="start"
-              animateOn="both"
+              animateOn="mount"
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white"
-              encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold"
+              encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-500"
               parentClassName="inline-block"
             />
           </motion.div>
@@ -120,7 +120,7 @@ export function HeroSection() {
             onClick={() => window.open("/curriculo", "_blank")}
           >
             <Download className="mr-2 h-4 w-4" />
-            Download CV
+            Currículo
           </Button>
         </motion.div>
 
