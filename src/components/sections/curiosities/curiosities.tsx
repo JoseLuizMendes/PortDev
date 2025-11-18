@@ -122,7 +122,7 @@ export default function Curiosities() {
                             />
                           </svg>
                           <span className="font-semibold text-xs sm:text-sm">
-                            5+ Tecnologias OOOOOOOOOOOOO
+                            5+ Tecnologias
                           </span>
                         </div>
                       </div>
