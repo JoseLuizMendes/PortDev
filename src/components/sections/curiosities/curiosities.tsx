@@ -54,7 +54,7 @@ export default function Curiosities() {
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px]">
               {/* Card Container com imagem de fundo */}
               <Card className="rounded-3xl md:rounded-4xl h-[420px] sm:h-[480px] md:h-[535px] p-1.5 md:p-2">
-                  <CardContent className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl h-full">
+                  <CardContent className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl h-full p-5">
                     {/* Imagem como background */}
                     <div className="relative h-[370px] sm:h-[430px] md:h-[480px]">
                       <Image
@@ -66,11 +66,11 @@ export default function Curiosities() {
                       />
 
                       {/* Gradiente blur na metade inferior */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t rounded-2xl from-slate-900 via-slate-900/40 to-transparent"></div>
                     </div>
 
                     {/* Conteúdo sobreposto */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6">
+                    <div className="absolute -bottom-0 sm:-bottom-2 md:-bottom-0 left-4 right-4 px-4 sm:px-5 md:px-6 flex flex-col">
                       {/* Nome e Verificação */}
                       <div className="flex items-center gap-1.5 md:gap-2 mb-2 md:mb-3">
                         <h3 className="text-xl sm:text-2xl font-bold text-white">
@@ -128,27 +128,29 @@ export default function Curiosities() {
                       </div>
 
                       {/* Botão */}
-                      <a 
-                        href="https://www.linkedin.com/in/jos%C3%A9-luiz-dos-santos-azeredo-mendes-ab5a10283/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full bg-white hover:bg-slate-100 text-slate-900 font-semibold py-2.5 md:py-3 px-4 md:px-6 rounded-full transition-all duration-300 flex items-center justify-center gap-2 group text-sm md:text-base"
-                      >
-                        Contate-me
-                        <svg
-                          className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                      <div className="w-full flex justify-center mb-7">
+                        <a 
+                          href="https://www.linkedin.com/in/jos%C3%A9-luiz-dos-santos-azeredo-mendes-ab5a10283/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full max-w-[250px] bg-white hover:bg-slate-100 text-slate-900 font-semibold py-2.5 md:py-3 px-4 md:px-6 rounded-full transition-all duration-300 flex items-center justify-center gap-2 group text-sm md:text-base"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </a>
+                          Contate-me
+                          <svg
+                            className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </CardContent>
               </Card>
@@ -163,7 +165,7 @@ export default function Curiosities() {
             viewport={{ once: true }}
             className="order-3 lg:block lg:pl-40"
           >
-            <div className="space-y-6">
+            <div className="space-y-6 text-center">
               <h3 className="text-2xl font-bold text-foreground">
                 Sobre Mim
               </h3>
