@@ -124,8 +124,10 @@ export default function CurriculoPage() {
                 <li>Desenvolvimento e manutenção de sistemas em C# (.NET / ASP.NET), incluindo correção de bugs e novas funcionalidades</li>
                 <li>Criação e manutenção de APIs, garantindo integração entre sistemas</li>
                 <li>Testes unitários para validação de funcionalidades e garantia da qualidade do código</li>
-                <li>Controle de qualidade de software com SonarQube</li>
-                <li>Gestão de versionamento via Azure DevOps e Git, com boas práticas de integração contínua</li>
+                <li>Comunicação e colaboração: Desenvolvi habilidades interpessoais ao interagir com equipes multidisciplinares, sendo responsável por alinhar informações entre diferentes áreas e garantir clareza nos processos. </li>
+                <li>Levantamento e análise de sistemas: Realizei um mapeamento completo dos sistemas integrados ao SIARHES (Sistema de RH do Estado do Espírito Santo), conduzindo entrevistas com responsáveis pelo desenvolvimento e manutenção para consolidar dados e elaborar um roadmap estratégico do SIARHES. </li>
+                <li>Qualidade de software com SonarQube: Assumi a responsabilidade pelo Portal do Servidor, Sistema de Seleção e Sistema CHE, implementando melhorias que elevaram as métricas de qualidade para nota A em todas as categorias avaliadas pelo SonarQube.</li>
+                <li>Gestão de versionamento e ciclo de vida de aplicações via Azure DevOps e Git, com utilização de repositórios, pipelines e boas práticas de integração contínua.</li>
                 <li>Administração de banco de dados com SQL Developer (criação de tabelas, views, consultas avançadas)</li>
                 <li>Modelagem de processos com UML (diagramas de atividades e fluxogramas)</li>
                 <li>Participação em projetos estratégicos do Governo do Estado</li>
