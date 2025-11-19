@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Download, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { curriculoData } from "./data";
 
 export default function CurriculoPage() {
   const router = useRouter();
@@ -51,15 +52,15 @@ export default function CurriculoPage() {
         <div className="p-4 sm:p-6 md:p-8 lg:p-12 print:p-8">
           {/* Cabeçalho */}
           <header className="text-center mb-6 sm:mb-8 pb-4 sm:pb-6 border-b-2 border-gray-300">
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 leading-tight">JOSÉ LUIZ DOS SANTOS AZEREDO MENDES</h1>
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 leading-tight">{curriculoData.informacoesPessoais.nome}</h1>
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 mb-2">
-              <span>📍 Ilha das Caieiras, Vitória/ES</span>
-              <span>21 anos</span>
-              <span>Solteiro</span>
+              <span>{curriculoData.informacoesPessoais.localizacao}</span>
+              <span>{curriculoData.informacoesPessoais.idade}</span>
+              <span>{curriculoData.informacoesPessoais.estadoCivil}</span>
             </div>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-700">
-              <span>📞 (27) 99630-0333</span>
-              <span className="break-all sm:break-normal">josemendess004@gmail.com</span>
+              <span>{curriculoData.informacoesPessoais.telefone}</span>
+              <span className="break-all sm:break-normal">{curriculoData.informacoesPessoais.email}</span>
             </div>
           </header>
 
@@ -69,10 +70,7 @@ export default function CurriculoPage() {
               OBJETIVO PROFISSIONAL
             </h3>
             <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">
-              Desenvolvedor Full Stack em formação, com vivência prática em manutenção e desenvolvimento de sistemas, APIs, testes e bancos de dados, 
-              buscando oportunidades com Next.js, React, Java, Spring e PostgreSQL. Experiência em práticas de versionamento (Git/Azure DevOps), 
-              qualidade de software e modelagem de processos, aliada a forte proatividade e resolução de problemas. Meu objetivo é trabalhar com 
-              equipes que valorizem colaboração e aprendizado contínuo, aplicando essas tecnologias para criar soluções web escaláveis e de alto impacto.
+              {curriculoData.objetivoProfissional}
             </p>
           </section>
 
@@ -81,10 +79,12 @@ export default function CurriculoPage() {
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 border-b border-gray-300 pb-2">
               FORMAÇÃO ACADÊMICA
             </h3>
-            <div className="mb-3">
-              <h4 className="text-base sm:text-lg font-semibold text-gray-900">Ciência da Computação</h4>
-              <p className="text-gray-600 text-xs sm:text-sm">FAESA - Cursando 4º período (noturno)</p>
-            </div>
+            {curriculoData.formacaoAcademica.map((formacao, index) => (
+              <div key={index} className="mb-3">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900">{formacao.curso}</h4>
+                <p className="text-gray-600 text-xs sm:text-sm">{formacao.instituicao}</p>
+              </div>
+            ))}
           </section>
 
           {/* Cursos Complementares */}
@@ -93,16 +93,9 @@ export default function CurriculoPage() {
               CURSOS COMPLEMENTARES
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs sm:text-sm text-gray-700">
-              <div>• Curso de Next.js - 20h (2025)</div>
-              <div>• Curso de Node - 20h (2025)</div>
-              <div>• Curso de TypeScript - 20h (2025)</div>
-              <div>• Curso de React - 20h (2025)</div>
-              <div>• Python 3 – Mundo 1 - 40h (2024)</div>
-              <div>• Pacote Office - 50h (2024)</div>
-              <div>• Eng. de Prompts - 3h (2024)</div>
-              <div>• Des. Ágil de Software - 32h (2024)</div>
-              <div>• Lab. POO - 20h (2024)</div>
-              <div>• Marketing Pessoal - 2h (2024)</div>
+              {curriculoData.cursosComplementares.map((curso, index) => (
+                <div key={index}>{curso}</div>
+              ))}
             </div>
           </section>
 
@@ -111,28 +104,22 @@ export default function CurriculoPage() {
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 border-b border-gray-300 pb-2">
               EXPERIÊNCIA PROFISSIONAL
             </h3>
-            <div className="mb-4">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
-                <div>
-                  <h4 className="text-base sm:text-lg font-semibold text-gray-900">Estagiário - PRODEST</h4>
-                  <p className="text-gray-600 text-xs sm:text-sm">Processamento de Dados do Espírito Santo</p>
+            {curriculoData.experienciaProfissional.map((experiencia, index) => (
+              <div key={index} className="mb-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <div>
+                    <h4 className="text-base sm:text-lg font-semibold text-gray-900">{experiencia.cargo}</h4>
+                    <p className="text-gray-600 text-xs sm:text-sm">{experiencia.empresa}</p>
+                  </div>
+                  <span className="text-gray-500 text-xs sm:text-sm">{experiencia.periodo}</span>
                 </div>
-                <span className="text-gray-500 text-xs sm:text-sm">Out/2024 - Atual</span>
+                <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1 ml-2">
+                  {experiencia.atividades.map((atividade, idx) => (
+                    <li key={idx}>{atividade}</li>
+                  ))}
+                </ul>
               </div>
-              <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1 ml-2">
-                <li>Atendimento técnico de primeiro e segundo nível, com registro, qualificação e resolução de demandas</li>
-                <li>Desenvolvimento e manutenção de sistemas em C# (.NET / ASP.NET), incluindo correção de bugs e novas funcionalidades</li>
-                <li>Criação e manutenção de APIs, garantindo integração entre sistemas</li>
-                <li>Testes unitários para validação de funcionalidades e garantia da qualidade do código</li>
-                <li>Comunicação e colaboração: Desenvolvi habilidades interpessoais ao interagir com equipes multidisciplinares, sendo responsável por alinhar informações entre diferentes áreas e garantir clareza nos processos. </li>
-                <li>Levantamento e análise de sistemas: Realizei um mapeamento completo dos sistemas integrados ao SIARHES (Sistema de RH do Estado do Espírito Santo), conduzindo entrevistas com responsáveis pelo desenvolvimento e manutenção para consolidar dados e elaborar um roadmap estratégico do SIARHES. </li>
-                <li>Qualidade de software com SonarQube: Assumi a responsabilidade pelo Portal do Servidor, Sistema de Seleção e Sistema CHE, implementando melhorias que elevaram as métricas de qualidade para nota A em todas as categorias avaliadas pelo SonarQube.</li>
-                <li>Gestão de versionamento e ciclo de vida de aplicações via Azure DevOps e Git, com utilização de repositórios, pipelines e boas práticas de integração contínua.</li>
-                <li>Administração de banco de dados com SQL Developer (criação de tabelas, views, consultas avançadas)</li>
-                <li>Modelagem de processos com UML (diagramas de atividades e fluxogramas)</li>
-                <li>Participação em projetos estratégicos do Governo do Estado</li>
-              </ul>
-            </div>
+            ))}
           </section>
 
           {/* Projetos Próprios */}
@@ -141,46 +128,19 @@ export default function CurriculoPage() {
               PROJETOS PRÓPRIOS
             </h3>
             
-            <div className="mb-4">
-              <h4 className="text-base sm:text-lg font-semibold text-gray-900">SaaS – Sistema de Agendamento para Barbearias</h4>
-              <p className="text-gray-600 text-xs sm:text-sm mb-2">
-                <strong>Stack:</strong> Next.js, React, TypeScript, Prisma, PostgreSQL, Docker, NextAuth
-              </p>
-              <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1 ml-2">
-                <li>Levantamento de requisitos com entrevistas e definição de funcionalidades</li>
-                <li>Modelagem do banco de dados e criação de queries complexas</li>
-                <li>Desenvolvimento de APIs REST com Prisma e PostgreSQL</li>
-                <li>Implementação de autenticação e autorização completa com NextAuth</li>
-                <li>Interface responsiva focada em usabilidade</li>
-                <li>Configuração de containers com Docker e deploy em produção</li>
-              </ul>
-            </div>
-
-            <div className="mb-4">
-              <h4 className="text-base sm:text-lg font-semibold text-gray-900">API em Java/Spring Boot</h4>
-              <p className="text-gray-600 text-xs sm:text-sm mb-2">
-                <strong>Stack:</strong> Java, Spring Boot, PostgreSQL, Docker
-              </p>
-              <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1 ml-2">
-                <li>Definição de arquitetura e padrão de camadas com segurança</li>
-                <li>Modelagem de dados e consultas otimizadas</li>
-                <li>Desenvolvimento de endpoints REST com autenticação e regras de negócio</li>
-                <li>Testes unitários e documentação</li>
-                <li>Conteinerização com Docker para produção</li>
-              </ul>
-            </div>
-
-            <div className="mb-3">
-              <h4 className="text-base sm:text-lg font-semibold text-gray-900">Desafios Técnicos – Itaú e PicPay</h4>
-              <p className="text-gray-600 text-xs sm:text-sm mb-2">
-                <strong>Stack:</strong> Java, Spring Boot
-              </p>
-              <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1 ml-2">
-                <li>Resolução de problemas algorítmicos para entrevistas técnicas</li>
-                <li>Implementação de soluções performáticas com foco em eficiência</li>
-                <li>Criação de APIs e microsserviços simulando cenários de produção</li>
-              </ul>
-            </div>
+            {curriculoData.projetosProprios.map((projeto, index) => (
+              <div key={index} className={index < curriculoData.projetosProprios.length - 1 ? "mb-4" : "mb-3"}>
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900">{projeto.titulo}</h4>
+                <p className="text-gray-600 text-xs sm:text-sm mb-2">
+                  <strong>Stack:</strong> {projeto.stack}
+                </p>
+                <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1 ml-2">
+                  {projeto.descricao.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </section>
 
           {/* Habilidades Técnicas */}
@@ -192,31 +152,25 @@ export default function CurriculoPage() {
               <div>
                 <h4 className="font-semibold text-gray-900 mb-2 text-xs sm:text-sm">Linguagens</h4>
                 <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1">
-                  <li>JavaScript/TypeScript</li>
-                  <li>C# (.NET)</li>
-                  <li>Java</li>
-                  <li>Python</li>
-                  <li>SQL</li>
+                  {curriculoData.habilidadesTecnicas.linguagens.map((linguagem, index) => (
+                    <li key={index}>{linguagem}</li>
+                  ))}
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-2 text-xs sm:text-sm">Frameworks</h4>
                 <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1">
-                  <li>Next.js & React</li>
-                  <li>Spring Boot</li>
-                  <li>ASP.NET</li>
-                  <li>Node.js</li>
-                  <li>Prisma</li>
+                  {curriculoData.habilidadesTecnicas.frameworks.map((framework, index) => (
+                    <li key={index}>{framework}</li>
+                  ))}
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-2 text-xs sm:text-sm">Ferramentas</h4>
                 <ul className="list-disc list-inside text-gray-700 text-xs sm:text-sm space-y-1">
-                  <li>Git & Azure DevOps</li>
-                  <li>Docker</li>
-                  <li>PostgreSQL</li>
-                  <li>SonarQube</li>
-                  <li>UML</li>
+                  {curriculoData.habilidadesTecnicas.ferramentas.map((ferramenta, index) => (
+                    <li key={index}>{ferramenta}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -228,10 +182,10 @@ export default function CurriculoPage() {
               INFORMAÇÕES ADICIONAIS
             </h3>
             <div className="text-gray-700 text-xs sm:text-sm space-y-2">
-              <p><strong>Idiomas:</strong> Leitura fluente em inglês e espanhol, com boa compreensão auditiva</p>
-              <p><strong>Soft Skills:</strong> Comunicativo, analítico, rápida capacidade de aprendizado, perfil voltado à resolução de problemas, persistência e potencial de liderança</p>
-              <p><strong>Interesses:</strong> Desenvolvimento de software e ciência de dados</p>
-              <p><strong>Diferenciais:</strong> Facilidade no relacionamento com clientes, elaboração de documentações e apresentações técnicas</p>
+              <p><strong>Idiomas:</strong> {curriculoData.informacoesAdicionais.idiomas}</p>
+              <p><strong>Soft Skills:</strong> {curriculoData.informacoesAdicionais.softSkills}</p>
+              <p><strong>Interesses:</strong> {curriculoData.informacoesAdicionais.interesses}</p>
+              <p><strong>Diferenciais:</strong> {curriculoData.informacoesAdicionais.diferenciais}</p>
             </div>
           </section>
         </div>
