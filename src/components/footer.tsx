@@ -10,10 +10,12 @@ import {
   SiReact,
   SiNodedotjs,
   SiPostgresql,
+  SiJavascript,
 } from "react-icons/si";
 
 export function Footer() {
   const techLogos = [
+    { node: <SiJavascript className="w-8 h-8" />, title: "JavaScript", ariaLabel: "JavaScript" },
     { node: <SiNextdotjs className="w-8 h-8" />, title: "Next.js", ariaLabel: "Next.js" },
     { node: <SiReact className="w-8 h-8" />, title: "React", ariaLabel: "React" },
     { node: <SiTypescript className="w-8 h-8" />, title: "TypeScript", ariaLabel: "TypeScript" },
