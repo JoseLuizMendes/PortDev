@@ -9,7 +9,7 @@ export const curriculoData = {
   },
 
   objetivoProfissional:
-    "Desenvolvedor Full Stack em formação, com vivência prática em manutenção e desenvolvimento de sistemas, APIs, testes e bancos de dados, buscando oportunidades com Next.js, React, Java, Spring e PostgreSQL. Experiência em práticas de versionamento (Git/Azure DevOps), qualidade de software e modelagem de processos, aliada a forte proatividade e resolução de problemas. Meu objetivo é trabalhar com equipes que valorizem colaboração e aprendizado contínuo, aplicando essas tecnologias para criar soluções web escaláveis e de alto impacto.",
+    "Desenvolvedor Full Stack em formação, com vivência prática em manutenção e desenvolvimento de sistemas, APIs, testes e bancos de dados, buscando oportunidades com JavaScript, Next.js, React, Java, Spring e PostgreSQL. Experiência em práticas de CI/CD (Git/Azure DevOps), qualidade de software e modelagem de processos, aliada a forte proatividade e resolução de problemas. Meu objetivo é trabalhar com equipes que valorizem colaboração e aprendizado contínuo, aplicando essas tecnologias para criar soluções web escaláveis e de alto impacto.",
 
   formacaoAcademica: [
     {
