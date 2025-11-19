@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { StaticImageData } from "next/image";
 import Image from "next/image";
-import proj1 from "../../../public/Capa.png";
+import proj1 from "../../../public/CapaBarber.png";
 
 interface Project {
   id: number;
@@ -94,7 +94,7 @@ export function ProjectsSection() {
             text="Meus Projetos"
             className="text-4xl md:text-5xl font-bold text-foreground mb-6 justify-center"
           />
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Aqui estão alguns dos projetos que desenvolvi durante minha jornada como estudante.
             Clique em qualquer projeto para ver mais detalhes.
           </p>
@@ -105,28 +105,30 @@ export function ProjectsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
         >
           {projects.map((project) => (
             <motion.div key={project.id} variants={itemVariants}>
               <Card className="glass-card hover:border-primary/50 transition-all duration-500 overflow-hidden group cursor-pointer tech-hover">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
-                    <div className="w-full h-64 relative overflow-hidden bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
+                    <div className="w-full h-48 sm:h-56 md:h-64 relative overflow-hidden bg-slate-900">
                       {/* Imagem do projeto */}
                       {project.image && typeof project.image === 'object' ? (
                         <Image
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="object-contain md:object-cover group-hover:scale-110 transition-transform duration-500"
+                          style={{ objectPosition: 'center' }}
                         />
                       ) : typeof project.image === 'string' ? (
                         <Image
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="object-contain md:object-cover group-hover:scale-110 transition-transform duration-500"
+                          style={{ objectPosition: 'center' }}
                         />
                       ) : null}
                       {/* Efeito tech de fundo */}
@@ -134,7 +136,7 @@ export function ProjectsSection() {
                       
                       {/* Overlay com links */}
                       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-3 sm:space-x-4">
                           <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
@@ -142,9 +144,9 @@ export function ProjectsSection() {
                               e.stopPropagation();
                               window.open(project.demoUrl, "_blank");
                             }}
-                            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white p-3 rounded-full transition-all duration-300 shadow-lg shadow-blue-500/25"
+                            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white p-2.5 sm:p-3 rounded-full transition-all duration-300 shadow-lg shadow-blue-500/25"
                           >
-                            <ExternalLink className="h-5 w-5" />
+                            <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
                           </motion.button>
                           
                           {project.githubUrl && (
@@ -155,29 +157,29 @@ export function ProjectsSection() {
                                 e.stopPropagation();
                                 window.open(project.githubUrl, "_blank");
                               }}
-                              className="bg-slate-700/80 hover:bg-slate-600/80 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 border border-slate-500/50"
+                              className="bg-slate-700/80 hover:bg-slate-600/80 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-full transition-all duration-300 border border-slate-500/50"
                             >
-                              <Github className="h-5 w-5" />
+                              <Github className="h-4 w-4 sm:h-5 sm:w-5" />
                             </motion.button>
                           )}
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-6 bg-gradient-to-t  to-transparent">
-                      <h3 className="text-xl font-semibold text-card-foreground mb-3 group-hover:text-gradient transition-all duration-300">
+                    <div className="p-4 sm:p-6 bg-gradient-to-t  to-transparent">
+                      <h3 className="text-lg sm:text-xl font-semibold text-card-foreground mb-2 sm:mb-3 group-hover:text-gradient transition-all duration-300">
                         {project.title}
                       </h3>
                       
-                      <p className="text-card-foreground/70 mb-4 line-clamp-3 group-hover:text-card-foreground transition-colors duration-300">
+                      <p className="text-sm sm:text-base text-card-foreground/70 mb-3 sm:mb-4 line-clamp-3 group-hover:text-card-foreground transition-colors duration-300">
                         {project.description}
                       </p>
                       
-                      <div className="flex flex-wrap gap-2 items-center justify-center">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 items-center justify-center">
                         {project.technologies.map((tech, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 text-xs font-medium bg-card/60 text-card-foreground rounded-full border border-primary/20 group-hover:border-primary/50 transition-colors duration-300"
+                            className="px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-medium bg-card/60 text-card-foreground rounded-full border border-primary/20 group-hover:border-primary/50 transition-colors duration-300"
                           >
                             {tech}
                           </span>
