@@ -23,16 +23,16 @@ export function AboutSection() {
           />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-0 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-0 items-start">
           {/* Texto sobre */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center md:text-left lg:pr-26">
-            <div className="space-y-6 mb-6">
-              <p className="text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
+            className="text-center md:text-left lg:pr-12">
+            <div className="space-y-4 sm:space-y-6 mb-6">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Sou um estudante apaixonado por tecnologia, sempre em busca de
                 novos conhecimentos e desafios. Durante minha jornada acadêmica
                 em Ciência da Computação, tenho me dedicado a desenvolver
@@ -40,7 +40,7 @@ export function AboutSection() {
                 criatividade.
               </p>
 
-              <p className="text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Minha paixão pela programação começou cedo, e desde então tenho
                 explorado diversas áreas do desenvolvimento de software, desde
                 desenvolvimento web até aplicações mobile. Acredito que a
@@ -48,7 +48,7 @@ export function AboutSection() {
                 parte dessa transformação.
               </p>
 
-              <p className="text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Quando não estou codificando, gosto de estudar novas
                 tecnologias, participar de comunidades de desenvolvedores e
                 trabalhar em projetos pessoais que me desafiam a crescer
@@ -63,7 +63,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-x-4 gap-y-4 pl-0">
+            className="grid grid-cols-2 gap-x-2 gap-y-3 sm:gap-x-4 sm:gap-y-4 pl-0">
             {achievements.map((achievement, index) => (
               <AchievementCard
                 key={index}
@@ -81,7 +81,7 @@ export function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+          className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {[
             { number: "2+", label: "Anos de Experiência" },
             { number: "5+", label: "Projetos Desenvolvidos" },
@@ -89,10 +89,10 @@ export function AboutSection() {
             { number: "∞", label: "Vontade de Aprender" },
           ].map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-1 sm:mb-2">
                 {stat.number}
               </div>
-              <div className="text-muted-foreground">{stat.label}</div>
+              <div className="text-xs sm:text-sm md:text-base text-muted-foreground">{stat.label}</div>
             </div>
           ))}
         </motion.div>
