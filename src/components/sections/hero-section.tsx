@@ -74,7 +74,7 @@ export function HeroSection() {
           >
             <DecryptedText
               text="Desenvolvedor Full Stack"
-              speed={50}
+              speed={35}
               maxIterations={5}
               sequential={true}
               revealDirection="start"
