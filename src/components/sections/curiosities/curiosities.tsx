@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { SplitText } from "@/components/ui/split-text";
-import personal from "../../../../public/personal.png";
+import card from "../../../../public/Card_Profissional.png";
 import { BadgeCheck } from "lucide-react";
 import { Card, CardContent } from "../../ui/card";
 import { CuriosityCard } from "./CuriosityCard";
@@ -58,7 +58,7 @@ export default function Curiosities() {
                     {/* Imagem como background */}
                     <div className="relative h-[370px] sm:h-[430px] md:h-[480px]">
                       <Image
-                        src={personal}
+                        src={card}
                         alt="José Luiz - Desenvolvedor Full Stack"
                         fill
                         style={{ objectFit: "cover", objectPosition: "top" }}
