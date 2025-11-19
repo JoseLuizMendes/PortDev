@@ -62,7 +62,7 @@ export function HeroSection() {
               revealDirection="start"
               animateOn="mount"
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-white"
-              encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-500"
+              encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-400"
               parentClassName="inline-block"
             />
           </motion.div>
@@ -80,7 +80,7 @@ export function HeroSection() {
               revealDirection="start"
               animateOn="mount"
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white"
-              encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-500"
+              encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-400"
               parentClassName="inline-block"
             />
           </motion.div>

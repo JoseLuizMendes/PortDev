@@ -161,7 +161,7 @@ export default function Curiosities() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="order-3 hidden lg:block lg:pl-40"
+            className="order-3 lg:block lg:pl-40"
           >
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-foreground">
