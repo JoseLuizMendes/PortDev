@@ -11,6 +11,16 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  AreaChart,
+  Area,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
 
 interface Skill {
@@ -55,18 +65,304 @@ const skills: Skill[] = [
 
 const categories = ["Frontend", "Backend", "Database", "Frameworks", "Tools"];
 
+// Cores temáticas para cada categoria
+const CATEGORY_COLORS = {
+  Frontend: {
+    primary: '#3b82f6',      // blue-500
+    gradient: ['#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af'], // blue gradient
+  },
+  Backend: {
+    primary: '#8b5cf6',      // purple-500
+    gradient: ['#a78bfa', '#8b5cf6', '#7c3aed', '#6d28d9', '#5b21b6'], // purple gradient
+  },
+  Database: {
+    primary: '#06b6d4',      // cyan-500
+    gradient: ['#22d3ee', '#06b6d4', '#0891b2', '#0e7490', '#155e75'], // cyan gradient
+  },
+  Frameworks: {
+    primary: '#10b981',      // emerald-500
+    gradient: ['#34d399', '#10b981', '#059669', '#047857', '#065f46'], // emerald gradient
+  },
+  Tools: {
+    primary: '#f59e0b',      // amber-500
+    gradient: ['#fbbf24', '#f59e0b', '#d97706', '#b45309', '#92400e'], // amber gradient
+  }
+};
+
 export function SkillsSection() {
   const getSkillsByCategory = (category: string) => {
     return skills.filter((skill) => skill.category === category);
   };
 
-  // Preparar dados radar para uma categoria específica
+  // Preparar dados radar para Frontend
   const getCategoryRadarData = (category: string) => {
     return getSkillsByCategory(category).map((skill) => ({
       skill: skill.name,
       level: skill.level,
       fullMark: 100,
     }));
+  };
+
+  // Preparar dados para gráfico de barras
+  const getCategoryBarData = (category: string) => {
+    return getSkillsByCategory(category).map((skill) => ({
+      name: skill.name,
+      level: skill.level,
+    }));
+  };
+
+  // Preparar dados para stacked area chart (Backend)
+  const getStackedAreaData = (category: string) => {
+    const categorySkills = getSkillsByCategory(category);
+    const dataPoints = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    
+    return dataPoints.map((point) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const dataPoint: any = { name: point };
+      categorySkills.forEach((skill) => {
+        // Criar variação aleatória para cada ponto mantendo a proporção do nível
+        const variation = Math.random() * 20 - 10; // -10 a +10 de variação
+        dataPoint[skill.name] = Math.max(0, skill.level + variation);
+      });
+      return dataPoint;
+    });
+  };
+
+  // Preparar dados para gráfico de pizza
+  const getCategoryPieData = (category: string) => {
+    return getSkillsByCategory(category).map((skill) => ({
+      name: skill.name,
+      value: skill.level,
+    }));
+  };
+
+  // Renderizar gráfico baseado na categoria
+  const renderChart = (category: string, categoryIndex: number) => {
+    switch (categoryIndex) {
+      case 0: // Frontend - Radar
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <RadarChart data={getCategoryRadarData(category)}>
+              <PolarGrid stroke="#475569" />
+              <PolarAngleAxis
+                dataKey="skill"
+                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                tickSize={17}
+              />
+              <PolarRadiusAxis
+                angle={90}
+                domain={[10, 100]}
+                tick={{ fill: "#94a3b8", fontSize: 10 }}
+              />
+              <Radar
+                name="Nível"
+                dataKey="level"
+                stroke={CATEGORY_COLORS.Frontend.primary}
+                fill={CATEGORY_COLORS.Frontend.primary}
+                fillOpacity={0.6}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1e293b",
+                  border: `1px solid ${CATEGORY_COLORS.Frontend.primary}`,
+                  borderRadius: "8px",
+                  color: "#e2e8f0",
+                }}
+              />
+            </RadarChart>
+          </ResponsiveContainer>
+        );
+      
+      case 1: // Backend - Stacked Area Chart
+        const backendStackedData = getStackedAreaData(category);
+        const backendSkills = getSkillsByCategory(category);
+        
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const CustomTooltip = ({ active, payload }: any) => {
+          if (active && payload && payload.length) {
+            return (
+              <div style={{
+                backgroundColor: "#1e293b",
+                border: `1px solid ${CATEGORY_COLORS.Backend.primary}`,
+                borderRadius: "8px",
+                padding: "10px",
+              }}>
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {payload.map((entry: any, index: number) => (
+                  <div key={`item-${index}`} style={{ marginBottom: "4px" }}>
+                    <span style={{ color: "#e2e8f0" }}>{entry.name}: </span>
+                    <span style={{ color: CATEGORY_COLORS.Backend.primary }}>
+                      {Math.round(entry.value)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+          return null;
+        };
+        
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={backendStackedData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+              <XAxis 
+                dataKey="name" 
+                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+              />
+              <YAxis 
+                tick={{ fill: "#94a3b8", fontSize: 10 }}
+                tickFormatter={(value) => Math.round(value).toString()}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              {backendSkills.map((skill, index) => (
+                <Area
+                  key={`area-${index}`}
+                  type="monotone"
+                  dataKey={skill.name}
+                  stackId="1"
+                  stroke={CATEGORY_COLORS.Backend.gradient[index % CATEGORY_COLORS.Backend.gradient.length]}
+                  fill={CATEGORY_COLORS.Backend.gradient[index % CATEGORY_COLORS.Backend.gradient.length]}
+                  fillOpacity={0.7}
+                />
+              ))}
+            </AreaChart>
+          </ResponsiveContainer>
+        );
+
+      case 2: // Database - Banded Bar Chart
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={getCategoryBarData(category)}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+              <XAxis 
+                dataKey="name" 
+                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                angle={-45}
+                textAnchor="end"
+                height={80}
+              />
+              <YAxis 
+                domain={[0, 100]}
+                tick={{ fill: "#94a3b8", fontSize: 10 }}
+              />
+              <Tooltip 
+                cursor={false}
+                contentStyle={{
+                  backgroundColor: "#1e293b",
+                  border: `1px solid ${CATEGORY_COLORS.Database.primary}`,
+                  borderRadius: "8px",
+                  color: "#e2e8f0",
+                }}
+              />
+              <Bar dataKey="level" fill={CATEGORY_COLORS.Database.primary} radius={[8, 8, 0, 0]}>
+                {getCategoryBarData(category).map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={CATEGORY_COLORS.Database.gradient[index % CATEGORY_COLORS.Database.gradient.length]} 
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        );
+
+      case 3: // Frameworks - Pie Chart with Customized Label
+        const RADIAN = Math.PI / 180;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
+          const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+          const x = cx + radius * Math.cos(-midAngle * RADIAN);
+          const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+          return (
+            <text 
+              x={x} 
+              y={y} 
+              fill="white" 
+              textAnchor={x > cx ? 'start' : 'end'} 
+              dominantBaseline="central"
+              fontSize={12}
+              fontWeight="bold"
+            >
+              {`${(percent * 100).toFixed(0)}%`}
+            </text>
+          );
+        };
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const CustomFrameworksTooltip = ({ active, payload }: any) => {
+          if (active && payload && payload.length) {
+            return (
+              <div style={{
+                backgroundColor: "#1e293b",
+                border: `1px solid ${CATEGORY_COLORS.Frameworks.primary}`,
+                borderRadius: "8px",
+                padding: "10px",
+              }}>
+                <div>
+                  <span style={{ color: "#e2e8f0" }}>{payload[0].name}: </span>
+                  <span style={{ color: CATEGORY_COLORS.Frameworks.primary}}>
+                    {payload[0].value}
+                  </span>
+                </div>
+              </div>
+            );
+          }
+          return null;
+        };
+
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={getCategoryPieData(category)}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {getCategoryPieData(category).map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={CATEGORY_COLORS.Frameworks.gradient[index % CATEGORY_COLORS.Frameworks.gradient.length]} />
+                ))}
+              </Pie>
+              <Tooltip content={<CustomFrameworksTooltip />} />
+            </PieChart>
+          </ResponsiveContainer>
+        );
+
+      case 4: // Tools - Bar Chart Horizontal
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={getCategoryBarData(category)} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+              <XAxis type="number" domain={[0, 100]} tick={{ fill: "#94a3b8", fontSize: 10 }} />
+              <YAxis 
+                type="category" 
+                dataKey="name" 
+                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                width={100}
+              />
+              <Tooltip 
+                cursor={false}
+                contentStyle={{
+                  backgroundColor: "#1e293b",
+                  border: `1px solid ${CATEGORY_COLORS.Tools.primary}`,
+                  borderRadius: "8px",
+                  color: "#e2e8f0",
+                }}
+              />
+              <Bar dataKey="level" fill={CATEGORY_COLORS.Tools.primary} radius={[0, 8, 8, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        );
+
+      default:
+        return null;
+    }
   };
 
   return (
@@ -116,37 +412,8 @@ export function SkillsSection() {
                       : "Tools"}
                   </h3>
 
-                  {/* Gráfico Radar para cada categoria */}
-                  <ResponsiveContainer width="100%" height={300}>
-                    <RadarChart data={getCategoryRadarData(category)}>
-                      <PolarGrid stroke="#475569" />
-                      <PolarAngleAxis
-                        dataKey="skill"
-                        tick={{ fill: "#cbd5e1", fontSize: 11 }}
-                        tickSize={17}
-                      />
-                      <PolarRadiusAxis
-                        angle={90}
-                        domain={[10, 100]}
-                        tick={{ fill: "#94a3b8", fontSize: 10 }}
-                      />
-                      <Radar
-                        name="Nível"
-                        dataKey="level"
-                        stroke="#3b82f6"
-                        fill="#3b82f6"
-                        fillOpacity={0.6}
-                      />
-                      <Tooltip
-                        contentStyle={{
-                          backgroundColor: "#1e293b",
-                          border: "1px solid #3b82f6",
-                          borderRadius: "8px",
-                          color: "#e2e8f0",
-                        }}
-                      />
-                    </RadarChart>
-                  </ResponsiveContainer>
+                  {/* Renderizar gráfico apropriado para cada categoria */}
+                  {renderChart(category, categoryIndex)}
                 </CardContent>
               </Card>
             </motion.div>
