@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://portdev-bice.vercel.app'),
   title: {
-    default: "Desenvolvedor Full Stack | Java, React, Next.js - Portfólio Profissional",
+    default: "Portifólio José Luiz Mendes | Desenvolvedor Full Stack",
     template: "%s | Desenvolvedor Full Stack",
   },
   description: "Desenvolvedor Full Stack especializado em Java, Spring, React, Next.js e TypeScript. 2 anos de experiência criando soluções web modernas. Disponível para contratação e projetos freelance.",
