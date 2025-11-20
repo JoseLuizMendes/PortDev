@@ -27,21 +27,22 @@ export function CuriosityCard({
       className="group"
     >
       <ElectricBorder
-        color="#06b6d4"
+        color="#1e40af"
         speed={1}
-        chaos={0.3}
-        thickness={2}
+        chaos={0.25}
+        thickness={0.03}
         className="h-full bg-card/50 backdrop-blur-sm rounded-xl p-5 transition-all duration-300"
         style={{ borderRadius: "0.75rem" }}
       >
         <div className="relative">
-          <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors duration-300">
-            <Icon className="w-5 h-5 text-primary" />
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+              <Icon className="w-5 h-5 text-primary" />
+            </div>
+            <h3 className="text-base font-semibold text-foreground">
+              {title}
+            </h3>
           </div>
-
-          <h3 className="text-base font-semibold text-foreground mb-2">
-            {title}
-          </h3>
 
           <p className="text-xs text-muted-foreground leading-relaxed">
             {description}

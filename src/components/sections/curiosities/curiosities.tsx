@@ -12,7 +12,7 @@ import { curiosities } from "./data";
 export default function Curiosities() {
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -29,9 +29,45 @@ export default function Curiosities() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[auto_340px_1fr] gap-6 md:gap-8 lg:gap-0 items-start mx-auto">
-          {/* Cards de Curiosidades */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 order-2 lg:order-1 max-w-[600px] lg:pr-8">
+        <div className="grid lg:grid-cols-[1fr_1fr_1fr] gap-6 md:gap-8 items-center mx-auto max-w-[1400px]">
+
+          {/* Área de texto à ESQUERDA */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="order-3 lg:order-1 py-6 md:py-8"
+          >
+            <div className="space-y-6 text-center">
+              <h3 className="text-2xl font-bold">
+                Sobre Mim
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Sou o <span className="text-foreground font-semibold">José Luiz</span>, desenvolvedor apaixonado por transformar
+                ideias em soluções reais. Minha jornada começou com a curiosidade de entender como as coisas funcionam,
+                e hoje me especializo em criar aplicações web completas e intuitivas.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                No trabalho, sou determinado e focado.
+                Um bom café pela manhã, música lo-fi no fone e foco total no código — é assim que inicio meus dias mais produtivos.
+                Acredito que disciplina e criatividade caminham juntas.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Fora das telas  , sou músico nas horas vagas!
+                Toco violão, guitarra, teclado e carron. A música me ensinou que criatividade não tem limites —
+                e isso transborda para o código que escrevo.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Curioso por natureza, me interesso por neurociência
+                (como o cérebro funciona e como a IA tenta imitá-lo), finanças e tecnologia.
+                Adoro aprender coisas novas, trocar ideias e colaborar em projetos desafiadores.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Cards de Curiosidades - CENTRO */}
+          <div className="grid grid-cols-1 gap-3 md:gap-4 order-2 py-6 md:py-8">
             {curiosities.map((item, index) => (
               <CuriosityCard
                 key={index}
@@ -43,13 +79,13 @@ export default function Curiosities() {
             ))}
           </div>
 
-          {/* Imagem - Card Profile */}
+          {/* Imagem - Card Profile - DIREITA */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative flex justify-center order-1 lg:order-2 mb-8 lg:mb-0"
+            className="relative flex justify-center order-1 lg:order-3 py-6 md:py-8"
           >
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px]">
               {/* Card Container com imagem de fundo */}
@@ -157,30 +193,6 @@ export default function Curiosities() {
             </div>
           </motion.div>
 
-          {/* Área de texto à direita */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="order-3 lg:block lg:pl-40"
-          >
-            <div className="space-y-6 text-center">
-              <h3 className="text-2xl font-bold text-foreground">
-                Sobre Mim
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Sou um desenvolvedor determinado, criativo e sociável, apaixonado por transformar
-                ideias em soluções reais. O que me move é identificar problemas e criar maneiras
-                de resolvê-los — e quando não sei como, eu aprendo.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Além da programação, sou curioso por natureza: neurociência, finanças e música
-                fazem parte da minha rotina. Toco violão, guitarra, teclado e carron — afinal,
-                criatividade não tem limites!
-              </p>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
