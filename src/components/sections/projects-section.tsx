@@ -7,6 +7,8 @@ import { ExternalLink, Github } from "lucide-react";
 import { StaticImageData } from "next/image";
 import Image from "next/image";
 import proj1 from "../../../public/CapaBarber.png";
+import proj2 from "../../../public/CapaCasamento.png";
+import proj3 from "../../../public/CapaTerraCerta.png";
 
 interface Project {
   id: number;
@@ -22,31 +24,33 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Barber Pro",
+    title: "Barber Pro ( Develop )",
     description: "Barber Pro — sistema de gestão para barbearias com agendamento online, controle de clientes e pagamentos.",
     image: proj1,
-    demoUrl: "https://seu-projeto-1.com",
-    githubUrl: "https://github.com/seu-usuario/projeto-1",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma"],
-  },
-  /*{
-    id: 2,
-    title: "Projeto 2",
-    description: "Descrição do seu segundo projeto. Uma aplicação mobile com design responsivo.",
-    image: "/api/placeholder/400/300",
-    demoUrl: "https://seu-projeto-2.com",
-    githubUrl: "https://github.com/seu-usuario/projeto-2",
-    technologies: ["React Native", "JavaScript", "Node.js"],
+    demoUrl: "https://github.com/JoseLuizMendes/barber-pro",
+    githubUrl: "https://github.com/JoseLuizMendes/barber-pro",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "NextAuth"],
   },
   {
-    id: 3,
-    title: "Projeto 3",
-    description: "Descrição do seu terceiro projeto. Um sistema web completo com backend robusto.",
-    image: "/api/placeholder/400/300",
-    demoUrl: "https://seu-projeto-3.com",
-    githubUrl: "https://github.com/seu-usuario/projeto-3",
-    technologies: ["Python", "Django", "PostgreSQL", "Docker"],
+  id: 2,
+  title: "Site do meu Casamento - ( Develop )",
+  description: "Site personalizado para celebração do meu casamento com confirmação de presença, linha do tempo do casal e informações do evento, música e muito mais.",
+  image: proj2,
+  demoUrl: "https://github.com/JoseLuizMendes",
+  githubUrl: "https://github.com/JoseLuizMendes",
+  technologies: ["JavaScript", "React", "Tailwind CSS", "Prisma", "TypeScript","PostgreSQL"],
   },
+  
+    {
+      id: 3,
+      title: "Terra Certa ( Demo )",
+      description: "Solução ecológica desenvolvida durante hackathon da faculdade para promover o uso consciente e eficiente de pesticidas, para práticas agrícolas sustentáveis.",
+      image: proj3,
+      demoUrl: "https://github.com/JoseLuizMendes/TerraCerta",
+    githubUrl: "https://github.com/JoseLuizMendes/TerraCerta",
+    technologies: ["Python", "Django", "PostgreSQL", "Docker"],
+    },
+    /*
   {
     id: 4,
     title: "Projeto 4",
@@ -81,7 +85,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-10 bg-background relative tech-pattern overflow-hidden">
+    <section id="projects" className="py-20 bg-background relative tech-pattern overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -119,7 +123,7 @@ export function ProjectsSection() {
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-contain md:object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="object-contain group-hover:scale-110 transition-transform duration-500"
                           style={{ objectPosition: 'center' }}
                         />
                       ) : typeof project.image === 'string' ? (
@@ -127,7 +131,7 @@ export function ProjectsSection() {
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-contain md:object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="object-contain group-hover:scale-110 transition-transform duration-500"
                           style={{ objectPosition: 'center' }}
                         />
                       ) : null}
