@@ -10,12 +10,12 @@ export const achievements: Achievement[] = [
   {
     icon: Code2,
     title: "Stack",
-    description: "Experiência em projetos web fullstack",
+    description: "Experiência em projetos",
   },
   {
     icon: Target,
     title: "Foco",
-    description: "Sempre buscando aprender novas tecnologias",
+    description: "Scientia potentia est - Conhecimento é poder",
   },
   {
     icon: Users,
@@ -51,11 +51,10 @@ export const dialogAchievements: DialogAchievements = {
   },
   Foco: {
     description:
-      "Tenho prioridade em entregar soluções com foco em performance, manutenibilidade e experiência do usuário." +
-      " Busco aprender continuamente através de projetos práticos e cursos, e aplico testes e boas práticas de desenvolvimento."
+      "Busco aprimorar tanto as soft skills quanto as hard skills, enquanto me preparo para alcançar a senioridade e empreender. Full stack focado em criar soluções inteligentes, com alta performance e liberdade como princípios."
   },
   Colaboração: {
     description:
-      "Trabalho bem em equipe e projetos colaborativos, utilizando metodologias ágeis e ferramentas de versionamento para garantir entregas de qualidade.",
+      "Clareza na comunicação, colaboração proativa e curiosidade: minha base para trabalhar bem em equipe e entregar com qualidade."
   },
 };

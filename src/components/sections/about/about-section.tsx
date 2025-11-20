@@ -31,28 +31,29 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="text-center md:text-left lg:pr-12">
-            <div className="space-y-4 sm:space-y-6 mb-6">
+            <div className="space-y-4 sm:space-y-5 mb-6">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
-                Sou um estudante apaixonado por tecnologia, sempre em busca de
-                novos conhecimentos e desafios. Durante minha jornada acadêmica
-                em Ciência da Computação, tenho me dedicado a desenvolver
-                projetos que demonstram minhas habilidades técnicas e
-                criatividade.
+                Sou um desenvolvedor full stack em evolução, movido por foco, curiosidade e a vontade de criar soluções que realmente
+                façam diferença. Minha jornada na Ciência da Computação tem sido marcada por projetos que me desafiam a unir técnica,
+                 propósito e criatividade — sempre buscando alta performance e clareza no que entrego.
               </p>
 
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
-                Minha paixão pela programação começou cedo, e desde então tenho
-                explorado diversas áreas do desenvolvimento de software, desde
-                desenvolvimento web até aplicações mobile. Acredito que a
-                tecnologia pode transformar o mundo e estou empolgado para fazer
-                parte dessa transformação.
+                Exploro o ecossistema do desenvolvimento desde cedo, passando pelo front-end, back-end e agora na construção do meu próprio SaaS.
+                Acredito que tecnologia é uma ferramenta poderosa para simplificar a vida das pessoas, automatizar processos
+                e abrir caminhos para novas ideias. Por isso, estudo com consistência, observo o mercado e busco entender 
+                como transformar conhecimento em impacto real.
               </p>
 
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
-                Quando não estou codificando, gosto de estudar novas
-                tecnologias, participar de comunidades de desenvolvedores e
-                trabalhar em projetos pessoais que me desafiam a crescer
-                profissionalmente.
+                Além da programação, invisto no desenvolvimento de soft skills — comunicação, proatividade e colaboração — 
+                porque sei que grandes projetos nascem quando pessoas trabalham alinhadas. Participar de comunidades, trocar
+                 conhecimento e assumir desafios que me tiram da zona de conforto fazem parte do meu crescimento diário.
+
+              </p>
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
+                Meu objetivo é claro: evoluir até a senioridade, empreender e conquistar liberdade, geográfica e financeira — 
+                sempre construindo com propósito e visão de futuro.
               </p>
             </div>
           </motion.div>

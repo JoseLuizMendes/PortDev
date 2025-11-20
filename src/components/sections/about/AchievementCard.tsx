@@ -85,7 +85,7 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
     case "Foco": {
       const data = dialogData.Foco;
       return (
-        <div className="space-y-0">
+        <div className="space-y-0 text-center">
           <p className="text-slate-300">{data.description}</p>
         </div>
       );
@@ -94,7 +94,7 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
     case "Colaboração": {
       const data = dialogData.Colaboração;
       return (
-        <div className="space-y-0">
+        <div className="space-y-0 text-center">
           <p className="text-slate-300">{data.description}</p>
         </div>
       );
