@@ -531,11 +531,18 @@ export function SkillsSection() {
                 {[
                   "Rest API",
                   "Java",
+                  "C#",
                   "Spring Boot",
                   "JavaScript",
                   "Next.js",
                   "React",
                   "Prisma",
+                  ".NET",
+                  "ASP.NET",
+                  "Node.js",
+                  "Express",
+                  "Python",                
+                  "SQL Developer",
                   "PostgreSQL",
                 ].map((tech, index) => (
                   <motion.span
