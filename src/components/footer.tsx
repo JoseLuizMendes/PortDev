@@ -41,7 +41,7 @@ export function Footer() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-slate-400 text-sm mb-4 md:mb-0 font-mono text-center">
-          <span className="text-blue-400">©</span> 2024
+          <span className="text-blue-400">©</span> {new Date().getFullYear()}
           <span className="text-gradient font-semibold"> DevPortfolio</span>
           <span className="text-slate-500">. All rights reserved.</span>
         </div>
