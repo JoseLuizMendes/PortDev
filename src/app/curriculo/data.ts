@@ -43,6 +43,7 @@ export const curriculoData = {
         "Testes unitários para validação de funcionalidades e garantia da qualidade do código",
         "Comunicação e colaboração: Desenvolvi habilidades interpessoais ao interagir com equipes multidisciplinares, sendo responsável por alinhar informações entre diferentes áreas e garantir clareza nos processos. ",
         "Levantamento e análise de sistemas: Realizei um mapeamento completo dos sistemas integrados ao SIARHES (Sistema de RH do Estado do Espírito Santo), conduzindo entrevistas com responsáveis pelo desenvolvimento e manutenção para consolidar dados e elaborar um roadmap estratégico do SIARHES. ",
+        "Liderei o levantamento, o estudo e a análise de sistemas integrados ao sistema SIARHES atual, para serem transportados para o novo sistema de RH do governo – O Novo SIARHES. O projeto já foi levado pra Santa Catarina para ser estudado e implementado assim como em Vitoria, no Espírito Santo.",
         "Qualidade de software com SonarQube: Assumi a responsabilidade pelo Portal do Servidor, Sistema de Seleção e Sistema CHE, implementando melhorias que elevaram as métricas de qualidade para nota A em todas as categorias avaliadas pelo SonarQube.",
         "Gestão de versionamento e ciclo de vida de aplicações via Azure DevOps e Git, com utilização de repositórios, pipelines e boas práticas de integração contínua.",
         "Administração de banco de dados com SQL Developer (criação de tabelas, views, consultas avançadas)",
