@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { SplitText } from "@/components/ui/split-text";
+
 import { motion } from "framer-motion";
 import {
   Radar,
@@ -22,6 +22,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import { TechEffects } from "@/components/ui/tech-effects";
 
 interface Skill {
   name: string;
@@ -116,7 +117,7 @@ export function SkillsSection() {
   // Preparar dados para stacked area chart (Backend)
   const getStackedAreaData = (category: string) => {
     const categorySkills = getSkillsByCategory(category);
-    const dataPoints = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    const dataPoints = ['2024/1', '2024/2', '2025/1', '2025/2'];
     
     return dataPoints.map((point) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -370,24 +371,9 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="py-20 bg-background/95 relative tech-pattern"
-    >
+        className="py-20 bg-background relative tech-pattern overflow-hidden">
+      <TechEffects />
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <SplitText
-            text="Habilidades Técnicas"
-            className="text-4xl md:text-5xl font-bold text-foreground mb-6 justify-center"
-          />
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Tecnologias e ferramentas que domino e utilizo em meus projetos
-          </p>
-        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {categories.map((category, categoryIndex) => (

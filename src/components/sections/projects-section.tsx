@@ -9,6 +9,7 @@ import Image from "next/image";
 import proj1 from "../../../public/CapaBarber.png";
 import proj2 from "../../../public/CapaCasamento.png";
 import proj3 from "../../../public/CapaTerraCerta.png";
+import { TechEffects } from "../ui/tech-effects";
 
 interface Project {
   id: number;
@@ -86,6 +87,7 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" className="py-20 bg-background relative tech-pattern overflow-hidden">
+      <TechEffects />
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

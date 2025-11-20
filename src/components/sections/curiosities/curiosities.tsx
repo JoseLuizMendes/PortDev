@@ -8,10 +8,14 @@ import { BadgeCheck } from "lucide-react";
 import { Card, CardContent } from "../../ui/card";
 import { CuriosityCard } from "./CuriosityCard";
 import { curiosities } from "./data";
+import { TechEffects } from "@/components/ui/tech-effects";
 
 export default function Curiosities() {
   return (
-    <section className="py-20 bg-background relative overflow-hidden">
+    <section
+      id="curiosities"
+      className="py-20 bg-background relative tech-pattern overflow-hidden">
+      <TechEffects />
       <div className="container  mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

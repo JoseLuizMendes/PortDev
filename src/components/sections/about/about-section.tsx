@@ -4,12 +4,14 @@ import { SplitText } from "@/components/ui/split-text";
 import { motion } from "framer-motion";
 import { AchievementCard } from "./AchievementCard";
 import { achievements, dialogAchievements } from "./data";
+import { TechEffects } from "@/components/ui/tech-effects";
 
 export function AboutSection() {
   return (
     <section
       id="about"
       className="py-20 bg-background relative tech-pattern overflow-hidden">
+      <TechEffects />
       <div className="container mx-auto px-6 ">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
