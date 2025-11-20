@@ -123,7 +123,7 @@ export function ProjectsSection() {
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-contain group-hover:scale-110 transition-transform duration-500"
+                          className="object-contain md:object-cover group-hover:scale-110 transition-transform duration-500"
                           style={{ objectPosition: 'center' }}
                         />
                       ) : typeof project.image === 'string' ? (
@@ -131,7 +131,7 @@ export function ProjectsSection() {
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-contain group-hover:scale-110 transition-transform duration-500"
+                          className="object-contain md:object-cover group-hover:scale-110 transition-transform duration-500"
                           style={{ objectPosition: 'center' }}
                         />
                       ) : null}
