@@ -29,14 +29,15 @@ export default function Curiosities() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1fr_1fr_1fr] gap-6 md:gap-8 items-center mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
           {/* Área de texto à ESQUERDA */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="order-3 lg:order-1"
+            className="order-3 lg:order-1 h-full"
           >
             <div className="space-y-3 text-center">
               <h3 className="text-2xl font-bold">Sobre Mim</h3>
@@ -75,7 +76,7 @@ export default function Curiosities() {
           </motion.div>
 
           {/* Cards de Curiosidades - CENTRO */}
-          <div className="grid grid-cols-1 gap-3 md:gap-4 order-2">
+          <div className="grid grid-cols-1 gap-4 order-2 h-full overflow-visible py-2.5 w-full max-w-[400px] mx-auto lg:mx-0">
             {curiosities.map((item, index) => (
               <CuriosityCard
                 key={index}
@@ -93,12 +94,12 @@ export default function Curiosities() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative flex justify-center order-1 lg:order-3"
+            className="relative flex justify-center mt-1 order-1 lg:order-3 h-full"
           >
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px]">
               {/* Card Container com imagem de fundo */}
-              <Card className="rounded-3xl md:rounded-4xl h-[420px] sm:h-[480px] md:h-[535px] p-1.5 md:p-2">
-                <CardContent className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl h-full p-5">
+              <Card className="rounded-3xl md:rounded-4xl w-full p-1.5 md:p-2">
+                <CardContent className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl p-5">
                   {/* Imagem como background */}
                   <div className="relative h-[370px] sm:h-[430px] md:h-[480px]">
                     <Image
@@ -200,6 +201,7 @@ export default function Curiosities() {
               </Card>
             </div>
           </motion.div>
+          </div>
         </div>
       </div>
     </section>
