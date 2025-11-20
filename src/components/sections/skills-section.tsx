@@ -36,6 +36,8 @@ const skills: Skill[] = [
   { name: "JavaScript", level: 70, category: "Frontend" },
   { name: "React", level: 70, category: "Frontend" },
   { name: "TypeScript", level: 60, category: "Frontend" },
+  { name: "ShadCN UI", level: 90, category: "Frontend" },
+  { name: "React Bits", level: 90, category: "Frontend" },
 
   // Backend
   { name: "Java", level: 85, category: "Backend" },
@@ -45,11 +47,11 @@ const skills: Skill[] = [
   { name: "Express", level: 50, category: "Backend" },
 
   // Database
+  { name: "PostgreSQL", level: 85, category: "Database" },
   { name: "SQL Developer", level: 80, category: "Database" },
-  { name: "PostgreSQL", level: 75, category: "Database" },
   { name: "MongoDB", level: 75, category: "Database" },
   { name: "Oracle", level: 70, category: "Database" },
-
+  
   // Frameworks
   { name: "Spring", level: 75, category: "Frameworks" },
   { name: "ASP.NET", level: 60, category: "Frameworks" },
