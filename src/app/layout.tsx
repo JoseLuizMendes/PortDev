@@ -15,12 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://seudominio.com.br'), // ALTERE PARA SEU DOMÍNIO
+  metadataBase: new URL('https://portdev-bice.vercel.app'),
   title: {
     default: "Desenvolvedor Full Stack | Java, React, Next.js - Portfólio Profissional",
     template: "%s | Desenvolvedor Full Stack",
   },
-  description: "Desenvolvedor Full Stack especializado em Java, Spring, React, Next.js e TypeScript. 2+ anos de experiência criando soluções web modernas. Disponível para contratação e projetos freelance.",
+  description: "Desenvolvedor Full Stack especializado em Java, Spring, React, Next.js e TypeScript. 2 anos de experiência criando soluções web modernas. Disponível para contratação e projetos freelance.",
   keywords: [
     // Palavras-chave para contratação
     "desenvolvedor full stack",
@@ -33,13 +33,18 @@ export const metadata: Metadata = {
     "engenheiro de software",
     
     // Tecnologias específicas
-    "java spring boot",
+    "java",
+    "C#",
+    ".net",
+    "asp.net",
+    "spring boot",
     "react.js",
     "next.js",
     "node.js",
     "typescript",
     "javascript",
     "tailwind css",
+    "sql developer",
     "postgresql",
     "mongodb",
     "oracle database",
@@ -47,9 +52,9 @@ export const metadata: Metadata = {
     // Serviços
     "desenvolvedor freelance",
     "desenvolvedor remoto",
-    "programador para contratar",
+    "desenvolvedor junior",
     "desenvolvedor web",
-    "desenvolvedor mobile",
+    "desenvolvedor full stack",
     
     // Localização e contexto
     "desenvolvedor brasil",
@@ -57,21 +62,21 @@ export const metadata: Metadata = {
     "ciência da computação",
     "estudante tecnologia",
   ],
-  authors: [{ name: "Seu Nome Completo" }], // ALTERE SEU NOME
-  creator: "Seu Nome Completo", // ALTERE SEU NOME
-  publisher: "Seu Nome Completo", // ALTERE SEU NOME
+  authors: [{ name: "José Luiz Mendes" }],
+  creator: "José Luiz Mendes",
+  publisher: "José Luiz Mendes",
   
   // Open Graph para redes sociais
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://seudominio.com.br", // ALTERE PARA SEU DOMÍNIO
+    url: "https://portdev-bice.vercel.app",
     siteName: "Portfólio Profissional - Desenvolvedor Full Stack",
-    title: "Desenvolvedor Full Stack | Java, React, Next.js - Disponível para Contratação",
+    title: "Portifólio José Luiz Mendes | Desenvolvedor Full Stack",
     description: "Desenvolvedor Full Stack com expertise em Java, Spring, React e Next.js. Transformo ideias em soluções digitais de alta qualidade. Veja meus projetos e entre em contato!",
     images: [
       {
-        url: "/og-image.png", // CRIE UMA IMAGEM 1200x630px
+        url: "../../public/Card_Profissional.png",
         width: 1200,
         height: 630,
         alt: "Portfólio Desenvolvedor Full Stack",
