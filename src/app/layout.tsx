@@ -83,7 +83,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Portfólio Desenvolvedor Full Stack",
-        type: "image/png",
+        type: "../../public/port-hero.png",
       },
     ],
   },
