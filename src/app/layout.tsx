@@ -72,33 +72,33 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://portdev-bice.vercel.app",
+    url: "https://portdev-bice.vercel.app", // Mantenha o seu domínio Vercel
     siteName: "Portfólio Profissional - Desenvolvedor Full Stack",
     title: "Portifólio José Luiz Mendes | Desenvolvedor Full Stack",
     description:
       "Desenvolvedor Full Stack com expertise em Java, Spring, React e Next.js. Transformo ideias em soluções digitais de alta qualidade. Veja meus projetos e entre em contato!",
     images: [
       {
-        // CAMINHO CORRETO PARA SUA IMAGEM NA PASTA /PUBLIC, com quebra de cache
-        url: "/port-hero.png?v=5",
+        // ✅ CORREÇÃO: Caminho público correto e Cache Busting
+        url: "/port-hero.png?v=6",
         width: 1200,
         height: 630,
         alt: "Portfólio Desenvolvedor Full Stack",
-        // TIPO CORRETO
+        // ✅ CORREÇÃO: Tipo MIME
         type: "image/png", 
       },
     ],
   },
 
-  // Twitter Card
+  // Twitter Card (NECESSÁRIO, pois o LinkedIn o usa!)
   twitter: {
     card: "summary_large_image",
     title: "Desenvolvedor Full Stack | Java, React, Next.js",
     description:
       "Desenvolvedor Full Stack especializado em criar aplicações web modernas e escaláveis. Disponível para projetos.",
-    creator: "@seutwitter", // Não se esqueça de alterar seu Twitter aqui
-    // USANDO A MESMA IMAGEM CORRIGIDA
-    images: ["/port-hero.png?v=5"], 
+    creator: "@seutwitter", // Troque isso, se tiver Twitter.
+    // ✅ CORREÇÃO: Imagem correta e Cache Busting
+    images: ["/port-hero.png?v=6"], 
   },
 
   // Robots e indexação
