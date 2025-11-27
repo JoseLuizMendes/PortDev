@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     images: [
       {
         // ✅ CORREÇÃO: Caminho público correto e Cache Busting
-        url: "/port-hero.png?v=6",
+        url: "/port-hero-final.png?v=6",
         width: 1200,
         height: 630,
         alt: "Portfólio Desenvolvedor Full Stack",
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
       "Desenvolvedor Full Stack especializado em criar aplicações web modernas e escaláveis. Disponível para projetos.",
     creator: "@seutwitter", // Troque isso, se tiver Twitter.
     // ✅ CORREÇÃO: Imagem correta e Cache Busting
-    images: ["/port-hero.png?v=6"], 
+    images: ["/port-hero-final.png?v=7"], 
   },
 
   // Robots e indexação
