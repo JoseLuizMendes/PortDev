@@ -79,11 +79,13 @@ export const metadata: Metadata = {
       "Desenvolvedor Full Stack com expertise em Java, Spring, React e Next.js. Transformo ideias em soluções digitais de alta qualidade. Veja meus projetos e entre em contato!",
     images: [
       {
-        url: "../../public/Card_Profissional.png",
+        // CAMINHO CORRETO PARA SUA IMAGEM NA PASTA /PUBLIC, com quebra de cache
+        url: "/port-hero.png?v=5",
         width: 1200,
         height: 630,
         alt: "Portfólio Desenvolvedor Full Stack",
-        type: "../../public/port-hero.png",
+        // TIPO CORRETO
+        type: "image/png", 
       },
     ],
   },
@@ -94,8 +96,9 @@ export const metadata: Metadata = {
     title: "Desenvolvedor Full Stack | Java, React, Next.js",
     description:
       "Desenvolvedor Full Stack especializado em criar aplicações web modernas e escaláveis. Disponível para projetos.",
-    creator: "@seutwitter", // ALTERE SEU TWITTER
-    images: ["/og-image.png"], // MESMA IMAGEM DO OPEN GRAPH
+    creator: "@seutwitter", // Não se esqueça de alterar seu Twitter aqui
+    // USANDO A MESMA IMAGEM CORRIGIDA
+    images: ["/port-hero.png?v=5"], 
   },
 
   // Robots e indexação
