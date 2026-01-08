@@ -57,7 +57,7 @@ export const curriculoData = {
 
   projetosProprios: [
     {
-      titulo: "Wedding-New – Plataforma de Planejamento de Casamentos",
+      titulo: "Wedding-New – Aplicação Web Que Desenvolvi Pro Meu Casamento",
       stack: "Next.js 15, TypeScript, Prisma, PostgreSQL, Mercado Pago API, Tailwind CSS, Jest/Playwright",
       descricao: [
         "Desenvolvimento de plataforma Full Stack com Next.js 15, utilizando Server Components e Client Components para alta performance",
