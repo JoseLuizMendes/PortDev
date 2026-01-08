@@ -14,7 +14,7 @@ export const curriculoData = {
   formacaoAcademica: [
     {
       curso: "Ciência da Computação",
-      instituicao: "FAESA - Cursando 4º período (noturno)",
+      instituicao: "FAESA - Cursando 5º período",
     },
   ],
 
@@ -29,6 +29,8 @@ export const curriculoData = {
     "• Des. Ágil de Software - 32h (2024)",
     "• Lab. POO - 20h (2024)",
     "• Marketing Pessoal - 2h (2024)",
+    "• Pré-Mestrado Internacional de Inteligência Artificial",
+    "• C# com .NET Framework - 40h (2024)",
   ],
 
   experienciaProfissional: [
@@ -54,6 +56,19 @@ export const curriculoData = {
   ],
 
   projetosProprios: [
+    {
+      titulo: "Wedding-New – Plataforma de Planejamento de Casamentos",
+      stack: "Next.js 15, TypeScript, Prisma, PostgreSQL, Mercado Pago API, Tailwind CSS, Jest/Playwright",
+      descricao: [
+        "Desenvolvimento de plataforma Full Stack com Next.js 15, utilizando Server Components e Client Components para alta performance",
+        "Integração completa com API do Mercado Pago para processamento de pagamentos e gestão de webhooks",
+        "Sistema de RSVP e gestão de convidados com validações em tempo real e persistência via Prisma",
+        "Lista de presentes interativa com reserva de itens e contribuição em cotas de 'Lua de Mel' com progresso dinâmico",
+        "Galeria colaborativa com upload de fotos, curtidas e comentários integrados a rotas de API",
+        "Garantia de qualidade através de Testes Unitários (Jest) e Testes de Ponta a Ponta (Playwright)",
+        "Validação rigorosa de dados com Zod em toda a aplicação (Client/Server)",
+      ],
+    },
     {
       titulo: "SaaS – Sistema de Agendamento para Barbearias",
       stack: "Next.js, React, TypeScript, Prisma, PostgreSQL, Docker, NextAuth",
@@ -109,6 +124,11 @@ export const curriculoData = {
       "PostgreSQL",
       "SonarQube",
       "UML",
+      "Postman",
+      "SQL Server",
+      "MongoDB",
+      "Swagger",
+      "GitHub",
     ],
   },
 
