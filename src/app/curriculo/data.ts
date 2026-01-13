@@ -1,4 +1,57 @@
-export const curriculoData = {
+export type CurriculoYearMonth = `${number}-${number}` | string
+
+export type CurriculoFormacaoAcademica = {
+  curso: string
+  instituicao: string
+  inicio?: CurriculoYearMonth
+  fim?: CurriculoYearMonth
+}
+
+export type CurriculoExperienciaProfissional = {
+  cargo: string
+  empresa: string
+  periodo: string
+  inicio?: CurriculoYearMonth
+  fim?: CurriculoYearMonth
+  atividades: string[]
+}
+
+export type CurriculoProjetoProprio = {
+  titulo: string
+  stack: string
+  inicio?: CurriculoYearMonth
+  fim?: CurriculoYearMonth
+  descricao: string[]
+}
+
+export type CurriculoData = {
+  informacoesPessoais: {
+    nome: string
+    localizacao: string
+    idade: string
+    estadoCivil: string
+    telefone: string
+    email: string
+  }
+  objetivoProfissional: string
+  formacaoAcademica: CurriculoFormacaoAcademica[]
+  cursosComplementares: string[]
+  experienciaProfissional: CurriculoExperienciaProfissional[]
+  projetosProprios: CurriculoProjetoProprio[]
+  habilidadesTecnicas: {
+    linguagens: string[]
+    frameworks: string[]
+    ferramentas: string[]
+  }
+  informacoesAdicionais: {
+    idiomas: string
+    softSkills: string
+    interesses: string
+    diferenciais: string
+  }
+}
+
+export const curriculoData: CurriculoData = {
   informacoesPessoais: {
     nome: "JOSÉ LUIZ DOS SANTOS AZEREDO MENDES",
     localizacao: "📍 Ilha das Caieiras, Vitória/ES",
@@ -15,6 +68,8 @@ export const curriculoData = {
     {
       curso: "Ciência da Computação",
       instituicao: "FAESA - Cursando 5º período",
+      inicio: "2024-08",
+      fim: undefined,
     },
   ],
 
@@ -38,6 +93,8 @@ export const curriculoData = {
       cargo: "Estagiário - PRODEST",
       empresa: "Processamento de Dados do Espírito Santo",
       periodo: "Out/2024 - Atual",
+      inicio: "2024/10",
+      fim: "2026/10",
       atividades: [
         "Atendimento técnico de primeiro e segundo nível, com registro, qualificação e resolução de demandas",
         "Desenvolvimento e manutenção de sistemas em C# (.NET / ASP.NET), incluindo correção de bugs e novas funcionalidades",
@@ -59,6 +116,8 @@ export const curriculoData = {
     {
       titulo: "Wedding-New – Aplicação Web Que Desenvolvi Pro Meu Casamento",
       stack: "Next.js 15, TypeScript, Prisma, PostgreSQL, Mercado Pago API, Tailwind CSS, Jest/Playwright",
+      inicio: "2025-08",
+      fim: "2025-12",
       descricao: [
         "Desenvolvimento de plataforma Full Stack com Next.js 15, utilizando Server Components e Client Components para alta performance",
         "Integração completa com API do Mercado Pago para processamento de pagamentos e gestão de webhooks",
@@ -72,6 +131,8 @@ export const curriculoData = {
     {
       titulo: "SaaS – Sistema de Agendamento para Barbearias",
       stack: "Next.js, React, TypeScript, Prisma, PostgreSQL, Docker, NextAuth",
+      inicio: "2025-08",
+      fim: undefined,
       descricao: [
         "Levantamento de requisitos com entrevistas e definição de funcionalidades",
         "Modelagem do banco de dados e criação de queries complexas",
@@ -84,6 +145,8 @@ export const curriculoData = {
     {
       titulo: "API em Java/Spring Boot",
       stack: "Java, Spring Boot, PostgreSQL, Docker",
+      inicio: "2024-06",
+      fim: "2024-06",
       descricao: [
         "Definição de arquitetura e padrão de camadas com segurança",
         "Modelagem de dados e consultas otimizadas",
@@ -95,6 +158,8 @@ export const curriculoData = {
     {
       titulo: "Desafios Técnicos – Itaú e PicPay",
       stack: "Java, Spring Boot",
+      inicio: "2024-02",
+      fim: "2024-02",
       descricao: [
         "Resolução de problemas algorítmicos para entrevistas técnicas",
         "Implementação de soluções performáticas com foco em eficiência",
