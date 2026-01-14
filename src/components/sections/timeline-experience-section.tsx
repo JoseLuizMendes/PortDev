@@ -70,9 +70,7 @@ function TimelineItem({ item, side }: { item: TimelineExperienceItem; side: Time
                     </CardTitle>
 
                     <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                      {periodLabel ? (
-                        <span>{periodLabel}</span>
-                      ) : null}
+                      {periodLabel ? <span>{periodLabel}</span> : null}
                       {item.location ? (
                         <>
                           <span aria-hidden="true">·</span>

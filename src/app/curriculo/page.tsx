@@ -92,9 +92,16 @@ export default function CurriculoPage() {
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 border-b border-gray-300 pb-2">
               CURSOS COMPLEMENTARES
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs sm:text-sm text-gray-700">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs sm:text-sm text-gray-700">
               {curriculoData.cursosComplementares.map((curso, index) => (
-                <div key={index}>{curso}</div>
+                <div key={index} className="leading-snug">
+                  <div className="font-medium text-gray-900">• {curso.titulo}</div>
+                  <div className="text-gray-600">
+                    {[curso.cargaHoraria, curso.ano ? String(curso.ano) : undefined, curso.instituicao, curso.plataforma]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </div>
+                </div>
               ))}
             </div>
           </section>
