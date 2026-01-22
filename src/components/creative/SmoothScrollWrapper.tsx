@@ -103,12 +103,3 @@ export function SmoothScrollWrapper({
 
   return <>{children}</>;
 }
-
-/**
- * Hook to access Lenis instance
- * 
- * @returns Lenis instance or null
- */
-export function useLenis() {
-  return useRef<Lenis | null>(null);
-}
