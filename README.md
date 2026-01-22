@@ -15,7 +15,8 @@ Um portfólio pessoal moderno e interativo desenvolvido com Next.js 15 e React 1
 - **Framework:** Next.js 15.5.3 com Turbopack
 - **UI Library:** React 19.1.0
 - **Estilização:** Tailwind CSS 4.0
-- **Animações:** Framer Motion
+- **Animações:** GSAP + @gsap/react (migrado de Framer Motion)
+- **Smooth Scrolling:** Lenis
 - **3D Graphics:** Three.js com React Three Fiber
 - **Componentes UI:** Radix UI
 - **Ícones:** Lucide React, React Icons
@@ -24,11 +25,20 @@ Um portfólio pessoal moderno e interativo desenvolvido com Next.js 15 e React 1
 
 #### ✨ Características
 - Interface responsiva e moderna
-- Animações suaves e interativas
+- **Experiência web imersiva** com animações cinematográficas
+- **Smooth scrolling** integrado com GSAP ScrollTrigger
+- **Performance otimizada** (target 120fps)
 - Elementos 3D interativos
+- **Preloader splash screen** com animações GSAP
 - Sistema de temas (claro/escuro)
+- **Transições entre páginas** com efeito curtain
+- **Acessibilidade** com suporte a prefers-reduced-motion
 - Otimizado com Vercel Speed Insights
 - Carrossel de projetos com Embla Carousel
+
+#### 📖 Documentação
+Para detalhes sobre o sistema de animações imersivas, consulte:
+- [Documentação de Refatoração Imersiva](docs/immersive-refactor.md)
 
 #### 📄 Licença
 MIT License
