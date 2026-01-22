@@ -3,10 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { SplitTextChar } from "@/components/ui/split-text";
 import DecryptedText from "@/components/ui/DecryptedText";
-import { Beams } from "@/components/ui/beams";
+//import { Beams } from "@/components/ui/beams";
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
 import Image from "next/image";
+import LightPillar from "../LightPillar";
 
 export function HeroSection() {
   const scrollToSection = (id: string) => {
@@ -21,7 +22,20 @@ export function HeroSection() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <Beams />
+      <LightPillar
+        topColor="#5227FF"
+        bottomColor="#FF9FFC"
+        intensity={1}
+        rotationSpeed={0.3}
+        glowAmount={0.002}
+        pillarWidth={3}
+        pillarHeight={0.4}
+        noiseIntensity={0.5}
+        pillarRotation={25}
+        interactive={false}
+        mixBlendMode="screen"
+        quality="high"
+      />
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <motion.div
@@ -93,8 +107,8 @@ export function HeroSection() {
           className="mb-8"
         >
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Sou apaixonado por tecnologia, sempre em busca de novos
-            desafios e oportunidades para crescer profissionalmente.
+            Sou apaixonado por tecnologia, sempre em busca de novos desafios e
+            oportunidades para crescer profissionalmente.
           </p>
         </motion.div>
 

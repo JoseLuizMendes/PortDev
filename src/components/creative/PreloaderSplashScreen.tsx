@@ -31,7 +31,7 @@ interface PreloaderSplashScreenProps {
  */
 export function PreloaderSplashScreen({
   onComplete,
-  maxDuration = 5000,
+  maxDuration = 10000,
 }: PreloaderSplashScreenProps) {
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);

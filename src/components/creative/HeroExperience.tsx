@@ -2,10 +2,14 @@
 
 import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
-import { createTimeline, shouldEnableAdvancedAnimations } from "@/lib/gsap-config";
+import {
+  createTimeline,
+  shouldEnableAdvancedAnimations,
+} from "@/lib/gsap-config";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Download } from "lucide-react";
 import Image from "next/image";
+import LightPillar from "@/components/LightPillar";
 import DecryptedTextGSAP from "@/components/ui/DecryptedTextGSAP";
 
 interface MousePosition {
@@ -15,14 +19,14 @@ interface MousePosition {
 
 /**
  * HeroExperience
- * 
+ *
  * Refactored hero section with GSAP animations and ethereal background effects
  * Features:
  * - GSAP timeline entrance sequence
  * - Mouse-reactive ethereal light pillar background
  * - Portrait integration with blend modes
  * - Responsive with simplified mobile experience
- * 
+ *
  * @component
  */
 export function HeroExperience() {
@@ -61,7 +65,7 @@ export function HeroExperience() {
           duration: 1.2,
           ease: "back.out(1.4)",
         },
-        "-=0.5"
+        "-=0.5",
       );
 
       // Content entrance (stagger children)
@@ -75,10 +79,10 @@ export function HeroExperience() {
           duration: 0.8,
           ease: "power2.out",
         },
-        "-=0.8"
+        "-=0.8",
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   // Mouse tracking for ethereal effect
@@ -108,6 +112,20 @@ export function HeroExperience() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
+      <LightPillar
+        topColor="#5227FF"
+        bottomColor="#FF9FFC"
+        intensity={1}
+        rotationSpeed={0.3}
+        glowAmount={0.002}
+        pillarWidth={3}
+        pillarHeight={0.4}
+        noiseIntensity={0.5}
+        pillarRotation={25}
+        interactive={false}
+        mixBlendMode="screen"
+        quality="high"
+      />
       {/* Ethereal Light Pillar Background */}
       <div
         ref={backgroundRef}
@@ -142,7 +160,10 @@ export function HeroExperience() {
       </div>
 
       {/* Content Container */}
-      <div ref={contentRef} className="relative z-10 container mx-auto px-6 text-center">
+      <div
+        ref={contentRef}
+        className="relative z-10 container mx-auto px-6 text-center"
+      >
         {/* Portrait with blend effects */}
         <div ref={portraitRef} className="mb-6 mt-20">
           <div className="relative w-32 h-32 mx-auto">
@@ -191,8 +212,8 @@ export function HeroExperience() {
         {/* Description */}
         <div className="mb-8">
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Sou apaixonado por tecnologia, sempre em busca de novos
-            desafios e oportunidades para crescer profissionalmente.
+            Sou apaixonado por tecnologia, sempre em busca de novos desafios e
+            oportunidades para crescer profissionalmente.
           </p>
         </div>
 
