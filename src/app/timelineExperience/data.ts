@@ -1,6 +1,6 @@
 import { curriculoData } from "@/app/curriculo/data"
 
-export type TimelineCategory = "Experiência" | "Projetos" | "Formação" | "Cursos"
+export type TimelineCategory = "Experiência" | "Projetos" | "Bacharelado" | "Cursos"
 
 export type TimelineExperienceItem = {
   id: string
@@ -107,18 +107,6 @@ function inferTechFromText(text: string) {
   )
 }
 
-function parseCourseLine(line: string): { title: string; hours?: string; year?: number } {
-  // Ex: "• Curso de Next.js - 20h (2025)"
-  const cleaned = line.replace(/^\s*•\s*/, "").trim()
-  const yearMatch = cleaned.match(/\((\d{4})\)\s*$/)
-  const year = yearMatch ? Number(yearMatch[1]) : undefined
-  const withoutYear = yearMatch ? cleaned.replace(/\s*\(\d{4}\)\s*$/, "").trim() : cleaned
-  const parts = withoutYear.split("-").map((p) => p.trim()).filter(Boolean)
-  const title = parts[0] ?? withoutYear
-  const hours = parts[1]
-  return { title, hours, year }
-}
-
 function toMonthIndex(ym?: string) {
   if (!ym) return Number.POSITIVE_INFINITY
   const match = ym.match(/^(\d{4})-(\d{2})$/)
@@ -134,6 +122,57 @@ function normalizeYearMonth(ym?: string) {
   const match = ym.match(/^(\d{4})-(\d{2})$/)
   if (!match) return undefined
   return ym
+}
+
+function clamp(n: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, n))
+}
+
+function monthDiff(fromYm: string, toDate: Date) {
+  const [y, m] = fromYm.split("-").map(Number)
+  const from = new Date(y, (m ?? 1) - 1, 1)
+  return (toDate.getFullYear() - from.getFullYear()) * 12 + (toDate.getMonth() - from.getMonth())
+}
+
+function computeAutoPeriodo(edu: {
+  periodoBase?: number
+  periodoBaseInicio?: string
+  totalPeriodos?: number
+}) {
+  const total = edu.totalPeriodos ?? 8
+  const basePeriodo = edu.periodoBase ?? 1
+  const baseInicio = normalizeYearMonth(edu.periodoBaseInicio)
+  if (!baseInicio) {
+    return { periodo: clamp(basePeriodo, 1, total), total }
+  }
+
+  const months = monthDiff(baseInicio, new Date())
+  const increments = Math.floor(months / 6)
+  const computed = basePeriodo + (Number.isFinite(increments) ? increments : 0)
+  return { periodo: clamp(computed, 1, total), total }
+}
+
+function courseToStart(course: { inicio?: string; ano?: number }) {
+  const start = normalizeYearMonth(course.inicio)
+  if (start) return start
+  if (course.ano) return toIsoYearMonth(course.ano, 1)
+  return undefined
+}
+
+function buildCourseHighlights(course: {
+  instituicao?: string
+  plataforma?: string
+  modalidade?: string
+  cargaHoraria?: string
+  topicos?: string[]
+}) {
+  const highlights: string[] = []
+  if (course.cargaHoraria) highlights.push(`Carga horária: ${course.cargaHoraria}`)
+  if (course.modalidade) highlights.push(`Modalidade: ${course.modalidade}`)
+  if (course.instituicao) highlights.push(`Instituição: ${course.instituicao}`)
+  if (course.plataforma) highlights.push(`Plataforma: ${course.plataforma}`)
+  if (course.topicos?.length) highlights.push(...course.topicos)
+  return highlights.length ? highlights : undefined
 }
 
 const experienceItems: TimelineExperienceItem[] = curriculoData.experienciaProfissional.map((exp, idx) => {
@@ -167,40 +206,120 @@ const experienceItems: TimelineExperienceItem[] = curriculoData.experienciaProfi
 const educationItems: TimelineExperienceItem[] = curriculoData.formacaoAcademica.map((edu, idx) => {
   const start = normalizeYearMonth(edu.inicio)
   const end = normalizeYearMonth(edu.fim)
+
+  const { periodo: autoPeriodo } = computeAutoPeriodo({
+    periodoBase: edu.periodoBase,
+    periodoBaseInicio: edu.periodoBaseInicio,
+    totalPeriodos: edu.totalPeriodos,
+  })
+
+  const periodoAtualLabel = edu.periodoAtual ?? `${autoPeriodo}º período`
+
+  const periodParts = [edu.status, periodoAtualLabel].filter(Boolean)
+  const periodLabel = periodParts.length ? periodParts.join(" · ") : undefined
+
+  const currentPeriodSubjects = edu.matrizCurricular?.find((p) => p.periodo === autoPeriodo)?.disciplinas
+  const subjectsLines = (currentPeriodSubjects ?? []).map((d) => `${d.nome} (${d.cargaHoraria}h)`)
+
+  const highlights = pickHighlights(
+    [
+      ...(subjectsLines.length ? subjectsLines.map((d) => `Disciplina: ${d}`) : (edu.disciplinas ?? []).map((d) => `Disciplina: ${d}`)),
+      ...(edu.atividades ?? []),
+      ...(edu.projetos ?? []).map((p) => `Projeto: ${p}`),
+    ],
+    8
+  )
+
+  const tech = uniq(
+    [
+      ...(edu.competencias ?? []),
+      ...inferTechFromText(
+        [
+          edu.curso,
+          edu.instituicao,
+          edu.descricao,
+          ...(edu.disciplinas ?? []),
+          ...(edu.competencias ?? []),
+        ]
+          .filter(Boolean)
+          .join("\n")
+      ),
+    ].filter(Boolean)
+  )
+
+  const summary =
+    edu.descricao ??
+    (edu.periodoAtual
+      ? `Graduação em andamento (${edu.periodoAtual}), com foco em desenvolvimento de software e fundamentos de computação.`
+      : "Formação acadêmica em andamento, com base sólida em computação e desenvolvimento de software.")
+
   return {
     id: `edu-${idx}`,
-    category: "Formação",
+    category: "Bacharelado",
     company: edu.instituicao,
     role: edu.curso,
+    location: edu.campus,
     start,
     end,
-    isCurrent: /cursando/i.test(edu.instituicao),
-    periodLabel: /cursando/i.test(edu.instituicao) ? "Cursando" : undefined,
-    summary: "Formação acadêmica em andamento, com base sólida em computação e desenvolvimento de software.",
-    tech: ["Algoritmos", "Estruturas de Dados", "POO"],
+    isCurrent: edu.status ? /cursando/i.test(edu.status) : /cursando/i.test(edu.instituicao),
+    periodLabel,
+    summary,
+    highlights: highlights.length ? highlights : undefined,
+    tech: tech.length ? tech : undefined,
   } satisfies TimelineExperienceItem
 })
 
-const courseItems: TimelineExperienceItem[] = curriculoData.cursosComplementares
-  .map((line, idx) => {
-    const parsed = parseCourseLine(line)
-    const periodLabel = parsed.year ? String(parsed.year) : undefined
-    const tech = inferTechFromText([parsed.title, line].join("\n"))
+const courseItems: TimelineExperienceItem[] = curriculoData.cursosComplementares.map((course, idx) => {
+  const periodLabel = course.ano ? String(course.ano) : undefined
 
-    // Para ordenar cronologicamente, cursos com ano viram YYYY-01
-    const start = parsed.year ? toIsoYearMonth(parsed.year, 1) : undefined
+  const tech = uniq(
+    [
+      ...(course.tags ?? []),
+      ...inferTechFromText(
+        [
+          course.titulo,
+          course.instituicao,
+          course.plataforma,
+          course.modalidade,
+          course.cargaHoraria,
+          course.resumo,
+          ...(course.topicos ?? []),
+        ]
+          .filter(Boolean)
+          .join("\n")
+      ),
+    ].filter(Boolean)
+  )
 
-    return {
-      id: `course-${idx}`,
-      category: "Cursos",
-      company: parsed.hours ? parsed.hours : "Curso complementar",
-      role: parsed.title,
-      start,
-      periodLabel,
-      summary: "Curso complementar para aprofundamento técnico e prática.",
-      tech: tech.length ? tech : undefined,
-    } satisfies TimelineExperienceItem
-  })
+  const start = courseToStart({ inicio: course.inicio, ano: course.ano })
+  const end = normalizeYearMonth(course.fim)
+
+  const company = course.instituicao ?? course.plataforma ?? (course.cargaHoraria ? course.cargaHoraria : "Curso complementar")
+  const summary =
+    course.resumo ??
+    (course.topicos?.length
+      ? course.topicos.join(", ")
+      : course.cargaHoraria
+      ? `Curso complementar (${course.cargaHoraria}).`
+      : "Curso complementar.")
+
+  const links = course.certificadoUrl ? [{ label: "Certificado", href: course.certificadoUrl }] : undefined
+  const highlights = buildCourseHighlights(course)
+
+  return {
+    id: `course-${idx}`,
+    category: "Cursos",
+    company,
+    role: course.titulo,
+    start,
+    end,
+    periodLabel,
+    summary,
+    highlights,
+    tech: tech.length ? tech : undefined,
+    links,
+  } satisfies TimelineExperienceItem
+})
 
 const projectItems: TimelineExperienceItem[] = curriculoData.projetosProprios.map((p, idx) => {
   const stackTech = uniq(

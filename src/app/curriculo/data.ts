@@ -5,6 +5,23 @@ export type CurriculoFormacaoAcademica = {
   instituicao: string
   inicio?: CurriculoYearMonth
   fim?: CurriculoYearMonth
+  campus?: string
+  periodoAtual?: string
+  status?: "Cursando" | "Concluído" | string
+  previsaoConclusao?: CurriculoYearMonth
+  totalPeriodos?: number
+  periodoBase?: number
+  periodoBaseInicio?: CurriculoYearMonth
+  descricao?: string
+  disciplinas?: string[]
+  atividades?: string[]
+  projetos?: string[]
+  competencias?: string[]
+  matrizCurricular?: Array<{
+    periodo: number
+    disciplinas: Array<{ nome: string; cargaHoraria: number }>
+  }>
+  optativas?: Array<{ nome: string; cargaHoraria: number }>
 }
 
 export type CurriculoExperienciaProfissional = {
@@ -24,6 +41,21 @@ export type CurriculoProjetoProprio = {
   descricao: string[]
 }
 
+export type CurriculoCursoComplementar = {
+  titulo: string
+  instituicao?: string
+  plataforma?: string
+  modalidade?: "Online" | "Presencial" | string
+  cargaHoraria?: string
+  ano?: number
+  inicio?: CurriculoYearMonth
+  fim?: CurriculoYearMonth
+  resumo?: string
+  topicos?: string[]
+  tags?: string[]
+  certificadoUrl?: string
+}
+
 export type CurriculoData = {
   informacoesPessoais: {
     nome: string
@@ -35,7 +67,7 @@ export type CurriculoData = {
   }
   objetivoProfissional: string
   formacaoAcademica: CurriculoFormacaoAcademica[]
-  cursosComplementares: string[]
+  cursosComplementares: CurriculoCursoComplementar[]
   experienciaProfissional: CurriculoExperienciaProfissional[]
   projetosProprios: CurriculoProjetoProprio[]
   habilidadesTecnicas: {
@@ -67,31 +99,305 @@ export const curriculoData: CurriculoData = {
   formacaoAcademica: [
     {
       curso: "Ciência da Computação",
-      instituicao: "FAESA - Cursando 5º período",
+      instituicao: "FAESA",
       inicio: "2024-08",
       fim: undefined,
+      campus: "Vitória/ES",
+      periodoAtual: "5º período",
+      status: "Cursando",
+      previsaoConclusao: "2027-12",
+      totalPeriodos: 8,
+      // Ajuste essas duas linhas para o período real atual.
+      // A cada 6 meses desde `periodoBaseInicio`, o período é incrementado até `totalPeriodos`.
+      periodoBase: 5,
+      periodoBaseInicio: "2025-08",
+      descricao:
+        "Graduação com foco em fundamentos de computação e desenvolvimento de software, com prática em modelagem, banco de dados e engenharia de software.",
+      disciplinas: [
+        "Estrutura de Dados",
+        "Banco de Dados",
+        "Engenharia de Software",
+        "Sistemas Operacionais",
+        "Redes de Computadores",
+      ],
+      atividades: [
+        "Projetos acadêmicos com trabalho em equipe e versionamento",
+        "Modelagem e documentação (UML e fluxos)",
+        "Resolução de problemas e exercícios práticos",
+      ],
+      competencias: [
+        "Lógica de programação",
+        "POO",
+        "Modelagem de dados",
+        "UML",
+      ],
+      matrizCurricular: [
+        {
+          periodo: 1,
+          disciplinas: [
+            { nome: "Habilidades de estudo e comunicação", cargaHoraria: 40 },
+            { nome: "Laboratório de Programação I", cargaHoraria: 80 },
+            { nome: "Modelos Lógicos Computacionais", cargaHoraria: 80 },
+            { nome: "Universo Computacional", cargaHoraria: 80 },
+            { nome: "Sistemas de Informação Organizacionais", cargaHoraria: 80 },
+          ],
+        },
+        {
+          periodo: 2,
+          disciplinas: [
+            { nome: "Sistemas Digitais e Microprocessados", cargaHoraria: 80 },
+            { nome: "Engenharia de Software", cargaHoraria: 80 },
+            { nome: "Sociedade, Cidadania e Diversidade", cargaHoraria: 80 },
+            { nome: "Álgebra Linear e Tecnologias Digitais", cargaHoraria: 80 },
+            { nome: "Laboratório de Programação II", cargaHoraria: 80 },
+          ],
+        },
+        {
+          periodo: 3,
+          disciplinas: [
+            { nome: "Matemática Discreta", cargaHoraria: 80 },
+            { nome: "Arquitetura de Computadores", cargaHoraria: 80 },
+            { nome: "Análise Orientada a Objetos", cargaHoraria: 80 },
+            { nome: "Padrões de Linguagens de Programação", cargaHoraria: 80 },
+            { nome: "Estrutura de Dados", cargaHoraria: 80 },
+            { nome: "Projeto Integrador Computação I", cargaHoraria: 40 },
+          ],
+        },
+        {
+          periodo: 4,
+          disciplinas: [
+            { nome: "Linguagem de Programação Orientada a Objetos", cargaHoraria: 80 },
+            { nome: "Projeto Integrador Computação II", cargaHoraria: 40 },
+            { nome: "Banco de Dados", cargaHoraria: 80 },
+            { nome: "Pesquisa e Ordenação", cargaHoraria: 80 },
+            { nome: "Projeto Orientado a Objetos", cargaHoraria: 80 },
+          ],
+        },
+        {
+          periodo: 5,
+          disciplinas: [
+            { nome: "Sistemas Operacionais", cargaHoraria: 80 },
+            { nome: "Análise de dados aplicada à computação", cargaHoraria: 80 },
+            { nome: "Business Intelligence", cargaHoraria: 40 },
+            { nome: "Projeto Integrador Computação III", cargaHoraria: 40 },
+            { nome: "Redes de Computadores e Dispositivos Inteligentes", cargaHoraria: 80 },
+          ],
+        },
+        {
+          periodo: 6,
+          disciplinas: [
+            { nome: "Inteligência Artificial, Machine Learning e Deep Learning", cargaHoraria: 80 },
+            { nome: "Economia", cargaHoraria: 80 },
+            { nome: "Projeto Integrador Computação IV", cargaHoraria: 40 },
+            { nome: "Teoria da Computação e Autômatos", cargaHoraria: 80 },
+            { nome: "Teste de Software", cargaHoraria: 80 },
+          ],
+        },
+        {
+          periodo: 7,
+          disciplinas: [
+            { nome: "Compiladores", cargaHoraria: 40 },
+            { nome: "Complexidade de algoritmos", cargaHoraria: 80 },
+            { nome: "Empreendedorismo e inovação", cargaHoraria: 40 },
+            { nome: "Projeto de trabalho de conclusão de curso", cargaHoraria: 40 },
+            { nome: "Tópicos especiais I", cargaHoraria: 40 },
+          ],
+        },
+        {
+          periodo: 8,
+          disciplinas: [
+            { nome: "Interface homem-computador", cargaHoraria: 40 },
+            { nome: "Trabalho de conclusão de curso", cargaHoraria: 120 },
+            { nome: "Tópicos especiais II", cargaHoraria: 80 },
+            { nome: "Sistemas distribuídos e computação em nuvem", cargaHoraria: 80 },
+          ],
+        },
+      ],
+      optativas: [
+        { nome: "IoT", cargaHoraria: 80 },
+        { nome: "Cibersegurança", cargaHoraria: 80 },
+        { nome: "Governança de TI", cargaHoraria: 80 },
+        { nome: "Desenvolvimento de aplicações WEB I", cargaHoraria: 80 },
+        { nome: "Desenvolvimento de aplicações WEB II", cargaHoraria: 80 },
+        { nome: "Libras", cargaHoraria: 80 },
+        { nome: "Data Science", cargaHoraria: 80 },
+        { nome: "Internet das Coisas", cargaHoraria: 80 },
+      ],
     },
   ],
 
   cursosComplementares: [
-    "• Curso de Next.js - 20h (2025)",
-    "• Curso de Node - 20h (2025)",
-    "• Curso de TypeScript - 20h (2025)",
-    "• Curso de React - 20h (2025)",
-    "• Python 3 – Mundo 1 - 40h (2024)",
-    "• Pacote Office - 50h (2024)",
-    "• Eng. de Prompts - 3h (2024)",
-    "• Des. Ágil de Software - 32h (2024)",
-    "• Lab. POO - 20h (2024)",
-    "• Marketing Pessoal - 2h (2024)",
-    "• Pré-Mestrado Internacional de Inteligência Artificial",
-    "• C# com .NET Framework - 40h (2024)",
+    {
+      titulo: "Curso de Next.js",
+      cargaHoraria: "20h",
+      ano: 2025,
+      modalidade: "Online",
+      tags: ["Next.js"],
+      topicos: [
+        "App Router e estrutura do projeto",
+        "Server Components x Client Components",
+        "Rotas, layouts e loading/error boundaries",
+        "Data fetching e renderização (SSR/SSG)",
+        "SEO e metadata",
+        "Deploy e boas práticas",
+      ],
+    },
+    {
+      titulo: "Curso de Node",
+      cargaHoraria: "20h",
+      ano: 2025,
+      modalidade: "Online",
+      tags: ["Node.js"],
+      topicos: [
+        "Fundamentos do Node.js e event loop",
+        "APIs REST com Express",
+        "Middlewares, validação e tratamento de erros",
+        "Autenticação (JWT) e segurança básica",
+        "Integração com banco de dados",
+        "Boas práticas e estrutura de projeto",
+      ],
+    },
+    {
+      titulo: "Curso de TypeScript",
+      cargaHoraria: "20h",
+      ano: 2025,
+      modalidade: "Online",
+      tags: ["TypeScript"],
+      topicos: [
+        "Tipagem estática e inferência",
+        "Interfaces, tipos, union e generics",
+        "Narrowing, type guards e utility types",
+        "Configuração (tsconfig) e organização",
+        "Tipagem em APIs e React",
+        "Boas práticas de tipagem",
+      ],
+    },
+    {
+      titulo: "Curso de React",
+      cargaHoraria: "20h",
+      ano: 2025,
+      modalidade: "Online",
+      tags: ["React"],
+      topicos: [
+        "Componentização e JSX",
+        "Props, estado e ciclo de vida",
+        "Hooks (useState, useEffect, useMemo)",
+        "Listas, chaves e renderização condicional",
+        "Formulários e validação",
+        "Boas práticas e performance",
+      ],
+    },
+    {
+      titulo: "Python",
+      cargaHoraria: "40h",
+      ano: 2024,
+      modalidade: "Online",
+      tags: undefined,
+      topicos: [
+        "Sintaxe básica e tipos",
+        "Operadores e estruturas condicionais",
+        "Laços (for/while)",
+        "Listas, tuplas e dicionários",
+        "Funções e módulos",
+        "Boas práticas e exercícios",
+      ],
+    },
+    {
+      titulo: "Pacote Office",
+      cargaHoraria: "50h",
+      ano: 2024,
+      modalidade: "Presencial",
+      tags: ["Word","Excel", "PowerPoint"],
+      topicos: [
+        "Excel: fórmulas, gráficos e tabelas dinâmicas",
+        "Word: formatação e padronização de documentos",
+        "PowerPoint: apresentações e storytelling",
+        "Outlook: organização e produtividade",
+      ],
+    },
+    {
+      titulo: "Engenharia de Prompts",
+      cargaHoraria: "3h",
+      ano: 2024,
+      modalidade: "Online",
+      tags: ["IA", "Persona"],
+      topicos: [
+        "Estrutura de prompt (contexto, objetivo, restrições)",
+        "Técnicas: few-shot e chain-of-thought (quando aplicável)",
+        "Refinamento iterativo e avaliação",
+        "Criação de prompts para tarefas de dev",
+      ],
+    },
+    {
+      titulo: "Desenvolvimento Ágil de Software",
+      cargaHoraria: "32h",
+      ano: 2024,
+      modalidade: "Online",
+      tags: ["Kanbam","Scrum", "Trello", "Sprints"],
+      topicos: [
+        "Valores e princípios do Manifesto Ágil",
+        "Scrum: papéis, cerimônias e artefatos",
+        "Kanban: fluxo, WIP e métricas",
+        "User stories e critérios de aceitação",
+        "Estimativas e planejamento",
+      ],
+    },
+    {
+      titulo: "Laboratório de POO",
+      cargaHoraria: "20h",
+      ano: 2024,
+      modalidade: "Presencial",
+      tags: ["POO","Java","Estruturas de Dados", "Herança", "Polimorfismo"],
+      topicos: [
+        "Classes, objetos e encapsulamento",
+        "Herança, polimorfismo e abstração",
+        "Interfaces e composição",
+        "Boas práticas (SOLID - visão geral)",
+        "Modelagem básica com UML",
+      ],
+    },
+    {
+      titulo: "Marketing Pessoal",
+      cargaHoraria: "2h",
+      ano: 2024,
+      modalidade: "Online",
+      tags: ["Soft skills"],
+      topicos: [
+        "Posicionamento e branding pessoal",
+        "Comunicação e networking",
+        "LinkedIn e portfólio",
+        "Entrevistas e apresentação profissional",
+      ],
+    },
+    {
+      titulo: "Pré-Mestrado Internacional de Inteligência Artificial",
+      tags: ["IA"],
+      topicos: [
+        "Conceitos fundamentais de IA e aprendizado de máquina",
+        "Modelos supervisionados vs não supervisionados (visão geral)",
+        "Ética e aplicações de IA",
+      ],
+    },
+    {
+      titulo: "C# com .NET Framework",
+      cargaHoraria: "40h",
+      ano: 2024,
+      modalidade: "Online",
+      tags: ["C#", ".NET"],
+      topicos: [
+        "Sintaxe C# e orientação a objetos",
+        "LINQ e coleções",
+        "Tratamento de exceções",
+        "APIs/serviços e integração básica",
+        "Boas práticas e organização de projetos",
+      ],
+    },
   ],
 
   experienciaProfissional: [
     {
-      cargo: "Estagiário - PRODEST",
-      empresa: "Processamento de Dados do Espírito Santo",
+      cargo: "Analista de TI - PRODEST",
+      empresa: "Instituto de Tecnologia da Informação e Comunicação do Estado do Espírito Santo",
       periodo: "Out/2024 - Atual",
       inicio: "2024/10",
       fim: "2026/10",

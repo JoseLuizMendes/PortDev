@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SchemaMarkup } from "@/components/ui/schema-markup";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SmoothScrollWrapper } from "@/components/creative/SmoothScrollWrapper";
+import { PageTransitionProvider } from "@/components/creative/PageTransitionProvider";
 
 
 const inter = Inter({
@@ -164,7 +166,11 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          {children}
+          <SmoothScrollWrapper>
+            <PageTransitionProvider>
+              {children}
+            </PageTransitionProvider>
+          </SmoothScrollWrapper>
         </ThemeProvider>
         <SpeedInsights />
       </body>
