@@ -161,7 +161,7 @@ export function AchievementCard({
                 <achievement.icon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-400 group-hover:text-blue-300" />
               </div>
               <div>
-                <h3 className="text-white font-semibold group-hover:text-blue-100 text-sm sm:text-base">
+                <h3 className="text-zinc-50 group-hover:text-blue-100 text-sm sm:text-base">
                   {achievement.title}
                 </h3>
                 <p className="text-slate-400 px-1 py-2 text-xs sm:text-sm group-hover:text-slate-300 line-clamp-3">

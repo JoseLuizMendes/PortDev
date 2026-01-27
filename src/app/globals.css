@@ -289,3 +289,13 @@ body {
     radial-gradient(circle at 40% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 50%);
   pointer-events: none;
 }
+
+@layer utilities {
+  .font-bebas {
+    font-family: var(--font-bebas);
+  }
+
+  .font-sans {
+    font-family: var(--font-inter);
+  }
+}

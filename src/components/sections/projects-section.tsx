@@ -10,6 +10,7 @@ import proj1 from "../../../public/CapaBarber.png";
 import proj2 from "../../../public/CapaCasamento.png";
 import proj3 from "../../../public/CapaTerraCerta.png";
 import { TechEffects } from "../ui/tech-effects";
+import { GsapScrollReveal } from "../ui/gsap-animations";
 
 interface Project {
   id: number;
@@ -106,15 +107,13 @@ export function ProjectsSection() {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+        <GsapScrollReveal 
+          animation="fadeUp" 
+          stagger={0.2}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
         >
           {projects.map((project) => (
-            <motion.div key={project.id} variants={itemVariants}>
+            <div key={project.id}>
               <Card className="glass-card hover:border-primary/50 transition-all duration-500 overflow-hidden group cursor-pointer tech-hover">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
@@ -195,9 +194,9 @@ export function ProjectsSection() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </GsapScrollReveal>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}

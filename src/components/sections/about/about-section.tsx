@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { AchievementCard } from "./AchievementCard";
 import { achievements, dialogAchievements } from "./data";
 import { TechEffects } from "@/components/ui/tech-effects";
+import { GsapScrollReveal, GsapSplitText, GsapCounter } from "@/components/ui/gsap-animations";
 
 export function AboutSection() {
   return (
@@ -33,7 +34,7 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="text-center md:text-left lg:pr-12">
-            <div className="space-y-4 sm:space-y-5 mb-6">
+            <GsapScrollReveal animation="fadeUp" stagger={0.15} className="space-y-4 sm:space-y-5 mb-6">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Sou um desenvolvedor full stack em evolução, movido por foco, curiosidade e a vontade de criar soluções que realmente
                 façam diferença. Minha jornada na Ciência da Computação tem sido marcada por projetos que me desafiam a unir técnica,
@@ -57,7 +58,7 @@ export function AboutSection() {
                 Meu objetivo é claro: evoluir até a senioridade, empreender e conquistar liberdade, geográfica e financeira — 
                 sempre construindo com propósito e visão de futuro.
               </p>
-            </div>
+            </GsapScrollReveal>
           </motion.div>
 
           {/* Cards de conquistas */}

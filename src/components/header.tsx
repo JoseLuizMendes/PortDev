@@ -50,7 +50,7 @@ export function Header() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border shadow-lg shadow-primary/5"
     >
-      <div className="container mx-auto px-6 py-4">
+      <div className="w-full mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <motion.div
             initial={{ opacity: 0 }}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { motion, HTMLMotionProps } from 'motion/react';
 
 interface DecryptedTextProps extends HTMLMotionProps<'span'> {
@@ -36,6 +36,11 @@ export default function DecryptedText({
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const hasAnimated = useRef<boolean>(false);
+
+  const startWhenAllowed = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    setIsAnimating(true);
+  }, []);
 
   // Detecta montagem e inicia com texto embaralhado
   useEffect(() => {
@@ -145,11 +150,11 @@ export default function DecryptedText({
     if (animateOn === 'mount' && !hasAnimated.current) {
       hasAnimated.current = true;
       const timer = setTimeout(() => {
-        setIsAnimating(true);
+        startWhenAllowed();
       }, 100);
       return () => clearTimeout(timer);
     }
-  }, [animateOn]);
+  }, [animateOn, startWhenAllowed]);
 
   // Trigger para view
   useEffect(() => {
@@ -160,7 +165,7 @@ export default function DecryptedText({
         entries.forEach(entry => {
           if (entry.isIntersecting && !hasAnimated.current) {
             hasAnimated.current = true;
-            setIsAnimating(true);
+            startWhenAllowed();
           }
         });
       },
@@ -173,12 +178,12 @@ export default function DecryptedText({
     return () => {
       if (currentRef) observer.unobserve(currentRef);
     };
-  }, [animateOn]);
+  }, [animateOn, startWhenAllowed]);
 
   // Trigger para hover
   const hoverProps = (animateOn === 'hover' || animateOn === 'both')
     ? {
-        onMouseEnter: () => setIsAnimating(true),
+        onMouseEnter: () => startWhenAllowed(),
         onMouseLeave: () => setIsAnimating(false)
       }
     : {};
@@ -194,8 +199,10 @@ export default function DecryptedText({
       <span aria-hidden="true">
         {displayText.split('').map((char, index) => {
           const isRevealed = revealedIndices.has(index) || !isAnimating;
+          const revealedClassName = className || encryptedClassName;
+          const encryptedFinalClassName = encryptedClassName || className;
           return (
-            <span key={index} className={isRevealed ? className : encryptedClassName}>
+            <span key={index} className={isRevealed ? revealedClassName : encryptedFinalClassName}>
               {char}
             </span>
           );

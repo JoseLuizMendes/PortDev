@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bebas_Neue, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SchemaMarkup } from "@/components/ui/schema-markup";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bebas = Bebas_Neue({
   subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bebas",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -152,7 +156,7 @@ export default function RootLayout({
         <SchemaMarkup />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${inter.variable} ${bebas.variable} font-sans bg-background text-foreground antialiased min-h-screen`}
       >
         <ThemeProvider
           attribute="class"

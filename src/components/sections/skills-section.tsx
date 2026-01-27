@@ -536,7 +536,7 @@ export function SkillsSection() {
                   "JavaScript",
                   "Next.js",
                   "React",
-                  "Prisma",
+                  "Prisma>ex",
                   ".NET",
                   "ASP.NET",
                   "Node.js",
