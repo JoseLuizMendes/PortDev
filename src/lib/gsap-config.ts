@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-let hasRegistered = false
-
-export async function registerGSAPPlugins() {
-  if (hasRegistered) return
-  if (typeof window === 'undefined') return
-
-  const { gsap } = await import('gsap')
-
-  // TextPlugin é útil para animações de texto (typing/reveal) e integrações.
-  // Mantemos o registro lazy para evitar qualquer risco de "window is not defined".
-  const { TextPlugin } = await import('gsap/TextPlugin')
-
-  gsap.registerPlugin(TextPlugin)
-  hasRegistered = true
-}
-
-export async function getGSAP() {
-  await registerGSAPPlugins()
-  const { gsap } = await import('gsap')
-  return gsap
-=======
-"use client";
 
 /**
  * GSAP Configuration Module
@@ -169,5 +146,4 @@ export { gsap, ScrollTrigger, Observer, Flip, TextPlugin };
 // Auto-initialize on module load (client-side only)
 if (typeof window !== "undefined") {
   registerGSAPPlugins();
->>>>>>> 7bb71fbfeebe502d04a3045871062795b82cde54
 }
