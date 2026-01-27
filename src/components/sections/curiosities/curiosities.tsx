@@ -100,7 +100,6 @@ export default function Curiosities() {
               title="Desenvolvedor Front-end"
               enableTilt
               behindGlowEnabled={true}
-              showUserInfo="jOSE"
               className="order-1 lg:order-3 max-w-[300px] mx-auto lg:mx-0"
             />
           </div>
