@@ -1,57 +1,126 @@
 "use client";
 
+import { useLayoutEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { SplitTextChar } from "@/components/ui/split-text";
-import DecryptedText from "@/components/ui/DecryptedText";
 //import { Beams } from "@/components/ui/beams";
 import DecryptedScrambleText from "@/components/ui/DecryptedScrambleText";
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
 import Image from "next/image";
-import LightPillar from "../LightPillar";
 import LightRays from "../ui/LightRays";
-import { GsapScrollReveal, GsapMagnetic } from "../ui/gsap-animations";
+import { GsapMagnetic } from "../ui/gsap-animations";
+import { gsap, getScrollTrigger } from "@/lib/gsap-config";
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const bgRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
   const scrollToSection = (id: string) => {
+    type LenisLike = {
+      scrollTo: (target: unknown, options?: Record<string, unknown>) => void;
+    };
+
+    const lenis =
+      typeof window !== "undefined"
+        ? (window as unknown as { __lenis?: LenisLike }).__lenis
+        : undefined;
+
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      if (lenis?.scrollTo) {
+        lenis.scrollTo(element, { immediate: false });
+      } else {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
+
+  useLayoutEffect(() => {
+    if (!sectionRef.current || !bgRef.current || !contentRef.current) return;
+
+    const ScrollTrigger = getScrollTrigger();
+    if (!ScrollTrigger) return;
+
+    const ctx = gsap.context(() => {
+      // Background move slower (down) + slight scale for depth
+      gsap.to(bgRef.current, {
+        yPercent: 18,
+        scale: 1.2,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Foreground/content move faster (up) to feel separated
+      gsap.to(contentRef.current, {
+        yPercent: -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }, sectionRef);
+
+    // Garante cálculos corretos após o layout (e Lenis) estabilizarem
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="home"
+      ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <LightPillar
-        topColor="#5227FF"
-        bottomColor="#FF9FFC"
-        intensity={1}
-        rotationSpeed={0.3}
-        glowAmount={0.002}
-        pillarWidth={3}
-        pillarHeight={0.4}
-        noiseIntensity={0.5}
-        pillarRotation={25}
-        interactive={false}
-        mixBlendMode="screen"
-        quality="high"
-      />
-      <div className="absolute inset-0 z-0">
-        <LightRays/>
+      {/* Background image (fica atrás do LightRays) */}
+      <div ref={bgRef} className="absolute inset-0 z-0 will-change-transform">
+        <Image
+          width={1920}
+          height={1080}
+          src="/peace.svg"
+          alt="bg"
+          sizes="100vw"
+          className="h-full w-full object-cover"
+          priority
+        />
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      {/* Gradient overlay (escurece um pouco o background, mas fica abaixo do conteúdo) */}
+      <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent via-transparent to-slate-900/50" />
+
+      {/* Light rays acima da imagem */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        <LightRays
+          saturation={2}
+          mouseInfluence={0.1}
+          fadeDistance={2}
+          raysColor="#011228"
+          
+        />
+      </div>
+
+      <div
+        ref={contentRef}
+        className="relative z-30 container mx-auto px-6 text-center will-change-transform"
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="mb-6 mt-20"
         >
-          <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl pulse-tech relative overflow-hidden">
-            <Image  
+          <div className="w-32 h-32 mx-auto rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl pulse-tech relative overflow-hidden">
+            <Image
               className="mx-auto rounded-full overflow-hidden mt-10"
               src="/Dev.jpeg"
               alt="José Luiz"
@@ -61,7 +130,7 @@ export function HeroSection() {
           </div>
         </motion.div>
 
-        <div className="mb-6">
+        <div className="mb-6" id="hello-hero">
           <SplitTextChar
             text="Olá, eu sou o"
             className="text-2xl md:text-3xl text-slate-300 mb-4 justify-center"
@@ -80,8 +149,9 @@ export function HeroSection() {
               maxIterations={12}
               sequential={true}
               revealDirection="start"
-              scrambleOnHover={true}
+              scrambleOnHover={false}
               scrambleSpeed={25}
+              playOncePerPageLoadKey="home-name"
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-white"
               encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-400"
               parentClassName="inline-block"
@@ -99,8 +169,9 @@ export function HeroSection() {
               maxIterations={8}
               sequential={true}
               revealDirection="start"
-              scrambleOnHover={true}
+              scrambleOnHover={false}
               scrambleSpeed={20}
+              playOncePerPageLoadKey="home-role"
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white"
               encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-400"
               parentClassName="inline-block"
@@ -129,7 +200,7 @@ export function HeroSection() {
           <GsapMagnetic strength={0.2}>
             <Button
               size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full tech-hover shadow-lg shadow-blue-500/25"
+              className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full tech-hover shadow-lg shadow-blue-500/25"
               onClick={() => scrollToSection("projects")}
             >
               Ver Projetos
@@ -160,9 +231,6 @@ export function HeroSection() {
           <ArrowDown className="h-6 w-6 text-slate-400 mx-auto" />
         </motion.div>
       </div>
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/50" />
     </section>
   );
 }
