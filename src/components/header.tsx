@@ -4,15 +4,21 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/toggle-theme";
 import { AnimatePresence, motion } from "framer-motion";
 import { Github, Linkedin, Menu, X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+type LenisLike = {
+  scrollTo: (target: unknown, options?: Record<string, unknown>) => void;
+};
 
 export function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
 
   const navItems = useMemo(
-    () => ["home", "about", "skills", "projects", "experience"] as const,
+    () => ["home", "about", "curiosities", "skills", "projects", "experience"] as const,
     []
   );
 
@@ -22,6 +28,8 @@ export function Header() {
         return "Início";
       case "about":
         return "Sobre";
+      case "curiosities":
+        return "Curiosidades";
       case "skills":
         return "Habilidades";
       case "projects":
@@ -31,20 +39,88 @@ export function Header() {
     }
   };
 
-  const handleNavigation = (item: string) => {
-    if (item === "experience") {
-      router.push("/timelineExperience");
-    } else {
-      // Para outros itens, fazer scroll na página atual
-      const element = document.getElementById(item);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = useCallback(
+    (id: string, behavior: ScrollBehavior = "smooth") => {
+      if (typeof window === "undefined") return;
+
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const headerOffset = headerRef.current?.offsetHeight ?? 80;
+      const lenis = (window as unknown as { __lenis?: LenisLike }).__lenis;
+
+      if (lenis?.scrollTo) {
+        lenis.scrollTo(element, {
+          offset: -headerOffset,
+          immediate: behavior === "auto",
+        });
+        return;
       }
-    }
-  };
+
+      const top = element.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top, behavior });
+    },
+    []
+  );
+
+  const tryScrollToHash = useCallback(
+    (hash: string, behavior: ScrollBehavior = "auto") => {
+      if (typeof window === "undefined") return;
+      const raw = hash.startsWith("#") ? hash.slice(1) : hash;
+      const id = decodeURIComponent(raw);
+      if (!id) return;
+
+      let attempts = 0;
+      const maxAttempts = 40; // ~2s (40 * 50ms)
+
+      const tick = () => {
+        attempts += 1;
+        const el = document.getElementById(id);
+        if (el) {
+          scrollToSection(id, behavior);
+          return;
+        }
+        if (attempts < maxAttempts) {
+          window.setTimeout(tick, 50);
+        }
+      };
+
+      window.setTimeout(tick, 0);
+    },
+    [scrollToSection]
+  );
+
+  // Quando navega para a home com hash (ex.: "/#projects"), faz o scroll após a página montar.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (pathname !== "/") return;
+    if (!window.location.hash) return;
+
+    tryScrollToHash(window.location.hash, "smooth");
+  }, [pathname, tryScrollToHash]);
+
+  const handleNavigation = useCallback(
+    (item: (typeof navItems)[number]) => {
+      if (item === "experience") {
+        router.push("/timelineExperience");
+        return;
+      }
+
+      // Se não estiver na home, navega com hash e o useEffect acima faz o scroll.
+      if (pathname !== "/") {
+        router.push(`/#${item}`);
+        return;
+      }
+
+      // Home: scroll direto.
+      scrollToSection(item, "smooth");
+    },
+    [pathname, router, scrollToSection]
+  );
 
   return (
     <motion.header
+      ref={headerRef}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -69,7 +145,8 @@ export function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
                 onClick={() => handleNavigation(item)}
-                className="text-muted-foreground hover:text-primary transition-colors duration-300 capitalize relative group"
+                className="text-zinc-50 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-400 hover:bg-clip-text hover:text-transparent transition-all duration-300 capitalize relative group cursor-pointer"
+
               >
                 {getNavLabel(item)}
               </motion.button>
@@ -176,7 +253,9 @@ export function Header() {
                     transition={{ delay: 0.05 + index * 0.04, duration: 0.22 }}
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      handleNavigation(item);
+                      window.setTimeout(() => {
+                        handleNavigation(item);
+                      }, 50);
                     }}
                     className="w-full text-left px-4 py-3 rounded-lg text-muted-foreground hover:text-primary hover:bg-background/60 transition-colors duration-300"
                   >
