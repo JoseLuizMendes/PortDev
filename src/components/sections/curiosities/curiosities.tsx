@@ -17,6 +17,13 @@ export default function Curiosities() {
     if (!el) return;
 
     const measure = () => {
+      // Sync height strictly on desktop (lg breakpoint matches Tailwind default: 1024px)
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
+      if (!isDesktop) {
+        setProfileCardHeight(undefined);
+        return;
+      }
       const next = Math.round(el.getBoundingClientRect().height);
       if (next > 0) setProfileCardHeight(next);
     };
@@ -112,13 +119,14 @@ export default function Curiosities() {
             </div>
 
             {/* Imagem - Card Profile - DIREITA */}
-            <div className="order-1 lg:order-3 max-w-75 mx-auto lg:mx-0 self-stretch object-cover flex flex-col items-center lg:items-start">
+            <div className="order-1 lg:order-3 w-full max-w-sm lg:max-w-none mx-auto lg:mx-auto self-stretch object-cover flex flex-col items-center lg:items-center">
 
               <ProfileCard
+                className="w-full"
                 avatarUrl="/Card_Profissional.png"
                 avatarOffsetY={10}
-                cardHeight={profileCardHeight}
-                cardMaxHeight={profileCardHeight}
+                cardHeight={profileCardHeight || "auto"}
+                cardMaxHeight={profileCardHeight || "none"}
                 name="José Luiz"
                 title="Desenvolvedor Full Stack"
                 enableTilt={true}
