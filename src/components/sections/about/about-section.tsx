@@ -1,11 +1,10 @@
 "use client";
 
 import { SplitText } from "@/components/ui/split-text";
-import { motion } from "framer-motion";
 import { AchievementCard } from "./AchievementCard";
 import { achievements, dialogAchievements } from "./data";
 import { TechEffects } from "@/components/ui/tech-effects";
-import { GsapScrollReveal, GsapSplitText, GsapCounter } from "@/components/ui/gsap-animations";
+import { GsapScrollReveal } from "@/components/ui/gsap-animations";
 
 export function AboutSection() {
   return (
@@ -14,26 +13,16 @@ export function AboutSection() {
       className="py-20 bg-background relative tech-pattern overflow-hidden">
       <TechEffects />
       <div className="container mx-auto px-6 ">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16">
+        <GsapScrollReveal animation="fadeUp" className="text-center mb-16">
           <SplitText
             text="Sobre Mim"
             className="text-4xl md:text-5xl font-bold text-foreground mb-6 justify-center"
           />
-        </motion.div>
+        </GsapScrollReveal>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-0 items-start">
           {/* Texto sobre */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center md:text-left lg:pr-12">
+          <GsapScrollReveal animation="fadeLeft" className="text-center md:text-left lg:pr-12">
             <GsapScrollReveal animation="fadeUp" stagger={0.15} className="space-y-4 sm:space-y-5 mb-6">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-center md:text-justify">
                 Sou um desenvolvedor full stack em evolução, movido por foco, curiosidade e a vontade de criar soluções que realmente
@@ -59,15 +48,14 @@ export function AboutSection() {
                 sempre construindo com propósito e visão de futuro.
               </p>
             </GsapScrollReveal>
-          </motion.div>
+          </GsapScrollReveal>
 
           {/* Cards de conquistas */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 gap-x-2 gap-y-3 sm:gap-x-4 sm:gap-y-4 pl-0">
+          <GsapScrollReveal
+            animation="fadeRight"
+            stagger={0.06}
+            className="grid grid-cols-2 gap-x-2 gap-y-3 sm:gap-x-4 sm:gap-y-4 pl-0"
+          >
             {achievements.map((achievement, index) => (
               <AchievementCard
                 key={index}
@@ -76,16 +64,15 @@ export function AboutSection() {
                 dialogData={dialogAchievements}
               />
             ))}
-          </motion.div>
+          </GsapScrollReveal>
         </div>
 
         {/* Estatísticas */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        <GsapScrollReveal
+          animation="fadeUp"
+          stagger={0.08}
+          className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+        >
           {[
             { number: "2+", label: "Anos de Experiência" },
             { number: "5+", label: "Projetos Desenvolvidos" },
@@ -99,7 +86,7 @@ export function AboutSection() {
               <div className="text-xs sm:text-sm md:text-base text-muted-foreground">{stat.label}</div>
             </div>
           ))}
-        </motion.div>
+        </GsapScrollReveal>
       </div>
     </section>
   );

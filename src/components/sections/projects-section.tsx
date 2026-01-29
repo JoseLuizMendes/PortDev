@@ -65,38 +65,11 @@ const projects: Project[] = [
 ];
 
 export function ProjectsSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
   return (
     <section id="projects" className="py-20 bg-background relative tech-pattern overflow-hidden">
       <TechEffects />
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <GsapScrollReveal animation="fadeUp" className="text-center mb-16">
           <SplitText
             text="Meus Projetos"
             className="text-4xl md:text-5xl font-bold text-foreground mb-6 justify-center"
@@ -105,7 +78,7 @@ export function ProjectsSection() {
             Aqui estão alguns dos projetos que desenvolvi durante minha jornada como estudante.
             Clique em qualquer projeto para ver mais detalhes.
           </p>
-        </motion.div>
+        </GsapScrollReveal>
 
         <GsapScrollReveal 
           animation="fadeUp" 
@@ -198,17 +171,11 @@ export function ProjectsSection() {
           ))}
         </GsapScrollReveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
+        <GsapScrollReveal animation="fadeUp" className="text-center mt-12">
           <p className="text-muted-foreground text-lg py-6">
             Mais projetos em desenvolvimento... 🚀
           </p>
-        </motion.div>
+        </GsapScrollReveal>
       </div>
     </section>
   );

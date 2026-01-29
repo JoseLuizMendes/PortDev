@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 
 import { TechEffects } from "@/components/ui/tech-effects";
-import { motion } from "framer-motion";
+import { GsapScrollReveal } from "@/components/ui/gsap-animations";
 import {
   Area,
   AreaChart,
@@ -473,13 +473,12 @@ export function SkillsSection() {
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-8">
           {categories.map((category, categoryIndex) => (
-            <motion.div
+            <GsapScrollReveal
               key={category}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              viewport={{ once: true }}
-              className={category === "Tools" ? "lg:col-span-2" : ""}>
+              animation="fadeUp"
+              delay={categoryIndex * 0.08}
+              className={category === "Tools" ? "lg:col-span-2" : ""}
+            >
               <Card className="glass-card backdrop-blur-md tech-hover group">
                 <CardContent className="p-8 relative">
                   <div className="absolute top-4 right-4 w-2 h-2 bg-blue-500 rounded-full animate-pulse opacity-60"></div>
@@ -499,17 +498,12 @@ export function SkillsSection() {
                   {renderChart(category, categoryIndex)}
                 </CardContent>
               </Card>
-            </motion.div>
+            </GsapScrollReveal>
           ))}
         </div>
 
         {/* Seção de aprendizado contínuo */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-10 text-center">
+        <GsapScrollReveal animation="fadeUp" className="mt-10 text-center">
           <Card className="glass-card border-blue-500/20 backdrop-blur-md relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5"></div>
             <CardContent className="p-8 relative z-10">
@@ -527,7 +521,11 @@ export function SkillsSection() {
                 conhecimentos.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-3 mt-8">
+              <GsapScrollReveal
+                animation="scaleUp"
+                stagger={0.06}
+                className="flex flex-wrap justify-center gap-3 mt-8"
+              >
                 {[
                   "Rest API",
                   "Java",
@@ -536,7 +534,7 @@ export function SkillsSection() {
                   "JavaScript",
                   "Next.js",
                   "React",
-                  "Prisma>ex",
+                  "Prisma ORM",
                   ".NET",
                   "ASP.NET",
                   "Node.js",
@@ -545,20 +543,17 @@ export function SkillsSection() {
                   "SQL Developer",
                   "PostgreSQL",
                 ].map((tech, index) => (
-                  <motion.span
+                  <span
                     key={tech}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="px-4 py-2 glass-card text-card-foreground rounded-full text-sm border-primary/20 tech-hover cursor-default">
+                    className="px-4 py-2 glass-card text-card-foreground rounded-full text-sm border-primary/20 tech-hover cursor-default"
+                  >
                     {tech}
-                  </motion.span>
+                  </span>
                 ))}
-              </div>
+              </GsapScrollReveal>
             </CardContent>
           </Card>
-        </motion.div>
+        </GsapScrollReveal>
       </div>
     </section>
   );
