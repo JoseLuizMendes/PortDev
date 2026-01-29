@@ -15,6 +15,11 @@ interface DecryptedScrambleTextProps extends HTMLMotionProps<'span'> {
   parentClassName?: string
   scrambleOnHover?: boolean
   scrambleSpeed?: number
+  /**
+   * Se definido, o efeito inicial roda só uma vez por carregamento da página
+   * (útil para evitar o double-run do React StrictMode em dev).
+   */
+  playOncePerPageLoadKey?: string
 }
 
 export default function DecryptedScrambleText({
@@ -29,6 +34,7 @@ export default function DecryptedScrambleText({
   encryptedClassName = '',
   scrambleOnHover = true,
   scrambleSpeed = 30,
+  playOncePerPageLoadKey,
   ...props
 }: DecryptedScrambleTextProps) {
   const containerRef = useRef<HTMLSpanElement>(null)
@@ -40,18 +46,45 @@ export default function DecryptedScrambleText({
   const hasAnimated = useRef<boolean>(false)
   const scrambleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  const getPlayedFlagKey = useCallback(() => {
+    if (!playOncePerPageLoadKey) return null
+    return `__DECRYPTED_SCRAMBLE_TEXT_PLAYED__${playOncePerPageLoadKey}`
+  }, [playOncePerPageLoadKey])
+
+  const hasAlreadyPlayedThisLoad = useCallback(() => {
+    if (typeof window === 'undefined') return false
+    const k = getPlayedFlagKey()
+    if (!k) return false
+    return Boolean((window as any)[k])
+  }, [getPlayedFlagKey])
+
+  const markPlayedThisLoad = useCallback(() => {
+    if (typeof window === 'undefined') return
+    const k = getPlayedFlagKey()
+    if (!k) return
+    ;(window as any)[k] = true
+  }, [getPlayedFlagKey])
+
   const getScrambledChar = useCallback(() => {
     return characters[Math.floor(Math.random() * characters.length)]
   }, [characters])
 
   // Inicia com texto embaralhado
   useEffect(() => {
+    if (hasAlreadyPlayedThisLoad()) {
+      setDisplayText(text)
+      setIsDecrypting(false)
+      setIsDecrypted(true)
+      setRevealedIndices(new Set(text.split('').map((_, i) => i)))
+      return
+    }
+
     const scrambled = text
       .split('')
       .map(char => char === ' ' ? ' ' : getScrambledChar())
       .join('')
     setDisplayText(scrambled)
-  }, [text, getScrambledChar])
+  }, [text, getScrambledChar, hasAlreadyPlayedThisLoad])
 
   // Animação de decriptação inicial
   useEffect(() => {
@@ -114,14 +147,17 @@ export default function DecryptedScrambleText({
 
   // Trigger inicial
   useEffect(() => {
+    if (hasAlreadyPlayedThisLoad()) return
+
     if (!hasAnimated.current) {
       hasAnimated.current = true
+      markPlayedThisLoad()
       const timer = setTimeout(() => {
         setIsDecrypting(true)
       }, 100)
       return () => clearTimeout(timer)
     }
-  }, [])
+  }, [hasAlreadyPlayedThisLoad, markPlayedThisLoad])
 
   // Efeito scramble no hover (após decriptação)
   const handleMouseEnter = useCallback(() => {

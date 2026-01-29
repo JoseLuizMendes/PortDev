@@ -15,6 +15,7 @@ interface GsapScrollRevealProps {
   delay?: number
   stagger?: number
   scrub?: boolean | number
+  once?: boolean
 }
 
 export function GsapScrollReveal({
@@ -25,6 +26,7 @@ export function GsapScrollReveal({
   delay = 0,
   stagger = 0.1,
   scrub = false,
+  once = false,
 }: GsapScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -56,7 +58,7 @@ export function GsapScrollReveal({
           start: 'top 85%',
           end: 'bottom 15%',
           scrub,
-          toggleActions: 'play none none none',
+          toggleActions: once ? 'play none none none' : 'play reverse play reverse',
         },
       })
     }, element)
@@ -78,6 +80,7 @@ interface GsapSplitTextProps {
   animation?: 'fadeUp' | 'slideUp' | 'rotateIn' | 'scaleUp'
   duration?: number
   stagger?: number
+  once?: boolean
 }
 
 export function GsapSplitText({
@@ -87,6 +90,7 @@ export function GsapSplitText({
   animation = 'fadeUp',
   duration = 0.8,
   stagger = 0.03,
+  once = false,
 }: GsapSplitTextProps) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -134,7 +138,7 @@ export function GsapSplitText({
           scrollTrigger: {
             trigger: element,
             start: 'top 85%',
-            toggleActions: 'play none none none',
+            toggleActions: once ? 'play none none none' : 'play reverse play reverse',
           },
         }
       )
@@ -379,6 +383,7 @@ interface GsapCounterProps {
   className?: string
   prefix?: string
   suffix?: string
+  once?: boolean
 }
 
 export function GsapCounter({
@@ -387,6 +392,7 @@ export function GsapCounter({
   className = '',
   prefix = '',
   suffix = '',
+  once = false,
 }: GsapCounterProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const countRef = useRef({ value: 0 })
@@ -403,7 +409,7 @@ export function GsapCounter({
         scrollTrigger: {
           trigger: element,
           start: 'top 85%',
-          toggleActions: 'play none none none',
+          toggleActions: once ? 'play none none none' : 'play reverse play reverse',
         },
         onUpdate: () => {
           element.textContent = `${prefix}${Math.round(countRef.current.value)}${suffix}`
