@@ -1,28 +1,47 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
 import { SplitText } from "@/components/ui/split-text";
-import card from "../../../../public/Card_Profissional.png";
-import { BadgeCheck, Heart, MessageCircle } from "lucide-react";
-import { Card, CardContent } from "../../ui/card";
 import { CuriosityCard } from "./CuriosityCard";
 import { curiosities } from "./data";
 import { TechEffects } from "@/components/ui/tech-effects";
 import ProfileCard from "@/components/ui/ProfileCard";
+import { GsapScrollReveal } from "@/components/ui/gsap-animations";
 
 export default function Curiosities() {
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const [profileCardHeight, setProfileCardHeight] = useState<number>();
+
+  useLayoutEffect(() => {
+    const el = leftColRef.current;
+    if (!el) return;
+
+    const measure = () => {
+      const next = Math.round(el.getBoundingClientRect().height);
+      if (next > 0) setProfileCardHeight(next);
+    };
+
+    measure();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", measure);
+      return () => window.removeEventListener("resize", measure);
+    }
+
+    const ro = new ResizeObserver(() => measure());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <section
       id="curiosities"
-      className="py-20 bg-background relative tech-pattern overflow-hidden">
+      className="py-20 bg-background relative tech-pattern overflow-hidden"
+    >
       <TechEffects />
       <div className="container  mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <GsapScrollReveal
+          animation="fadeUp"
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
           <SplitText
@@ -32,35 +51,34 @@ export default function Curiosities() {
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto px-4">
             Um pouco mais sobre mim além do código
           </p>
-        </motion.div>
+        </GsapScrollReveal>
 
         <div className="mx-auto max-w-[1400px]">
-          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
+          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-stretch">
             {/* Área de texto à ESQUERDA */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="order-3 lg:order-1 h-full"
-            >
-              <div className="space-y-3 text-center">
+            <div ref={leftColRef} className="order-3 lg:order-1 h-full">
+              <GsapScrollReveal
+                animation="fadeLeft"
+                className="space-y-3 text-center"
+              >
                 <h3 className="text-2xl font-bold">Sobre Mim</h3>
 
                 <p className="text-muted-foreground leading-relaxed">
                   Sou o{" "}
-                  <span className="text-foreground font-semibold">José Luiz</span>
+                  <span className="text-foreground font-semibold">
+                    José Luiz
+                  </span>
                   , alguém movido pela curiosidade — seja na tecnologia, na arte
                   ou na mente humana. Antes do código, sempre fui o cara que
-                  queria entender o “porquê” das coisas, e isso acabou me guiando
-                  naturalmente para o mundo do desenvolvimento.
+                  queria entender o “porquê” das coisas, e isso acabou me
+                  guiando naturalmente para o mundo do desenvolvimento.
                 </p>
 
                 <p className="text-muted-foreground leading-relaxed">
                   No trabalho, busco foco e intenção. Meu dia começa com café,
-                  música no fone e aquela imersão total no que estou construindo.
-                  Acredito que consistência e criatividade formam a base de
-                  qualquer entrega bem-feita.
+                  música no fone e aquela imersão total no que estou
+                  construindo. Acredito que consistência e criatividade formam a
+                  base de qualquer entrega bem-feita.
                 </p>
 
                 <p className="text-muted-foreground leading-relaxed">
@@ -77,8 +95,8 @@ export default function Curiosities() {
                   vontade de aprender sempre mais e contribuir de forma real em
                   tudo o que faço.
                 </p>
-              </div>
-            </motion.div>
+              </GsapScrollReveal>
+            </div>
 
             {/* Cards de Curiosidades - CENTRO */}
             <div className="grid grid-cols-1 gap-4 order-2 h-full overflow-visible py-2.5 w-full max-w-100 mx-auto lg:mx-0">
@@ -94,14 +112,23 @@ export default function Curiosities() {
             </div>
 
             {/* Imagem - Card Profile - DIREITA */}
-            <ProfileCard
-              avatarUrl="/public/Card_Profissional.png"            
-              name="José Luiz"
-              title="Desenvolvedor Front-end"
-              enableTilt
-              behindGlowEnabled={true}
-              className="order-1 lg:order-3 max-w-[300px] mx-auto lg:mx-0"
-            />
+            <div className="order-1 lg:order-3 max-w-75 mx-auto lg:mx-0 self-stretch object-cover flex flex-col items-center lg:items-start">
+
+              <ProfileCard
+                avatarUrl="/Card_Profissional.png"
+                avatarOffsetY={10}
+                cardHeight={profileCardHeight}
+                cardMaxHeight={profileCardHeight}
+                name="José Luiz"
+                title="Desenvolvedor Full Stack"
+                enableTilt={true}
+                behindGlowEnabled={true}
+                enableMobileTilt={true}
+                showUserInfo={true}
+                behindGlowSize="50%"
+                behindGlowColor="rgba(38,70,94)"
+              />
+            </div>
           </div>
         </div>
       </div>

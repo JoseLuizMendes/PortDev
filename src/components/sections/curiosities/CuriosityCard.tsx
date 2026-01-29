@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import ElectricBorder from "@/components/ui/ElectricBorder";
+import { GsapScrollReveal } from "@/components/ui/gsap-animations";
 
 interface CuriosityCardProps {
   icon: LucideIcon;
@@ -18,18 +18,16 @@ export function CuriosityCard({
   index,
 }: CuriosityCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -5 }}
-      className="group"
+    <GsapScrollReveal
+      animation="fadeUp"
+      delay={index * 0.08}
+      duration={0.5}
+      className="group transition-transform duration-200 hover:-translate-y-1"
     >
       <ElectricBorder
         color="#1e40af"
         speed={1}
-        chaos={0.25}
+        chaos={0.1}
         thickness={0.03}
         className="h-full bg-card/50 backdrop-blur-sm rounded-xl p-5 transition-all duration-300"
         style={{ borderRadius: "0.75rem" }}
@@ -49,6 +47,6 @@ export function CuriosityCard({
           </p>
         </div>
       </ElectricBorder>
-    </motion.div>
+    </GsapScrollReveal>
   );
 }
