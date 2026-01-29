@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import LogoLoop from "@/components/ui/LogoLoop";
+import { GsapScrollReveal } from "@/components/ui/gsap-animations";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -26,13 +26,8 @@ export function Footer() {
   ];
 
   return (
-    <motion.footer
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      className="bg-slate-950/90 backdrop-blur-md border-t border-slate-800/50 py-8 relative overflow-hidden"
-    >
+    <GsapScrollReveal animation="fadeUp">
+      <footer className="bg-slate-950/90 backdrop-blur-md border-t border-slate-800/50 py-8 relative overflow-hidden">
       {/* Tech pattern background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent"></div>
@@ -64,6 +59,7 @@ export function Footer() {
           />
         </div>
       </div>
-    </motion.footer>
+      </footer>
+    </GsapScrollReveal>
   );
 }
