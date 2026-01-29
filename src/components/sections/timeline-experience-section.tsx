@@ -52,7 +52,7 @@ function TimelineItem({ item, side }: { item: TimelineExperienceItem; side: Time
       <motion.article
         initial={reduceMotion ? false : { opacity: 0, y: 14 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+        viewport={{ once: false, margin: "-10% 0px -10% 0px" }}
         transition={{ type: "spring", stiffness: 220, damping: 26, mass: 0.5 }}
         className={cn(articlePaddingClass, "[transform:translateZ(0)]")}
       >
