@@ -1,4 +1,7 @@
-import React, { useEffect, useRef, useCallback, useMemo, useState } from 'react';
+"use client";
+
+import Image from 'next/image';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 
 const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
 
@@ -31,6 +34,9 @@ if (typeof document !== 'undefined' && !document.getElementById(KEYFRAMES_ID)) {
 
 interface ProfileCardProps {
   avatarUrl?: string;
+  avatarOffsetY?: number;
+  cardHeight?: number | string;
+  cardMaxHeight?: number | string;
   iconUrl?: string;
   grainUrl?: string;
   innerGradient?: string;
@@ -61,9 +67,12 @@ interface TiltEngine {
 }
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
-  avatarUrl = '<Placeholder for avatar URL>',
-  iconUrl = '<Placeholder for icon URL>',
-  grainUrl = '<Placeholder for grain URL>',
+  avatarUrl = '/Card_Profissional.png',
+  avatarOffsetY = 0,
+  cardHeight = '80svh',
+  cardMaxHeight = '540px',
+  iconUrl = '/iconCard.svg',
+  grainUrl = '/',
   innerGradient,
   behindGlowEnabled = true,
   behindGlowColor,
@@ -73,9 +82,9 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   enableMobileTilt = false,
   mobileTiltSensitivity = 5,
   miniAvatarUrl,
-  name = 'Javi A. Torres',
-  title = 'Software Engineer',
-  handle = 'javicodes',
+  name = 'José Luiz',
+  title = 'Desenvolvedor Full Stack',
+  handle = 'jose_luiz_mendess',
   status = 'Online',
   contactText = 'Contact',
   showUserInfo = true,
@@ -371,9 +380,10 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     }),
     [iconUrl, grainUrl, innerGradient, behindGlowColor, behindGlowSize, cardRadius]
   );
-
+  //levar o usuario até o meu LinkedIn
   const handleContactClick = useCallback((): void => {
-    onContactClick?.();
+    if (onContactClick) return onContactClick();
+    window.open('https://www.linkedin.com/in/jos%C3%A9-luiz-dos-santos-azeredo-mendes-ab5a10283/', '_blank');
   }, [onContactClick]);
 
   // Complex styles that require CSS variables and can't be done with Tailwind
@@ -457,12 +467,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           }}
         />
       )}
-      <div ref={shellRef} className="relative z-[1] group">
+      <div ref={shellRef} className="relative z-1 group">
         <section
           className="grid relative overflow-hidden"
           style={{
-            height: '80svh',
-            maxHeight: '540px',
+            height: cardHeight,
+            maxHeight: cardMaxHeight,
             aspectRatio: '0.718',
             borderRadius: cardRadius,
             backgroundBlendMode: 'color-dodge, normal, normal, normal',
@@ -515,15 +525,19 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 backfaceVisibility: 'hidden'
               }}
             >
-              <img
-                className="w-full absolute left-1/2 bottom-[-1px] will-change-transform transition-transform duration-[120ms] ease-out"
+              <Image
+                width={1200}
+                height={1600}
+                className="w-full absolute left-1/2 -bottom-px will-change-transform transition-transform duration-120 ease-out px-16"
                 src={avatarUrl}
                 alt={`${name || 'User'} avatar`}
                 loading="lazy"
+                quality={100}
+                sizes="(min-width: 1024px) 420px, (min-width: 640px) 360px, 300px"
                 style={{
                   transformOrigin: '50% 100%',
                   transform:
-                    'translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01))',
+                    `translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateY(${avatarOffsetY}px) translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01))`,
                   borderRadius: cardRadius,
                   backfaceVisibility: 'hidden'
                 }}
@@ -534,7 +548,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               />
               {showUserInfo && (
                 <div
-                  className="absolute z-[2] flex items-center justify-between backdrop-blur-[30px] border border-white/10 pointer-events-auto"
+                  className="absolute z-2 flex items-center justify-between backdrop-blur-[30px] border border-white/10 pointer-events-auto"
                   style={
                     {
                       '--ui-inset': '20px',
@@ -550,10 +564,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className="rounded-full overflow-hidden border border-white/10 flex-shrink-0"
+                      className="rounded-full overflow-hidden border border-white/10 shrink-0"
                       style={{ width: '48px', height: '48px' }}
                     >
-                      <img
+                      <Image
+                      width={48}
+                      height={48}
                         className="w-full h-full object-cover rounded-full"
                         src={miniAvatarUrl || avatarUrl}
                         alt={`${name || 'User'} mini avatar`}
@@ -586,7 +602,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
             {/* Details content */}
             <div
-              className="max-h-full overflow-hidden text-center relative z-[5]"
+              className="max-h-full overflow-hidden text-center relative z-5"
               style={{
                 transform:
                   'translate3d(calc(var(--pointer-from-left) * -6px + 3px), calc(var(--pointer-from-top) * -6px + 3px), 0.1px)',
@@ -596,14 +612,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 pointerEvents: 'none'
               }}
             >
-              <div className="w-full absolute flex flex-col" style={{ top: '3em', display: 'flex', gridArea: 'auto' }}>
+              <div className="w-full absolute flex flex-col -mt-8" style={{ top: '3em', display: 'flex', gridArea: 'auto' }}>
                 <h3
                   className="font-semibold m-0"
                   style={{
                     fontSize: 'min(5svh, 3em)',
                     backgroundImage: 'linear-gradient(to bottom, #fff, #6f6fbe)',
                     backgroundSize: '1em 1.5em',
-                    WebkitTextFillColor: 'transparent',
+                    WebkitTextFillColor: 'ThreeDFace',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
                     display: 'block',
