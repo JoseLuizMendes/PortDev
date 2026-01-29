@@ -61,7 +61,7 @@ export function useGsapScroll<T extends HTMLElement = HTMLDivElement>(
     scrub = false,
     markers = false,
     stagger = 0,
-    once = true,
+    once = false,
   } = options
 
   useEffect(() => {
@@ -152,8 +152,10 @@ export function useGsapParallax<T extends HTMLElement = HTMLDivElement>(
   return ref
 }
 
-export function useGsapTextReveal<T extends HTMLElement = HTMLDivElement>() {
+export function useGsapTextReveal<T extends HTMLElement = HTMLDivElement>(options: { once?: boolean } = {}) {
   const ref = useRef<T>(null)
+
+  const { once = false } = options
 
   useEffect(() => {
     const element = ref.current
@@ -179,7 +181,7 @@ export function useGsapTextReveal<T extends HTMLElement = HTMLDivElement>() {
           scrollTrigger: {
             trigger: element,
             start: 'top 85%',
-            toggleActions: 'play none none none',
+            toggleActions: once ? 'play none none none' : 'play reverse play reverse',
           },
         }
       )

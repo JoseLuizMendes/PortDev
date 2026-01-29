@@ -73,6 +73,9 @@ export function SmoothScrollWrapper({
 
     lenisRef.current = lenis;
 
+    // Expor para scroll programático (ex.: menu do Header)
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+
     // Sync Lenis with GSAP ScrollTrigger
     const ScrollTrigger = getScrollTrigger();
     if (ScrollTrigger) {
@@ -97,6 +100,10 @@ export function SmoothScrollWrapper({
       if (lenisRef.current) {
         lenisRef.current.destroy();
         lenisRef.current = null;
+      }
+      const globalLenis = (window as unknown as { __lenis?: Lenis }).__lenis;
+      if (globalLenis === lenis) {
+        delete (window as unknown as { __lenis?: Lenis }).__lenis;
       }
     };
   }, [enabled, duration, easing, smoothness]);
