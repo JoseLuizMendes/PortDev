@@ -3,7 +3,7 @@ import { TimelineExperienceSection } from "@/components/sections/timeline-experi
 
 export default function TimelineExperiencePage() {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative overflow-x-hidden">
       <TechEffects />
       <main className="relative z-10 pt-24">
         <TimelineExperienceSection />

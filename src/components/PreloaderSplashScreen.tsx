@@ -31,8 +31,21 @@ export default function PreloaderSplashScreen({ onComplete }: PreloaderSplashScr
 
   // Carregar SVG inline e ajustar para cobrir toda a tela
   useEffect(() => {
-    fetch('/Group%2019.svg')
-      .then(res => res.text())
+    // O arquivo esperado está em /public/preloader.svg.
+    // Mantém fallback para o nome antigo caso exista em algum ambiente.
+    const tryFetch = async (url: string) => {
+      const res = await fetch(url)
+      if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`)
+      return res.text()
+    }
+
+    ;(async () => {
+      try {
+        return await tryFetch('/intro_Bg.svg')
+      } catch {
+        return await tryFetch('/Group%2019.svg')
+      }
+    })()
       .then(svgText => {
         if (svgContainerRef.current) {
           svgContainerRef.current.innerHTML = svgText
@@ -57,6 +70,14 @@ export default function PreloaderSplashScreen({ onComplete }: PreloaderSplashScr
           }
           
           setSvgLoaded(true)
+        }
+      })
+      .catch(() => {
+        // Se não carregar, mantém o componente visível (background) mas sem animação.
+        // Evita ficar eternamente invisível.
+        setSvgLoaded(false)
+        if (containerRef.current) {
+          containerRef.current.style.opacity = '1'
         }
       })
   }, [])

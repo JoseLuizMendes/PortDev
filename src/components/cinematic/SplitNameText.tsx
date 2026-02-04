@@ -1,42 +1,49 @@
 'use client'
 
-import { useRef, useEffect, RefObject } from 'react'
+import { useRef, useLayoutEffect, forwardRef, useImperativeHandle } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 interface SplitNameTextProps {
   firstName: string
   lastName: string
-  scrollContainerRef: RefObject<HTMLDivElement | null>
 }
 
-export function SplitNameText({
-  firstName,
-  lastName,
-  scrollContainerRef,
-}: SplitNameTextProps) {
+export interface SplitNameTextHandle {
+  setProgress: (progress: number) => void
+}
+
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value))
+}
+
+export const SplitNameText = forwardRef<SplitNameTextHandle, SplitNameTextProps>(function SplitNameText(
+  {
+    firstName,
+    lastName,
+  }: SplitNameTextProps,
+  ref
+) {
   const containerRef = useRef<HTMLDivElement>(null)
   const firstNameRef = useRef<HTMLDivElement>(null)
   const lastNameRef = useRef<HTMLDivElement>(null)
   const firstLettersRef = useRef<HTMLSpanElement[]>([])
   const lastLettersRef = useRef<HTMLSpanElement[]>([])
 
-  useEffect(() => {
-    if (!scrollContainerRef.current || !containerRef.current) return
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
+
+  useImperativeHandle(ref, () => ({
+    setProgress: (progress: number) => {
+      tlRef.current?.progress(clamp01(progress))
+    },
+  }))
+
+  useLayoutEffect(() => {
+    if (!containerRef.current) return
     if (!firstNameRef.current || !lastNameRef.current) return
 
     const ctx = gsap.context(() => {
-      // Timeline principal vinculada ao scroll
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: scrollContainerRef.current,
-          start: 'top top',
-          end: '+=250%',
-          scrub: 1.5, // Mais suave
-        },
-      })
+      // Timeline principal controlada por progresso (0-1)
+      const tl = gsap.timeline({ paused: true })
 
       // FASE 1: Resistência inicial (0-30% do scroll)
       // O texto resiste, apenas leve tremor
@@ -93,10 +100,12 @@ export function SplitNameText({
         0.8
       )
 
+      tlRef.current = tl
+
     }, containerRef)
 
     return () => ctx.revert()
-  }, [scrollContainerRef])
+  }, [])
 
   return (
     <div
@@ -154,4 +163,4 @@ export function SplitNameText({
       </div>
     </div>
   )
-}
+})

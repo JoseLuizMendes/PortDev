@@ -31,7 +31,7 @@ function PaperFragmentsScene({
   onFormationComplete?: () => void
 }) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
-  const { camera, size } = useThree()
+  const { camera } = useThree()
   
   // Mouse tracking
   const mouseRef = useRef(new THREE.Vector2(0, 0))
@@ -85,9 +85,8 @@ function PaperFragmentsScene({
     return frags
   }, [])
 
-  // Cores
-  const goldColor = useMemo(() => new THREE.Color('#b3a483'), [])
-  const whiteColor = useMemo(() => new THREE.Color('#ffffff'), [])
+  // Cor única dos fragmentos (requisito)
+  const paperColor = useMemo(() => new THREE.Color('#F2A766'), [])
   
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
@@ -175,9 +174,9 @@ function PaperFragmentsScene({
         frag.formationProgress
       )
 
-      // ===== FLUTUAÇÃO ORGÂNICA PARA A DIREITA=====
+      // ===== FLUTUAÇÃO ORGÂNICA (sempre para a direita) =====
       const floatAmp = 0.06 * frag.formationProgress
-      const floatX = Math.sin(time * frag.floatSpeed + frag.floatOffset) * floatAmp
+      const floatX = (0.5 + 0.5 * Math.sin(time * frag.floatSpeed + frag.floatOffset)) * floatAmp
       const floatY = Math.cos(time * frag.floatSpeed * 0.8 + frag.floatOffset) * floatAmp
       const floatZ = Math.sin(time * frag.floatSpeed * 0.5 + frag.floatOffset * 1.5) * floatAmp * 0.5
 
@@ -192,8 +191,6 @@ function PaperFragmentsScene({
         
         // Raio virtual que passa pelo centro da esfera
         const rayOrigin = cam.position.clone()
-        const sphereCenter = new THREE.Vector3(0, 0, 0)
-        
         // Calcular ponto mais próximo do raio ao fragmento
         const fragWorldPos = basePos.clone()
         const toFrag = fragWorldPos.clone().sub(rayOrigin)
@@ -243,14 +240,9 @@ function PaperFragmentsScene({
     meshRef.current.instanceMatrix.needsUpdate = true
 
     // ===== COR DOS FRAGMENTOS =====
-    // Transição acontece a partir de 40% do scroll (quando está "entrando")
-    const colorStart = 0.4
-    const colorProgress = scrollProgress > colorStart 
-      ? Math.pow((scrollProgress - colorStart) / (1 - colorStart), 1.5)
-      : 0
-    
+    // Mantém cor única, sem variações
     const material = meshRef.current.material as THREE.MeshStandardMaterial
-    material.color.lerpColors(goldColor, whiteColor, colorProgress)
+    material.color.copy(paperColor)
 
     // Callback
     if (allComplete && !formationComplete.current && isForming) {
@@ -267,7 +259,7 @@ function PaperFragmentsScene({
     >
       <planeGeometry args={[1, 1.2]} />
       <meshStandardMaterial
-        color={goldColor}
+        color={paperColor}
         side={THREE.DoubleSide}
         roughness={0.6}
         metalness={0.3}
@@ -276,22 +268,8 @@ function PaperFragmentsScene({
   )
 }
 
-// Ambiente com transição de cor
+// Ambiente (sem trocar background; background vem do DOM via SVGs)
 function Environment({ scrollProgress }: { scrollProgress: number }) {
-  const { scene } = useThree()
-  const startColor = useMemo(() => new THREE.Color('#f5f5f0'), [])
-  const endColor = useMemo(() => new THREE.Color('#000000'), [])
-  
-  useFrame(() => {
-    // Transição de cor a partir de 40% (quando entra na esfera)
-    const colorStart = 0.4
-    const progress = scrollProgress > colorStart 
-      ? Math.pow((scrollProgress - colorStart) / (1 - colorStart), 1.2)
-      : 0
-    
-    const bgColor = startColor.clone().lerp(endColor, progress)
-    scene.background = bgColor
-  })
 
   const ambientIntensity = 0.5 - scrollProgress * 0.2
   const directionalIntensity = 0.8 - scrollProgress * 0.3
@@ -340,11 +318,14 @@ export const PaperSphere = forwardRef<PaperSphereHandle>(function PaperSphere(_,
         camera={{ position: [0, 0, 10], fov: 50 }}
         gl={{ 
           antialias: true,
-          alpha: false,
+          alpha: true,
           powerPreference: 'high-performance',
         }}
         dpr={[1, 1.5]}
-        style={{ background: '#f5f5f0' }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0)
+        }}
+        style={{ background: 'transparent' }}
       >
         <Environment scrollProgress={scrollProgress} />
         <PaperFragmentsScene 

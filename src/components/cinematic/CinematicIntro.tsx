@@ -6,7 +6,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { StrokeTextReveal } from './StrokeTextReveal'
 import { PaperSphere, PaperSphereHandle } from './PaperSphere'
-import { SplitNameText } from './SplitNameText'
+import { SplitNameText, SplitNameTextHandle } from './SplitNameText'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -29,6 +29,7 @@ export function CinematicIntro({
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollSectionRef = useRef<HTMLDivElement>(null)
   const sphereRef = useRef<PaperSphereHandle>(null)
+  const nameRef = useRef<SplitNameTextHandle>(null)
 
   // Esconder scrollbar (apenas a barra, não o scroll)
   useEffect(() => {
@@ -83,6 +84,7 @@ export function CinematicIntro({
       anticipatePin: 1,
       onUpdate: (self) => {
         sphereRef.current?.setScrollProgress(self.progress)
+        nameRef.current?.setProgress(self.progress)
       },
       // onLeave: handleScrollComplete, // Desabilitado para teste
     })
@@ -137,11 +139,7 @@ export function CinematicIntro({
             </div>
 
             {/* Tipografia */}
-            <SplitNameText
-              firstName={firstName}
-              lastName={lastName}
-              scrollContainerRef={scrollSectionRef}
-            />
+            <SplitNameText ref={nameRef} firstName={firstName} lastName={lastName} />
 
             {/* Indicador de scroll */}
             {(phase === 'ready' || phase === 'forming') && (
