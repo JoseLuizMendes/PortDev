@@ -10,15 +10,32 @@ import { TechEffects, SectionDivider } from "@/components/ui/tech-effects";
 import Curiosities from "@/components/sections/curiosities/curiosities";
 
 import { HeroSection } from "@/components/sections/hero-section";
-import { IntroFlow } from "@/components/intro/IntroFlow";
+//import { IntroFlow } from "@/components/intro/IntroFlow";
 
 export default function Home() {
-  const [introDone, setIntroDone] = useState(false);
-  const handleIntroComplete = useCallback(() => setIntroDone(true), []);
+  //const [introDone, setIntroDone] = useState(false);
+  //const handleIntroComplete = useCallback(() => setIntroDone(true), []);
 
   return (
     <>
-      {!introDone && <IntroFlow onComplete={handleIntroComplete} />}
+      <div className="min-h-screen bg-background relative overflow-hidden">
+          <TechEffects />
+          <Header />
+          <main className="relative z-10">
+            <HeroSection />
+            <SectionDivider />
+            <AboutSection />
+            <SectionDivider />
+            <Curiosities />
+            <SectionDivider />
+            <SkillsSection />
+            <SectionDivider />
+            <ProjectsSection />
+          </main>
+          <Footer />
+        </div>
+      
+      {/*{!introDone && <IntroFlow onComplete={handleIntroComplete} />}
 
       {introDone && (
         <div className="min-h-screen bg-background relative overflow-hidden">
@@ -37,7 +54,7 @@ export default function Home() {
           </main>
           <Footer />
         </div>
-      )}
+      )}*/}
     </>
   );
 }

@@ -145,12 +145,12 @@ export function HeroSection() {
           >
             <DecryptedScrambleText
               text="José Luiz"
-              speed={40}
+              speed={20}
               maxIterations={12}
               sequential={true}
               revealDirection="start"
               scrambleOnHover={false}
-              scrambleSpeed={25}
+              scrambleSpeed={10}
               playOncePerPageLoadKey="home-name"
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-white"
               encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-400"
@@ -165,12 +165,12 @@ export function HeroSection() {
           >
             <DecryptedScrambleText
               text="Desenvolvedor Full Stack"
-              speed={35}
-              maxIterations={8}
+              speed={20}
+              maxIterations={6}
               sequential={true}
               revealDirection="start"
               scrambleOnHover={false}
-              scrambleSpeed={20}
+              scrambleSpeed={10}
               playOncePerPageLoadKey="home-role"
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white"
               encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-400"

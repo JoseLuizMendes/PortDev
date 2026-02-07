@@ -1,4 +1,4 @@
-'use client'
+/*'use client'
 
 import { createContext, useContext, type ReactNode } from 'react'
 
@@ -25,3 +25,4 @@ export function IntroFlowActionsProvider({
 export function useIntroFlowActions() {
   return useContext(IntroFlowActionsContext)
 }
+*/
