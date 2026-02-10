@@ -195,8 +195,8 @@ export function ProjectsSection() {
                 </div>
               </div>
 
-              {/* Controles de Navegação (Extra UX) */}
-              <div className="flex items-center gap-4 mt-12 pt-6 border-t border-border/40">
+              {/* Controles de Navegação (Extra UX) - apenas desktop (no mobile fica abaixo da imagem) */}
+              <div className="hidden lg:flex items-center gap-4 mt-12 pt-6 border-t border-border/40">
                 <Button
                   variant="ghost"
                   size="icon"

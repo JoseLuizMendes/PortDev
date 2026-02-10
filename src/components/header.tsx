@@ -281,12 +281,12 @@ export function Header() {
             <motion.nav
               id="mobile-nav"
               key="mobile-nav"
-              initial={{ opacity: 0, y: -8, scaleY: 0.98 }}
-              animate={{ opacity: 1, y: 0, scaleY: 1 }}
-              exit={{ opacity: 0, y: -8, scaleY: 0.98 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-              style={{ transformOrigin: "top" }}
-              className="md:hidden mt-3 overflow-hidden"
+              initial={{ opacity: 0, y: -10, scaleY: 0.98, filter: "blur(2px)" }}
+              animate={{ opacity: 1, y: 0, scaleY: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -8, scaleY: 0.98, filter: "blur(3px)" }}
+              transition={{ duration: 0.36, ease: [1, 1, 1, 1] }}
+              style={{ transformOrigin: "top"}}
+              className="md:hidden mt-3 overflow-hidden backdrop-blur-2xl"
             >
               <div className="rounded-xl border border-border bg-card/70 backdrop-blur-md p-2 shadow-lg shadow-primary/10">
                 {navItems.map((item, index) => (
