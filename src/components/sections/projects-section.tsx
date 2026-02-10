@@ -80,6 +80,14 @@ export function ProjectsSection() {
     [activeProjectIndex],
   );
 
+  const handleNextMobile = () => {
+    setActiveProjectIndex((prev) => (prev + 1) % projects.length);
+  };
+
+  const handlePrevMobile = () => {
+    setActiveProjectIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
   // Funções de navegação manual
   const handleNext = () => {
     cardSwapRef.current?.next();
@@ -92,13 +100,13 @@ export function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-24 bg-background relative overflow-hidden"
+      className="py-16 sm:py-24 bg-background relative overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
       <TechEffects />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header Section */}
         <GsapScrollReveal animation="fadeUp" className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 border border-primary/20">
@@ -218,22 +226,74 @@ export function ProjectsSection() {
             {/* Glow Effect behind cards */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
 
-            <div className="relative w-full" style={{ minHeight: 520 }}>
+            {/* Mobile: card estático (evita que o CardSwap quebre layout e reduz jank) */}
+            <div className="w-full lg:hidden">
+              <GsapScrollReveal animation="scaleUp" delay={0.15}>
+                <div className="mx-auto w-full max-w-[520px]">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-card/40 backdrop-blur-xl shadow-2xl">
+                    <Image
+                      src={activeProject.image}
+                      alt={activeProject.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 92vw, 520px"
+                      quality={80}
+                      placeholder="blur"
+                      priority={activeProjectIndex === 0}
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/35 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="text-xs font-medium text-primary mb-1 uppercase tracking-wider">
+                        {activeProject.category.split("/")[0]}
+                      </p>
+                      <h4 className="text-xl font-bold text-white leading-tight">
+                        {activeProject.title}
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-3 mt-4">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={handlePrevMobile}
+                      className="rounded-full hover:bg-primary/10"
+                      aria-label="Projeto anterior"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </Button>
+                    <span className="text-sm text-muted-foreground">Navegar</span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={handleNextMobile}
+                      className="rounded-full hover:bg-primary/10"
+                      aria-label="Próximo projeto"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              </GsapScrollReveal>
+            </div>
+
+            {/* Desktop: CardSwap */}
+            <div className="relative w-full hidden lg:block" style={{ minHeight: 520 }}>
               <GsapScrollReveal animation="scaleUp" delay={0.3}>
                 <CardSwap
                   ref={cardSwapRef}
-                  width="clamp(280px, 45vw, 560px)"
-                  height="clamp(210px, 33.75vw, 420px)"
+                  width="clamp(360px, 45vw, 560px)"
+                  height="clamp(270px, 33.75vw, 420px)"
                   cardDistance={50}
                   verticalDistance={60}
                   delay={8000}
                   startImmediately
                   pauseOnHover
-                  skewAmount={3} // Reduzi um pouco para ficar mais elegante
+                  skewAmount={3}
                   easing="elastic"
                   onSwap={(frontIdx) => setActiveProjectIndex(frontIdx)}
                   useZ={false}
-                  className="relative mx-auto  mt-25 translate-x-4 translate-y-6 lg:translate-x-6 lg:translate-y-8" // um pouco mais pra direita/baixo
+                  className="relative mx-auto translate-x-6 translate-y-8"
                 >
                   {projects.map((project, idx) => (
                     <SwapCard
@@ -249,15 +309,13 @@ export function ProjectsSection() {
                             alt={project.title}
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
-                            sizes="(max-width: 640px) 280px, (max-width: 1024px) 45vw, 560px"
-                            quality={100}
+                            sizes="(max-width: 1024px) 45vw, 560px"
+                            quality={85}
                             placeholder="blur"
-                            unoptimized
                             priority={idx === 0}
                           />
                         )}
 
-                        {/* Gradiente Overlay para legibilidade do texto no card */}
                         <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
 
                         <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">

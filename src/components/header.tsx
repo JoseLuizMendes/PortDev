@@ -17,6 +17,7 @@ export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
+  const [isMdUp, setIsMdUp] = useState(true);
 
   const navItems = useMemo(
     () => ["home", "about", "curiosities", "skills", "projects", "experience"] as const,
@@ -100,6 +101,40 @@ export function Header() {
     tryScrollToHash(window.location.hash, "smooth");
   }, [pathname, tryScrollToHash]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsMdUp(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const previousOverflow = document.documentElement.style.overflow;
+    if (isMobileMenuOpen) {
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = previousOverflow;
+    }
+
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMobileMenuOpen]);
+
   const handleNavigation = useCallback(
     (item: (typeof navItems)[number]) => {
       if (item === "experience") {
@@ -127,18 +162,21 @@ export function Header() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="fixed top-0 p-4 w-full z-50"
     >
-      <GlassSurface
-        width="100%"
-        height="auto"
-        borderRadius={50}
-        opacity={0.93}
-        blur={30}
-        displace={5}
-        distortionScale={300}
-        className="mx-auto w-full max-w-7xl items-center justify-center"
-      >
-        <div className="w-full mx-auto px-3 sm:px-4 md:px-6 py-3 md:py-4">
-          <div className="flex items-center justify-between">
+      <div className="mx-auto w-full max-w-7xl">
+        <GlassSurface
+          width="100%"
+          height="auto"
+          borderRadius={50}
+          opacity={1}
+          saturation={1}
+          blur={isMdUp ? 30 : 18}
+          brightness={100}
+          displace={isMdUp ? 5 : 2}
+          distortionScale={isMdUp ? 300 : 120}
+          className="mx-auto w-full items-center justify-center"
+        >
+          <div className="w-full mx-auto px-3 sm:px-4 md:px-6 py-3 md:py-4">
+            <div className="flex items-center justify-between">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -234,50 +272,46 @@ export function Header() {
               </div>
             </motion.div>
           </div>
+          </div>
+        </GlassSurface>
 
-          {/* Mobile dropdown */}
-          <AnimatePresence initial={false}>
-            {isMobileMenuOpen ? (
-              <motion.nav
-                id="mobile-nav"
-                key="mobile-nav"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.28, ease: "easeOut" }}
-                className="md:hidden overflow-hidden"
-              >
-                <motion.div
-                  initial={{ y: -8 }}
-                  animate={{ y: 0 }}
-                  exit={{ y: -8 }}
-                  transition={{ duration: 0.28, ease: "easeOut" }}
-                  className="mt-4 rounded-xl border border-border bg-card/70 backdrop-blur-md p-2 shadow-lg shadow-primary/10"
-                >
-                  {navItems.map((item, index) => (
-                    <motion.button
-                      key={item}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -8 }}
-                      transition={{ delay: 0.05 + index * 0.04, duration: 0.22 }}
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        window.setTimeout(() => {
-                          handleNavigation(item);
-                        }, 50);
-                      }}
-                      className="w-full text-left px-4 py-3 rounded-lg text-muted-foreground hover:text-primary hover:bg-background/60 transition-colors duration-300"
-                    >
-                      {getNavLabel(item)}
-                    </motion.button>
-                  ))}
-                </motion.div>
-              </motion.nav>
-            ) : null}
-          </AnimatePresence>
-        </div>
-      </GlassSurface>
+        {/* Mobile dropdown (fora do GlassSurface para evitar recalcular filtro ao expandir) */}
+        <AnimatePresence initial={false}>
+          {isMobileMenuOpen ? (
+            <motion.nav
+              id="mobile-nav"
+              key="mobile-nav"
+              initial={{ opacity: 0, y: -8, scaleY: 0.98 }}
+              animate={{ opacity: 1, y: 0, scaleY: 1 }}
+              exit={{ opacity: 0, y: -8, scaleY: 0.98 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              style={{ transformOrigin: "top" }}
+              className="md:hidden mt-3 overflow-hidden"
+            >
+              <div className="rounded-xl border border-border bg-card/70 backdrop-blur-md p-2 shadow-lg shadow-primary/10">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -8 }}
+                    transition={{ delay: 0.03 + index * 0.03, duration: 0.18 }}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      window.setTimeout(() => {
+                        handleNavigation(item);
+                      }, 50);
+                    }}
+                    className="w-full text-left px-4 py-3 rounded-lg text-muted-foreground hover:text-primary hover:bg-background/60 transition-colors duration-300"
+                  >
+                    {getNavLabel(item)}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.nav>
+          ) : null}
+        </AnimatePresence>
+      </div>
     </motion.header>
   );
 }
