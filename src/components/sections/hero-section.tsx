@@ -145,7 +145,7 @@ export function HeroSection() {
           >
             <DecryptedScrambleText
               text="José Luiz"
-              speed={20}
+              speed={15}
               maxIterations={12}
               sequential={true}
               revealDirection="start"
@@ -165,7 +165,7 @@ export function HeroSection() {
           >
             <DecryptedScrambleText
               text="Desenvolvedor Full Stack"
-              speed={20}
+              speed={10}
               maxIterations={6}
               sequential={true}
               revealDirection="start"
