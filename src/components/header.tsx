@@ -194,7 +194,7 @@ export function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   onClick={() => handleNavigation(item)}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 capitalize relative group cursor-pointer"
+                  className="text-muted-foreground hover:text-cyan-200 transition-colors duration-300 capitalize relative group cursor-pointer"
                 >
                   {getNavLabel(item)}
                 </motion.button>
