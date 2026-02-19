@@ -38,7 +38,12 @@ export function HeroSection() {
   };
 
   useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
     if (!sectionRef.current || !bgRef.current || !contentRef.current) return;
+
+    const isSmallScreen = window.matchMedia("(max-width: 767px)").matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isSmallScreen || reduceMotion) return;
 
     const ScrollTrigger = getScrollTrigger();
     if (!ScrollTrigger) return;
@@ -99,7 +104,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent via-transparent to-slate-900/50" />
 
       {/* Light rays acima da imagem */}
-      <div className="absolute inset-0 z-20 pointer-events-none">
+      <div className="absolute inset-0 z-20 pointer-events-none hidden md:block">
         <LightRays
           saturation={2}
           mouseInfluence={0.1}
@@ -111,7 +116,7 @@ export function HeroSection() {
 
       <div
         ref={contentRef}
-        className="relative z-30 container mx-auto px-6 text-center will-change-transform"
+        className="relative z-30 container mx-auto px-4 sm:px-6 text-center will-change-transform"
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -152,8 +157,8 @@ export function HeroSection() {
               scrambleOnHover={false}
               scrambleSpeed={10}
               playOncePerPageLoadKey="home-name"
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white"
-              encryptedClassName="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-400"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+              encryptedClassName="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-slate-400 leading-tight"
               parentClassName="inline-block"
             />
           </motion.div>
@@ -172,8 +177,8 @@ export function HeroSection() {
               scrambleOnHover={false}
               scrambleSpeed={10}
               playOncePerPageLoadKey="home-role"
-              className="text-3xl md:text-5xl lg:text-6xl font-bold text-white"
-              encryptedClassName="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-400"
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+              encryptedClassName="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-slate-400 leading-tight"
               parentClassName="inline-block"
             />
           </motion.div>
