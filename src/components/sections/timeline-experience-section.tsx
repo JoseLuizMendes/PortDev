@@ -2,8 +2,9 @@
 
 import * as React from "react"
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion"
+import { Pin } from "lucide-react"
 
-import { timelineExperience, type TimelineExperienceItem } from "@/app/timelineExperience/data"
+import type { TimelineItem as TimelineExperienceItem } from "@/lib/timeline"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -33,7 +34,15 @@ function formatPeriod(item: TimelineExperienceItem) {
 
 type TimelineSide = "single" | "left" | "right"
 
-function TimelineItem({ item, side }: { item: TimelineExperienceItem; side: TimelineSide }) {
+function TimelineItem({
+  item,
+  side,
+  isPinned,
+}: {
+  item: TimelineExperienceItem
+  side: TimelineSide
+  isPinned: boolean
+}) {
   const reduceMotion = useReducedMotion()
 
   const periodLabel = formatPeriod(item)
@@ -47,14 +56,12 @@ function TimelineItem({ item, side }: { item: TimelineExperienceItem; side: Time
 
   return (
     <li className="relative">
-      
-
       <motion.article
         initial={reduceMotion ? false : { opacity: 0, y: 14 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-10% 0px -10% 0px" }}
         transition={{ type: "spring", stiffness: 220, damping: 26, mass: 0.5 }}
-        className={cn(articlePaddingClass, "[transform:translateZ(0)]")}
+        className={cn(articlePaddingClass, "transform-[translateZ(0)]")}
       >
         <SpotlightCard className="rounded-2xl">
           <GlareHover className="rounded-2xl">
@@ -82,6 +89,15 @@ function TimelineItem({ item, side }: { item: TimelineExperienceItem; side: Time
 
                   <div className="shrink-0">
                     <div className="flex flex-wrap items-center justify-end gap-2">
+                      {isPinned ? (
+                        <Badge variant="subtle" className="rounded-full px-3 py-1">
+                          <span className="inline-flex items-center gap-1 text-primary">
+                            <Pin className="size-4" fill="currentColor" />
+                            Fixado
+                          </span>
+                        </Badge>
+                      ) : null}
+
                       {item.isCurrent ? (
                         <StarBorder className="rounded-full">
                           <Badge variant="subtle" className="rounded-full px-3 py-1">
@@ -138,14 +154,16 @@ function TimelineItem({ item, side }: { item: TimelineExperienceItem; side: Time
   )
 }
 
-export function TimelineExperienceSection() {
+export function TimelineExperienceSection({ items }: { items: TimelineExperienceItem[] }) {
   const reduceMotion = useReducedMotion()
   const sectionRef = React.useRef<HTMLElement | null>(null)
+
+  const orderedItems = React.useMemo(() => items, [items])
 
   const leftItems: TimelineExperienceItem[] = []
   const rightItems: TimelineExperienceItem[] = []
 
-  timelineExperience.forEach((item, idx) => {
+  orderedItems.forEach((item, idx) => {
     if (idx % 2 === 0) leftItems.push(item)
     else rightItems.push(item)
   })
@@ -196,7 +214,7 @@ export function TimelineExperienceSection() {
             aria-hidden="true"
             className={cn(
               "absolute left-4 top-0 bottom-0 w-px origin-top",
-              "bg-gradient-to-b from-primary via-primary/70 to-transparent",
+              "bg-linear-to-b from-primary via-primary/70 to-transparent",
               "md:left-1/2 md:-translate-x-1/2"
             )}
             style={
@@ -210,21 +228,36 @@ export function TimelineExperienceSection() {
           />
 
           <ol className="grid gap-10 md:hidden">
-            {timelineExperience.map((item) => (
-              <TimelineItem key={item.id} item={item} side="single" />
+            {orderedItems.map((item) => (
+              <TimelineItem
+                key={item.id}
+                item={item}
+                side="single"
+                isPinned={Boolean(item.pinned)}
+              />
             ))}
           </ol>
 
           <div className="hidden md:flex items-start">
             <ol className="w-1/2 self-start grid content-start gap-10">
               {leftItems.map((item) => (
-                <TimelineItem key={item.id} item={item} side="left" />
+                <TimelineItem
+                  key={item.id}
+                  item={item}
+                  side="left"
+                  isPinned={Boolean(item.pinned)}
+                />
               ))}
             </ol>
 
             <ol className="w-1/2 self-start grid content-start gap-10">
               {rightItems.map((item) => (
-                <TimelineItem key={item.id} item={item} side="right" />
+                <TimelineItem
+                  key={item.id}
+                  item={item}
+                  side="right"
+                  isPinned={Boolean(item.pinned)}
+                />
               ))}
             </ol>
           </div>

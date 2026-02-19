@@ -92,7 +92,7 @@ export function HeroSection() {
         <Image
           width={1920}
           height={1080}
-          src="/peace.svg"
+          src="/peace2.png"
           alt="bg"
           sizes="100vw"
           className="h-full w-full object-cover"
@@ -138,7 +138,7 @@ export function HeroSection() {
         <div className="mb-6" id="hello-hero">
           <SplitTextChar
             text="Olá, eu sou o"
-            className="text-2xl md:text-3xl text-slate-300 mb-4 justify-center"
+            className="text-2xl md:text-3xl text-primary mb-4 justify-center"
             delay={0.5}
           />
 

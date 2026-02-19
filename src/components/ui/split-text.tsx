@@ -3,9 +3,8 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface SplitTextProps {
+interface SplitTextProps extends Omit<React.ComponentProps<typeof motion.div>, "children"> {
   text: string;
-  className?: string;
   delay?: number;
   duration?: number;
 }
@@ -14,7 +13,8 @@ export function SplitText({
   text, 
   className, 
   delay = 0, 
-  duration = 0.05 
+  duration = 0.05,
+  ...props
 }: SplitTextProps) {
   const words = text.split(" ");
 
@@ -53,6 +53,7 @@ export function SplitText({
       variants={container}
       initial="hidden"
       animate="visible"
+      {...props}
     >
       {words.map((word, index) => (
         <motion.span
@@ -67,9 +68,8 @@ export function SplitText({
   );
 }
 
-interface SplitTextCharProps {
+interface SplitTextCharProps extends Omit<React.ComponentProps<typeof motion.div>, "children"> {
   text: string;
-  className?: string;
   delay?: number;
   duration?: number;
 }
@@ -78,7 +78,8 @@ export function SplitTextChar({
   text, 
   className, 
   delay = 0, 
-  duration = 0.03 
+  duration = 0.03,
+  ...props
 }: SplitTextCharProps) {
   const chars = text.split("");
 
@@ -117,6 +118,7 @@ export function SplitTextChar({
       variants={container}
       initial="hidden"
       animate="visible"
+      {...props}
     >
       {chars.map((char, index) => (
         <motion.span

@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ContentKind {
+  EXPERIENCE
+  EDUCATION
+  COURSE
+  PROJECT
+}
+
+model ContentItem {
+  id          String      @id @default(cuid())
+  kind        ContentKind
+
+  company     String
+  role        String
+  location    String?
+
+  startYm     String?
+  endYm       String?
+  isCurrent   Boolean     @default(false)
+  periodLabel String?
+
+  summary     String
+  highlights  Json?
+  tech        Json?
+  links       Json?
+
+  pinned      Boolean     @default(false)
+  pinnedOrder Int?
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([kind])
+  @@index([pinned, pinnedOrder])
+}

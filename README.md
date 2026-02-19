@@ -42,3 +42,28 @@ Para detalhes sobre o sistema de animações imersivas, consulte:
 
 #### 📄 Licença
 MIT License
+
+---
+
+## 🔐 Painel Admin (MVP)
+
+O painel admin fica em `/admin` e é protegido por **Basic Auth** via middleware.
+
+### Variáveis de ambiente
+- Copie `.env.example` → `.env` e preencha:
+	- `DATABASE_URL` (Neon Postgres)
+	- `ADMIN_USER`
+	- `ADMIN_PASSWORD`
+
+Na Vercel, configure as mesmas env vars no Project Settings.
+
+### Preparar o banco (primeira vez)
+1) Gerar/aplicar migration:
+- `pnpm prisma:migrate`
+
+2) Popular com os dados atuais do currículo:
+- `pnpm db:seed`
+
+### URLs
+- Admin timeline (pins + lista): `/admin/timeline`
+- Criar item: `/admin/items/new`
