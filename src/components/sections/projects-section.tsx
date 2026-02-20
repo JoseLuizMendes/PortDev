@@ -135,20 +135,20 @@ export function ProjectsSection() {
               >
                 {/* Contador e Categoria */}
                 <div className="flex items-center justify-between border-b border-border pb-4">
-                  <span className="text-sm font-mono text-primary/80">
+                  <span className="text-sm font-mono text-primary">
                     {String(activeProject.id).padStart(2, "0")}{" "}
-                    <span className="text-muted-foreground">
+                    <span className="text-primary">
                       / {String(projects.length).padStart(2, "0")}
                     </span>
                   </span>
-                  <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
+                  <span className="text-xs uppercase tracking-widest text-primary font-semibold">
                     {activeProject.category}
                   </span>
                 </div>
 
                 {/* Título e Descrição */}
                 <div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
+                  <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight bg-clip-text bg-linear-to-r from-foreground to-foreground/70">
                     {activeProject.title}
                   </h3>
                   <p className="text-muted-foreground text-lg leading-relaxed">
@@ -172,7 +172,7 @@ export function ProjectsSection() {
                 <div className="flex flex-wrap gap-4 mt-2">
                   <Button
                     onClick={() => window.open(activeProject.demoUrl, "_blank")}
-                    className="gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300"
+                    className="gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/20 transition-all duration-300"
                     size="lg"
                   >
                     <ExternalLink className="h-4 w-4" />
@@ -201,18 +201,18 @@ export function ProjectsSection() {
                   variant="ghost"
                   size="icon"
                   onClick={handlePrev}
-                  className="rounded-full hover:bg-primary/10"
+                  className="rounded-full hover:bg-primary"
                 >
-                  <ChevronLeft className="h-5 w-5" />
+                  <ChevronLeft className="h-5 w-5 text-primary" />
                 </Button>
-                <span className="text-sm text-muted-foreground">Navegar</span>
+                <span className="text-sm text-accent-foreground">Navegar</span>
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={handleNext}
-                  className="rounded-full hover:bg-primary/10"
+                  className="rounded-full hover:bg-primary"
                 >
-                  <ChevronRight className="h-5 w-5" />
+                  <ChevronRight className="h-5 w-5 text-primary" />
                 </Button>
               </div>
             </GsapScrollReveal>
@@ -226,15 +226,15 @@ export function ProjectsSection() {
             {/* Mobile: card estático (evita que o CardSwap quebre layout e reduz jank) */}
             <div className="w-full lg:hidden">
               <GsapScrollReveal animation="scaleUp" delay={0.15}>
-                <div className="mx-auto w-full max-w-[520px]">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-card/40 shadow-2xl">
+                <div className="mx-auto w-full max-w-130">
+                  <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-white/10 bg-card/40 shadow-2xl">
                     <Image
                       src={activeProject.image}
                       alt={activeProject.title}
                       fill
                       className="object-cover"
                       sizes="(max-width: 640px) 92vw, 520px"
-                      quality={80}
+                      quality={100}
                       placeholder="blur"
                       priority={activeProjectIndex === 0}
                     />
@@ -316,7 +316,7 @@ export function ProjectsSection() {
                         <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
 
                         <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                          <p className="text-xs font-medium text-primary mb-1 uppercase tracking-wider">
+                          <p className="text-xs font-medium text-foreground mb-1 uppercase tracking-wider">
                             {project.category.split("/")[0]}
                           </p>
                           <h4 className="text-xl md:text-2xl font-bold text-white mb-2">
