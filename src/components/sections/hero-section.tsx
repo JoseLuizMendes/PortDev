@@ -205,7 +205,7 @@ export function HeroSection() {
           <GsapMagnetic strength={0.2}>
             <Button
               size="lg"
-              className="bg-linear-to-r from-brand-indigo to-primary hover:from-brand-indigo hover:to-primary text-white px-8 py-3 rounded-full tech-hover"
+              className="bg-linear-to-r from-brand-indigo to-indigo-400 hover:from-brand-indigo hover:to-indigo-400 text-white px-8 py-3 rounded-full"
               onClick={() => scrollToSection("projects")}
             >
               Ver Projetos
