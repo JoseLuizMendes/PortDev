@@ -25,11 +25,12 @@ export function CuriosityCard({
       className="group transition-transform duration-200 hover:-translate-y-1"
     >
       <ElectricBorder
-        color="#1e40af"
+        color="#F97316"
         speed={1}
-        chaos={0.1}
+        chaos={0.08}
         thickness={0.03}
-        className="h-full bg-card/50 backdrop-blur-sm rounded-xl p-5 transition-all duration-300"
+        glowIntensity={0.12}
+        className="h-full backdrop-blur-sm rounded-xl p-5 transition-all duration-300"
         style={{ borderRadius: "0.75rem" }}
       >
         <div className="relative">

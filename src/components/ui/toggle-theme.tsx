@@ -28,9 +28,9 @@ export function ModeToggle() {
         setTheme(pressed ? "dark" : "light");
       }}
       aria-label="Alternar tema"
-      size="sm"
-      variant="outline"
-      className="bg-card/80 hover:bg-card border-primary/30 data-[state=on]:bg-card data-[state=on]:border-primary/50 transition-all duration-300"
+      size="default"
+      variant="default"
+      className="bg-transparent text-primary hover:text-primary hover:bg-brand-indigo tech-hover data-[state=on]:text-primary data-[state=on]:bg-transparent data-[state=on]:hover:bg-brand-indigo transition-all duration-300"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
@@ -41,9 +41,9 @@ export function ModeToggle() {
           transition={{ duration: 0.2 }}
         >
           {isDark ? (
-            <Moon className="h-4 w-4 text-primary" />
+            <Moon className="h-5 w-5" />
           ) : (
-            <Sun className="h-4 w-4 text-black" />
+            <Sun className="h-5 w-5" />
           )}
         </motion.div>
       </AnimatePresence>

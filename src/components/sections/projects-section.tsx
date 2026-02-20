@@ -223,14 +223,11 @@ export function ProjectsSection() {
           */}
           {/* Coluna da Direita: Card Swap Visual */}
           <div className="lg:col-span-7 order-1 lg:order-2 flex justify-center lg:justify-end relative">
-            {/* Glow Effect behind cards */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
-
             {/* Mobile: card estático (evita que o CardSwap quebre layout e reduz jank) */}
             <div className="w-full lg:hidden">
               <GsapScrollReveal animation="scaleUp" delay={0.15}>
                 <div className="mx-auto w-full max-w-[520px]">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-card/40 backdrop-blur-xl shadow-2xl">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-card/40 shadow-2xl">
                     <Image
                       src={activeProject.image}
                       alt={activeProject.title}
@@ -300,7 +297,7 @@ export function ProjectsSection() {
                       key={project.id}
                       role="button"
                       tabIndex={0}
-                      customClass="group bg-card/40 border border-white/10 backdrop-blur-xl overflow-hidden shadow-2xl rounded-xl"
+                      customClass="group bg-card/40 border border-white/10 overflow-hidden shadow-2xl rounded-xl"
                     >
                       <div className="relative w-full h-full">
                         {project.image && (

@@ -181,7 +181,7 @@ export function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-2xl font-bold text-muted-foreground"
+              className="text-2xl font-bold text-zinc-50"
             >
               {"<DevIn/>"}
             </motion.div>
@@ -194,7 +194,7 @@ export function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   onClick={() => handleNavigation(item)}
-                  className="text-muted-foreground hover:text-cyan-200 transition-colors duration-300 capitalize relative group cursor-pointer"
+                  className="text-zinc-50 hover:text-primary transition-colors duration-300 capitalize relative group cursor-pointer"
                 >
                   {getNavLabel(item)}
                 </motion.button>
@@ -210,7 +210,7 @@ export function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-muted-foreground hover:text-primary hover:bg-card/80 tech-hover"
+                  className="text-primary hover:text-primary hover:bg-brand-indigo dark:hover:bg-brand-indigo! tech-hover"
                   onClick={() =>
                     window.open("https://github.com/JoseLuizMendes", "_blank")
                   }
@@ -220,7 +220,7 @@ export function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-muted-foreground hover:text-primary hover:bg-card/80 tech-hover"
+                  className="text-primary hover:text-primary hover:bg-brand-indigo dark:hover:bg-brand-indigo! tech-hover"
                   onClick={() =>
                     window.open(
                       "https://www.linkedin.com/in/jos%C3%A9-luiz-dos-santos-azeredo-mendes-ab5a10283/",

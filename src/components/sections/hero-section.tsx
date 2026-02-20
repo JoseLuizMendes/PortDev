@@ -92,7 +92,7 @@ export function HeroSection() {
         <Image
           width={1920}
           height={1080}
-          src="/peace2.png"
+          src="/peace2.svg"
           alt="bg"
           sizes="100vw"
           className="h-full w-full object-cover"
@@ -138,7 +138,7 @@ export function HeroSection() {
         <div className="mb-6" id="hello-hero">
           <SplitTextChar
             text="Olá, eu sou o"
-            className="text-2xl md:text-3xl text-primary mb-4 justify-center"
+            className="text-2xl md:text-3xl text-zinc-50 mb-4 justify-center"
             delay={0.5}
           />
 
@@ -205,7 +205,7 @@ export function HeroSection() {
           <GsapMagnetic strength={0.2}>
             <Button
               size="lg"
-              className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full tech-hover shadow-lg shadow-blue-500/25"
+              className="bg-linear-to-r from-brand-indigo to-primary hover:from-brand-indigo hover:to-primary text-white px-8 py-3 rounded-full tech-hover"
               onClick={() => scrollToSection("projects")}
             >
               Ver Projetos

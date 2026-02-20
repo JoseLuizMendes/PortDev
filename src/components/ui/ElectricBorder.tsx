@@ -6,6 +6,7 @@ type ElectricBorderProps = PropsWithChildren<{
   speed?: number;
   chaos?: number;
   thickness?: number;
+  glowIntensity?: number;
   className?: string;
   style?: CSSProperties;
 }>;
@@ -32,6 +33,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
   speed = 1,
   chaos = 1,
   thickness = 2,
+  glowIntensity = 1,
   className,
   style
 }) => {
@@ -155,7 +157,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
     borderStyle: 'solid',
     borderColor: hexToRgba(color, 0.6),
     filter: `blur(${effectsEnabled ? 0.5 + thickness * 0.25 : 0.25 + thickness * 0.15}px)`,
-    opacity: 0.5
+    opacity: 0.5 * glowIntensity
   };
 
   const glow2Style: CSSProperties = {
@@ -164,14 +166,16 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
     borderStyle: 'solid',
     borderColor: color,
     filter: `blur(${effectsEnabled ? 2 + thickness * 0.5 : 1.2 + thickness * 0.35}px)`,
-    opacity: 0.5
+    opacity: 0.5 * glowIntensity
   };
 
   const bgGlowStyle: CSSProperties = {
     ...inheritRadius,
     transform: 'scale(1.08)',
-    filter: effectsEnabled ? 'blur(32px)' : 'blur(18px)',
-    opacity: 0.3,
+    filter: effectsEnabled
+      ? `blur(${Math.max(0, 32 * glowIntensity)}px)`
+      : `blur(${Math.max(0, 18 * glowIntensity)}px)`,
+    opacity: 0.3 * glowIntensity,
     zIndex: -1,
     background: `linear-gradient(-30deg, ${hexToRgba(color, 0.8)}, transparent, ${color})`
   };

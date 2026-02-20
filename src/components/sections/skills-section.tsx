@@ -80,25 +80,62 @@ const categories = ["Frontend", "Backend", "Database", "Frameworks", "Tools"];
 // Cores temáticas para cada categoria
 const CATEGORY_COLORS = {
   Frontend: {
-    primary: "#3b82f6", // blue-500
-    gradient: ["#60a5fa", "#3b82f6", "#2563eb", "#1d4ed8", "#1e40af"], // blue gradient
+    primary: "var(--chart-1)",
+    gradient: [
+      "var(--chart-1)",
+      "var(--chart-2)",
+      "var(--chart-3)",
+      "var(--chart-4)",
+      "var(--chart-5)",
+    ],
   },
   Backend: {
-    primary: "#8b5cf6", // purple-500
-    gradient: ["#a78bfa", "#8b5cf6", "#7c3aed", "#6d28d9", "#5b21b6"], // purple gradient
+    primary: "var(--chart-2)",
+    gradient: [
+      "var(--chart-2)",
+      "var(--chart-3)",
+      "var(--chart-4)",
+      "var(--chart-5)",
+      "var(--chart-1)",
+    ],
   },
   Database: {
-    primary: "#06b6d4", // cyan-500
-    gradient: ["#22d3ee", "#06b6d4", "#0891b2", "#0e7490", "#155e75"], // cyan gradient
+    primary: "var(--chart-3)",
+    gradient: [
+      "var(--chart-3)",
+      "var(--chart-4)",
+      "var(--chart-5)",
+      "var(--chart-1)",
+      "var(--chart-2)",
+    ],
   },
   Frameworks: {
-    primary: "#10b981", // emerald-500
-    gradient: ["#34d399", "#10b981", "#059669", "#047857", "#065f46"], // emerald gradient
+    primary: "var(--chart-4)",
+    gradient: [
+      "var(--chart-4)",
+      "var(--chart-5)",
+      "var(--chart-1)",
+      "var(--chart-2)",
+      "var(--chart-3)",
+    ],
   },
   Tools: {
-    primary: "#f59e0b", // amber-500
-    gradient: ["#fbbf24", "#f59e0b", "#d97706", "#b45309", "#92400e"], // amber gradient
+    primary: "var(--chart-5)",
+    gradient: [
+      "var(--chart-5)",
+      "var(--chart-1)",
+      "var(--chart-2)",
+      "var(--chart-3)",
+      "var(--chart-4)",
+    ],
   },
+};
+
+const CHART_THEME = {
+  grid: "var(--border)",
+  tick: "var(--muted-foreground)",
+  tooltipBackground: "var(--card)",
+  tooltipText: "var(--foreground)",
 };
 
 export function SkillsSection() {
@@ -196,16 +233,16 @@ export function SkillsSection() {
         return (
           <ResponsiveContainer width="100%" height={300}>
             <RadarChart data={getCategoryRadarData(category)}>
-              <PolarGrid stroke="#475569" />
+              <PolarGrid stroke={CHART_THEME.grid} />
               <PolarAngleAxis
                 dataKey="skill"
-                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                tick={{ fill: CHART_THEME.tick, fontSize: 11 }}
                 tickSize={17}
               />
               <PolarRadiusAxis
                 angle={90}
                 domain={[10, 100]}
-                tick={{ fill: "#94a3b8", fontSize: 10 }}
+                tick={{ fill: CHART_THEME.tick, fontSize: 10 }}
               />
               <Radar
                 name="Nível"
@@ -216,10 +253,10 @@ export function SkillsSection() {
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#1e293b",
+                  backgroundColor: CHART_THEME.tooltipBackground,
                   border: `1px solid ${CATEGORY_COLORS.Frontend.primary}`,
                   borderRadius: "8px",
-                  color: "#e2e8f0",
+                  color: CHART_THEME.tooltipText,
                 }}
               />
             </RadarChart>
@@ -236,7 +273,7 @@ export function SkillsSection() {
             return (
               <div
                 style={{
-                  backgroundColor: "#1e293b",
+                  backgroundColor: CHART_THEME.tooltipBackground,
                   border: `1px solid ${CATEGORY_COLORS.Backend.primary}`,
                   borderRadius: "8px",
                   padding: "10px",
@@ -244,7 +281,7 @@ export function SkillsSection() {
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {payload.map((entry: any, index: number) => (
                   <div key={`item-${index}`} style={{ marginBottom: "4px" }}>
-                    <span style={{ color: "#e2e8f0" }}>{entry.name}: </span>
+                    <span style={{ color: CHART_THEME.tooltipText }}>{entry.name}: </span>
                     <span style={{ color: CATEGORY_COLORS.Backend.primary }}>
                       {Math.round(entry.value)}
                     </span>
@@ -259,13 +296,13 @@ export function SkillsSection() {
         return (
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={backendStackedData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-              <XAxis dataKey="name" tick={{ fill: "#cbd5e1", fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={CHART_THEME.grid} />
+              <XAxis dataKey="name" tick={{ fill: CHART_THEME.tick, fontSize: 11 }} />
               <YAxis
                 domain={[0, 100]}
                 type="number"
                 allowDataOverflow={false}
-                tick={{ fill: "#94a3b8", fontSize: 10 }}
+                tick={{ fill: CHART_THEME.tick, fontSize: 10 }}
                 tickFormatter={value => value.toString()}
               />
               <Tooltip content={<CustomTooltip />} />
@@ -296,25 +333,25 @@ export function SkillsSection() {
         return (
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={getCategoryBarData(category)}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+              <CartesianGrid strokeDasharray="3 3" stroke={CHART_THEME.grid} />
               <XAxis
                 dataKey="name"
-                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                tick={{ fill: CHART_THEME.tick, fontSize: 11 }}
                 angle={-45}
                 textAnchor="end"
                 height={80}
               />
               <YAxis
                 domain={[0, 100]}
-                tick={{ fill: "#94a3b8", fontSize: 10 }}
+                tick={{ fill: CHART_THEME.tick, fontSize: 10 }}
               />
               <Tooltip
                 cursor={false}
                 contentStyle={{
-                  backgroundColor: "#1e293b",
+                  backgroundColor: CHART_THEME.tooltipBackground,
                   border: `1px solid ${CATEGORY_COLORS.Database.primary}`,
                   borderRadius: "8px",
-                  color: "#e2e8f0",
+                  color: CHART_THEME.tooltipText,
                 }}
               />
               <Bar
@@ -365,7 +402,7 @@ export function SkillsSection() {
             <text
               x={x}
               y={y}
-              fill="white"
+              fill="var(--foreground)"
               textAnchor={x > cx ? "start" : "end"}
               dominantBaseline="central"
               fontSize={12}
@@ -381,13 +418,13 @@ export function SkillsSection() {
             return (
               <div
                 style={{
-                  backgroundColor: "#1e293b",
+                  backgroundColor: CHART_THEME.tooltipBackground,
                   border: `1px solid ${CATEGORY_COLORS.Frameworks.primary}`,
                   borderRadius: "8px",
                   padding: "10px",
                 }}>
                 <div>
-                  <span style={{ color: "#e2e8f0" }}>{payload[0].name}: </span>
+                  <span style={{ color: CHART_THEME.tooltipText }}>{payload[0].name}: </span>
                   <span style={{ color: CATEGORY_COLORS.Frameworks.primary }}>
                     {payload[0].value}
                   </span>
@@ -430,25 +467,25 @@ export function SkillsSection() {
         return (
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={getCategoryBarData(category)} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+              <CartesianGrid strokeDasharray="3 3" stroke={CHART_THEME.grid} />
               <XAxis
                 type="number"
                 domain={[0, 100]}
-                tick={{ fill: "#94a3b8", fontSize: 10 }}
+                tick={{ fill: CHART_THEME.tick, fontSize: 10 }}
               />
               <YAxis
                 type="category"
                 dataKey="name"
-                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                tick={{ fill: CHART_THEME.tick, fontSize: 11 }}
                 width={100}
               />
               <Tooltip
                 cursor={false}
                 contentStyle={{
-                  backgroundColor: "#1e293b",
+                  backgroundColor: CHART_THEME.tooltipBackground,
                   border: `1px solid ${CATEGORY_COLORS.Tools.primary}`,
                   borderRadius: "8px",
-                  color: "#e2e8f0",
+                  color: CHART_THEME.tooltipText,
                 }}
               />
               <Bar
@@ -479,7 +516,7 @@ export function SkillsSection() {
               delay={categoryIndex * 0.08}
               className={category === "Tools" ? "lg:col-span-2" : ""}
             >
-              <Card className="glass-card backdrop-blur-md tech-hover group">
+              <Card className="group rounded-xl border border-border/60 bg-card/40 shadow-none!">
                 <CardContent className="p-8 relative">
                   <div className="absolute top-4 right-4 w-2 h-2 bg-blue-500 rounded-full animate-pulse opacity-60"></div>
                   <h3 className="text-2xl font-bold text-gradient mb-6 text-center group-hover:scale-105 transition-transform duration-300">
@@ -504,14 +541,14 @@ export function SkillsSection() {
 
         {/* Seção de aprendizado contínuo */}
         <GsapScrollReveal animation="fadeUp" className="mt-10 text-center">
-          <Card className="glass-card border-blue-500/20 backdrop-blur-md relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5"></div>
+          <Card className="rounded-xl border border-blue-500/20 bg-transparent relative overflow-hidden shadow-none!">
+            <div className="absolute inset-0 "></div>
             <CardContent className="p-8 relative z-10">
               <div className="flex items-center justify-center mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-2xl mr-4 pulse-tech">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-4 pulse-tech">
                   🚀
                 </div>
-                <h3 className="text-2xl font-bold text-gradient">
+                <h3 className="text-2xl font-bold text-primary">
                   Sempre Aprendendo
                 </h3>
               </div>
@@ -542,7 +579,7 @@ export function SkillsSection() {
                   "Python",                
                   "SQL Developer",
                   "PostgreSQL",
-                ].map((tech, index) => (
+                ].map((tech) => (
                   <span
                     key={tech}
                     className="px-4 py-2 glass-card text-card-foreground rounded-full text-sm border-primary/20 tech-hover cursor-default"
