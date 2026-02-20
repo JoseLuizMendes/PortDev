@@ -27,11 +27,30 @@ function kindLabel(kind: string) {
 }
 
 export default async function AdminTimelinePage() {
-  let items: Awaited<ReturnType<typeof prisma.contentItem.findMany>> = []
+  type TimelineItemRow = {
+    id: string
+    kind: string
+    role: string
+    company: string
+    summary: string
+    pinned: boolean
+    pinnedOrder: number | null
+  }
+
+  let items: TimelineItemRow[] = []
   let dbNotReady = false
 
   try {
-    items = await prisma.contentItem.findMany({
+    items = (await prisma.contentItem.findMany({
+      select: {
+        id: true,
+        kind: true,
+        role: true,
+        company: true,
+        summary: true,
+        pinned: true,
+        pinnedOrder: true,
+      },
       orderBy: [
         { pinned: "desc" },
         { pinnedOrder: "asc" },
@@ -39,7 +58,7 @@ export default async function AdminTimelinePage() {
         { endYm: "asc" },
         { id: "asc" },
       ],
-    })
+    })) as unknown as TimelineItemRow[]
   } catch (e: unknown) {
     // Prisma: P2021 => tabela não existe.
     dbNotReady =
@@ -92,7 +111,7 @@ pnpm db:seed
           </Card>
         ) : null}
 
-        {items.map((item) => (
+        {items.map((item: TimelineItemRow) => (
           <Card key={item.id} className="border-border/60 bg-card/40">
             <CardHeader className="gap-2">
               <div className="flex flex-wrap items-start justify-between gap-3">
