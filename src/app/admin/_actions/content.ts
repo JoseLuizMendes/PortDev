@@ -4,7 +4,9 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 import { prisma } from "@/lib/prisma"
-import { ContentKind } from "@prisma/client"
+
+const CONTENT_KINDS = ["EXPERIENCE", "EDUCATION", "COURSE", "PROJECT"] as const
+type ContentKind = (typeof CONTENT_KINDS)[number]
 
 function parseLines(value: FormDataEntryValue | null) {
   if (typeof value !== "string") return undefined
@@ -27,8 +29,14 @@ function parseBoolean(value: FormDataEntryValue | null) {
 }
 
 export async function createContentItem(formData: FormData) {
-  const kind = parseOptionalString(formData.get("kind"))
-  if (!kind) throw new Error("kind é obrigatório")
+  const kindRaw = parseOptionalString(formData.get("kind"))
+  if (!kindRaw) throw new Error("kind é obrigatório")
+
+  if (!CONTENT_KINDS.includes(kindRaw as ContentKind)) {
+    throw new Error("kind inválido")
+  }
+
+  const kind: ContentKind = kindRaw as ContentKind
 
   const company = parseOptionalString(formData.get("company"))
   const role = parseOptionalString(formData.get("role"))
@@ -49,7 +57,7 @@ export async function createContentItem(formData: FormData) {
 
   const item = await prisma.contentItem.create({
     data: {
-      kind: kind as ContentKind,
+      kind,
       company,
       role,
       summary,
