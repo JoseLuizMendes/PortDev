@@ -30,14 +30,14 @@ export function Footer() {
       <footer className="bg-slate-950/90 backdrop-blur-md border-t border-slate-800/50 py-8 relative overflow-hidden">
       {/* Tech pattern background */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent"></div>
-        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-purple-500/30 to-transparent"></div>
+        <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-blue-500/30 to-transparent"></div>
+        <div className="absolute top-0 right-1/3 w-px h-full bg-linear-to-b from-transparent via-purple-500/30 to-transparent"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-slate-400 text-sm mb-4 md:mb-0 font-mono text-center">
-          <span className="text-blue-400">©</span> {new Date().getFullYear()}
-          <span className="text-gradient font-semibold"> DevPortfolio</span>
+          <span className="text-primary/80">©</span> {new Date().getFullYear()}
+          <span className="text-primary/80 font-semibold italic"> DevPortfolio</span>
           <span className="text-slate-500">. All rights reserved.</span>
         </div>
 
@@ -55,7 +55,7 @@ export function Footer() {
             pauseOnHover={true}
             scaleOnHover={true}
             fadeOut={false}
-            className="text-slate-400 hover:text-blue-400 transition-colors"
+            className="text-slate-400 hover:text-primary/60 transition-colors"
           />
         </div>
       </div>
