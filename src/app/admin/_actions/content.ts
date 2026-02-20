@@ -154,12 +154,17 @@ export async function togglePinned(id: string) {
 }
 
 export async function movePinned(id: string, direction: "up" | "down") {
-  const pinned = await prisma.contentItem.findMany({
+  type PinnedRow = {
+    id: string
+    pinnedOrder: number | null
+  }
+
+  const pinned = (await prisma.contentItem.findMany({
     where: { pinned: true },
     orderBy: [{ pinnedOrder: "asc" }, { id: "asc" }],
-  })
+  })) as unknown as PinnedRow[]
 
-  const idx = pinned.findIndex((p) => p.id === id)
+  const idx = pinned.findIndex((p: PinnedRow) => p.id === id)
   if (idx === -1) return
 
   const swapWith = direction === "up" ? idx - 1 : idx + 1
