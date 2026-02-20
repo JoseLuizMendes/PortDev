@@ -59,7 +59,7 @@ function renderDialogContent(title: string, dialogData: DialogAchievements) {
             {/* Backend */}
             <div className="space-y-1">
               <h4 className="font-bold text-cyan-300 mb-1 sm:mb-2 flex items-center gap-1 text-xs sm:text-sm">
-                <span className="w-1.5 h-1 bg-cyan-400 rounded-full"></span>
+                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
                 Backend
               </h4>
               <div className="space-y-0 text-slate-300 pl-2 text-xs">
@@ -155,9 +155,9 @@ export function AchievementCard({
           }}
           transition={{ duration: 0.3 }}
         >
-          <Card className="glass-card hover:border-blue-500/50 transition-all duration-300 h-full tech-hover group">
+          <Card className="glass-card  transition-all duration-300 h-full group">
             <CardContent className="p-3 sm:p-4 text-center relative flex flex-col justify-between h-full">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
                 <achievement.icon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-400 group-hover:text-blue-300" />
               </div>
               <div>
@@ -192,9 +192,9 @@ export function AchievementCard({
           }}
           transition={{ duration: 0.3 }}
         >
-          <Card className="glass-card border-blue-500/30 transition-all duration-300 h-full tech-hover group bg-slate-900/60">
+          <Card className="glass-card border-blue-500/30 transition-all duration-300 h-full  group bg-slate-900/60">
             <CardContent className="pt-2 sm:pt-3 px-3 sm:px-6 pb-2 h-full flex flex-col overflow-hidden">
-              <h3 className="text-white font-semibold mb-2 text-center pb-2 border-b border-slate-700/50 text-sm sm:text-base flex-shrink-0">
+              <h3 className="text-white font-semibold mb-2 text-center pb-2 border-b border-slate-700/50 text-sm sm:text-base shrink-0">
                 {achievement.title}
               </h3>
               <div className="text-slate-300 text-xs sm:text-sm font-semibold space-y-1 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
