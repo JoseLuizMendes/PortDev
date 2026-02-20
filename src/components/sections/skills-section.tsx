@@ -23,6 +23,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { Badge } from "../ui/badge";
 
 interface Skill {
   name: string;
@@ -580,12 +581,13 @@ export function SkillsSection() {
                   "SQL Developer",
                   "PostgreSQL",
                 ].map((tech) => (
-                  <span
+                  <Badge
+                  variant={"default"}
                     key={tech}
-                    className="px-4 py-2 glass-card text-card-foreground rounded-full text-sm border-primary/20 tech-hover cursor-default"
+                    className="px-4 py-2 bg-brand-indigo text-primary rounded-full text-sm  cursor-default"
                   >
                     {tech}
-                  </span>
+                  </Badge>
                 ))}
               </GsapScrollReveal>
             </CardContent>
