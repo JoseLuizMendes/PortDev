@@ -1,6 +1,5 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
 import { SplitText } from "@/components/ui/split-text";
 import { CuriosityCard } from "./CuriosityCard";
 import { curiosities } from "./data";
@@ -9,37 +8,6 @@ import ProfileCard from "@/components/ui/ProfileCard";
 import { GsapScrollReveal } from "@/components/ui/gsap-animations";
 
 export default function Curiosities() {
-  const leftColRef = useRef<HTMLDivElement>(null);
-  const [profileCardHeight, setProfileCardHeight] = useState<number>();
-
-  useLayoutEffect(() => {
-    const el = leftColRef.current;
-    if (!el) return;
-
-    const measure = () => {
-      // Sync height strictly on desktop (lg breakpoint matches Tailwind default: 1024px)
-      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-
-      if (!isDesktop) {
-        setProfileCardHeight(undefined);
-        return;
-      }
-      const next = Math.round(el.getBoundingClientRect().height);
-      if (next > 0) setProfileCardHeight(next);
-    };
-
-    measure();
-
-    if (typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", measure);
-      return () => window.removeEventListener("resize", measure);
-    }
-
-    const ro = new ResizeObserver(() => measure());
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
   return (
     <section
       id="curiosities"
@@ -63,7 +31,7 @@ export default function Curiosities() {
         <div className="mx-auto max-w-[1400px]">
           <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-stretch">
             {/* Área de texto à ESQUERDA */}
-            <div ref={leftColRef} className="order-3 lg:order-1 h-full">
+            <div className="order-3 lg:order-1 h-full">
               <GsapScrollReveal
                 animation="fadeLeft"
                 className="space-y-3 text-center"
@@ -119,14 +87,11 @@ export default function Curiosities() {
             </div>
 
             {/* Imagem - Card Profile - DIREITA */}
-            <div className="order-1 lg:order-3 w-full max-w-sm lg:max-w-none mx-auto lg:mx-auto self-stretch object-cover flex flex-col items-center lg:items-center">
-
+            <div className="order-1 py-18 lg:order-3 w-full max-w-sm lg:max-w-105 mx-auto self-start object-cover flex flex-col items-center">
               <ProfileCard
                 className="w-full"
                 avatarUrl="/Card_Profissional.png"
                 avatarOffsetY={10}
-                cardHeight={profileCardHeight || "auto"}
-                cardMaxHeight={profileCardHeight || "none"}
                 name="José Luiz"
                 title="Desenvolvedor Full Stack"
                 enableTilt={true}
@@ -135,6 +100,7 @@ export default function Curiosities() {
                 showUserInfo={true}
                 behindGlowSize="50%"
                 behindGlowColor="rgba(38,70,94)"
+                
               />
             </div>
           </div>
