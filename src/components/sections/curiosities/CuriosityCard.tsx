@@ -17,33 +17,39 @@ export function CuriosityCard({
   description,
   index,
 }: CuriosityCardProps) {
+  const animationByIndex = index % 2 === 0 ? "fadeUp" : "fadeRight";
+
   return (
     <GsapScrollReveal
-      animation="fadeUp"
+      animation={animationByIndex}
       delay={index * 0.08}
-      duration={0.5}
-      className="group transition-transform duration-200 hover:-translate-y-1"
+      duration={0.65}
+      className="group transition-transform duration-300 hover:-translate-y-1"
     >
       <ElectricBorder
-        color="#F97316"
+        color="hsl(var(--primary))"
         speed={1}
-        chaos={0.08}
+        chaos={0.06}
         thickness={0.03}
-        glowIntensity={0.12}
-        className="h-full backdrop-blur-sm rounded-xl p-5 transition-all duration-300"
+        glowIntensity={0.16}
+        className="relative min-h-40 backdrop-blur-md rounded-2xl p-5 bg-card/25 border border-border/40 transition-all duration-300"
         style={{ borderRadius: "0.75rem" }}
       >
-        <div className="relative">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+        <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        <div className="relative z-10">
+          <div className="flex items-center gap-3.5 mb-3">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
               <Icon className="w-5 h-5 text-primary" />
             </div>
-            <h3 className="text-base font-semibold text-foreground">
+            <h3 className="text-base sm:text-lg font-semibold text-foreground tracking-tight">
               {title}
             </h3>
           </div>
 
-          <p className="text-xs text-muted-foreground leading-relaxed">
+          <div className="h-px w-full bg-border/60 mb-3" />
+
+          <p className="text-sm text-muted-foreground leading-relaxed">
             {description}
           </p>
         </div>

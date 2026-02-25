@@ -6,22 +6,19 @@ export const curiosities: CuriosityItem[] = [
     icon: Coffee,
     title: "Estilo de Trabalho",
     description:
-      "Meu ritmo de trabalho é guiado por foco intencional. Gosto de começar o dia com café, música ambiente" +
-      " e uma rotina equilibrada que me mantém produtivo sem perder a criatividade.",
+      "Opero em foco profundo, com metas claras e ritmo consistente. Café e rotina estruturada me ajudam a manter alta performance com calma.",
   },
   {
     icon: Music2,
     title: "Vida Pessoal",
     description:
-      "A música é meu ponto de equilíbrio. Aprendi a tocar durante momentos difíceis da pandemia e, desde então, o violão" +
-      " faz parte da minha rotina. Ele me ajuda a aliviar a mente, estimular a criatividade e manter o bem-estar.",
+      "A música virou meu ponto de reset. O violão entrou na minha rotina na pandemia e segue como fonte de presença, energia e criatividade.",
   },
   {
     icon: Brain,
     title: "Curiosidade Técnica",
     description:
-      "Sou fascinado pela mente humana e por como o cérebro inspira tecnologias modernas. Neurociência, IA e finanças fazem parte da minha jornada " +
-      "de estudo, porque acredito que entender estruturas complexas nos torna melhores criadores de soluções.",
+      "Estudo neurociência, IA e finanças para entender sistemas complexos. Esse repertório amplia minha leitura de produto e melhora minhas decisões técnicas.",
   },
 ];
 

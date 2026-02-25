@@ -18,6 +18,7 @@ import proj3 from "../../../public/CapaTerraCerta.png";
 import { TechEffects } from "../ui/tech-effects";
 import { GsapScrollReveal } from "../ui/gsap-animations";
 import { useMemo, useRef, useState } from "react";
+import { Badge } from "../ui/badge";
 
 interface Project {
   id: number;
@@ -109,10 +110,10 @@ export function ProjectsSection() {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header Section */}
         <GsapScrollReveal animation="fadeUp" className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 border border-primary/20">
+          <Badge className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 border border-primary/20">
             <Layers size={14} />
             <span>Portfólio</span>
-          </div>
+          </Badge>
           <SplitText
             text="Projetos em Destaque"
             className="text-4xl md:text-5xl font-bold text-foreground mb-6 justify-center tracking-tight"
