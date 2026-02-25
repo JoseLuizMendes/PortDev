@@ -2,79 +2,85 @@
 
 import { SplitText } from "@/components/ui/split-text";
 import { CuriosityCard } from "./CuriosityCard";
+import { CuriosityBookCard } from "./CuriosityBookCard";
 import { curiosities } from "./data";
 import { TechEffects } from "@/components/ui/tech-effects";
 import ProfileCard from "@/components/ui/ProfileCard";
-import { GsapScrollReveal } from "@/components/ui/gsap-animations";
+import {
+  GsapParallax,
+  GsapScrollReveal,
+} from "@/components/ui/gsap-animations";
+import { Badge } from "@/components/ui/badge";
+import { CircleQuestionMark } from "lucide-react";
 
 export default function Curiosities() {
   return (
     <section
       id="curiosities"
-      className="py-20 bg-background relative tech-pattern overflow-hidden"
+      className="py-20 lg:py-24 bg-background relative tech-pattern overflow-hidden isolate"
     >
       <TechEffects />
-      <div className="container  mx-auto px-6">
+
+      <div className="absolute inset-0 -z-10">
+        <GsapParallax
+          speed={0.18}
+          direction="up"
+          className="absolute -top-20 left-1/2 -translate-x-1/2 w-3xl h-192 rounded-full bg-primary/10 blur-3xl"
+        >
+          <div />
+        </GsapParallax>
+        <GsapParallax
+          speed={0.12}
+          direction="down"
+          className="absolute top-1/3 -left-28 w-80 h-80 rounded-full bg-primary/10 blur-3xl"
+        >
+          <div />
+        </GsapParallax>
+        <GsapParallax
+          speed={0.15}
+          direction="up"
+          className="absolute bottom-0 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl"
+        >
+          <div />
+        </GsapParallax>
+      </div>
+
+      <div className="container mx-auto px-6">
         <GsapScrollReveal
           animation="fadeUp"
-          className="text-center mb-8 md:mb-12 lg:mb-16"
+          className="text-center mb-10 md:mb-14 lg:mb-16"
         >
+          <Badge className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 border border-primary/25 backdrop-blur-sm">
+            <CircleQuestionMark size={14} />
+            <span>Além do portfólio</span>
+          </Badge>
+
           <SplitText
-            text="Curiosidades"
+            text="Identidade, processo e visão"
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4 justify-center"
           />
+
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto px-4">
-            Um pouco mais sobre mim além do código
+            Uma leitura rápida de como penso, crio e evoluo para entregar com
+            mais precisão.
           </p>
         </GsapScrollReveal>
 
-        <div className="mx-auto max-w-[1400px]">
-          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-stretch">
+        <div className="mx-auto max-w-350">
+          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 xl:gap-12 items-start">
             {/* Área de texto à ESQUERDA */}
             <div className="order-3 lg:order-1 h-full">
-              <GsapScrollReveal
-                animation="fadeLeft"
-                className="space-y-3 text-center"
-              >
-                <h3 className="text-2xl font-bold">Sobre Mim</h3>
-
-                <p className="text-muted-foreground leading-relaxed">
-                  Sou o{" "}
-                  <span className="text-foreground font-semibold">
-                    José Luiz
-                  </span>
-                  , alguém movido pela curiosidade — seja na tecnologia, na arte
-                  ou na mente humana. Antes do código, sempre fui o cara que
-                  queria entender o “porquê” das coisas, e isso acabou me
-                  guiando naturalmente para o mundo do desenvolvimento.
-                </p>
-
-                <p className="text-muted-foreground leading-relaxed">
-                  No trabalho, busco foco e intenção. Meu dia começa com café,
-                  música no fone e aquela imersão total no que estou
-                  construindo. Acredito que consistência e criatividade formam a
-                  base de qualquer entrega bem-feita.
-                </p>
-
-                <p className="text-muted-foreground leading-relaxed">
-                  Fora das telas, a música é meu ponto de equilíbrio. Aprendi a
-                  tocar na pandemia e, desde então, violão, teclado, guitarra,
-                  baixo e cajón fazem parte da minha rotina. Ela expandiu minha
-                  mente e virou uma das minhas principais fontes de inspiração.
-                </p>
-
-                <p className="text-muted-foreground leading-relaxed">
-                  Também sou fascinado por neurociência e por como o cérebro — a
-                  máquina mais eficiente que existe — processa o mundo. Esse
-                  interesse, junto de finanças e tecnologia, alimenta minha
-                  vontade de aprender sempre mais e contribuir de forma real em
-                  tudo o que faço.
-                </p>
+              <GsapScrollReveal animation="fadeLeft">
+                <CuriosityBookCard />
               </GsapScrollReveal>
             </div>
 
             {/* Cards de Curiosidades - CENTRO */}
-            <div className="grid grid-cols-1 gap-4 order-2 h-full overflow-visible py-2.5 w-full max-w-100 mx-auto lg:mx-0">
+            <GsapScrollReveal
+              animation="fadeUp"
+              stagger={0.1}
+              className="grid grid-cols-1 gap-4 sm:gap-5 content-start order-2 overflow-visible w-full max-w-100 mx-auto lg:mx-0"
+            >
               {curiosities.map((item, index) => (
                 <CuriosityCard
                   key={index}
@@ -84,10 +90,13 @@ export default function Curiosities() {
                   index={index}
                 />
               ))}
-            </div>
+            </GsapScrollReveal>
 
             {/* Imagem - Card Profile - DIREITA */}
-            <div className="order-1 py-18 lg:order-3 w-full max-w-sm lg:max-w-105 mx-auto self-start object-cover flex flex-col items-center">
+            <GsapScrollReveal
+              animation="fadeRight"
+              className="order-1 py-4 lg:py-8 lg:order-3 w-full max-w-sm lg:max-w-105 mx-auto self-start object-cover flex flex-col items-center"
+            >
               <ProfileCard
                 className="w-full"
                 avatarUrl="/Card_Profissional.png"
@@ -100,9 +109,8 @@ export default function Curiosities() {
                 showUserInfo={true}
                 behindGlowSize="50%"
                 behindGlowColor="rgba(38,70,94)"
-                
               />
-            </div>
+            </GsapScrollReveal>
           </div>
         </div>
       </div>
