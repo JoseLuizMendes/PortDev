@@ -22,6 +22,14 @@ interface Skill {
 }
 
 const skills: Skill[] = [
+  //Soft Skills
+  { name: "Comunicação", level: 90, category: "SoftSkills" },
+  { name: "Liderança", level: 85, category: "SoftSkills" },
+  { name: "Trabalho em Equipe", level: 95, category: "SoftSkills" },
+  { name: "Resolução de Problemas", level: 90, category: "SoftSkills" },
+  { name: "Adaptabilidade", level: 88, category: "SoftSkills" },
+  { name: "Gestão de Tempo", level: 84, category: "SoftSkills" },
+  
   // Frontend
   { name: "Tailwind CSS", level: 90, category: "Frontend" },
   { name: "Next.js", level: 80, category: "Frontend" },
@@ -37,18 +45,18 @@ const skills: Skill[] = [
   { name: "Node.js", level: 75, category: "Backend" },
   { name: "Python", level: 70, category: "Backend" },
   { name: "Express", level: 50, category: "Backend" },
+  { name: "Spring", level: 75, category: "Backend" },
+  { name: "ASP.NET", level: 60, category: "Backend" },
+  { name: ".NET", level: 55, category: "Backend" },
+  { name: "Entity Framework", level: 55, category: "Backend" },
 
   // Database
   { name: "PostgreSQL", level: 85, category: "Database" },
   { name: "SQL Developer", level: 80, category: "Database" },
   { name: "MongoDB", level: 75, category: "Database" },
+  { name: "NeonDB", level: 90, category: "Database" },
   { name: "Oracle", level: 70, category: "Database" },
 
-  // Frameworks
-  { name: "Spring", level: 75, category: "Frameworks" },
-  { name: "ASP.NET", level: 60, category: "Frameworks" },
-  { name: ".NET", level: 55, category: "Frameworks" },
-  { name: "Entity Framework", level: 55, category: "Frameworks" },
 
   // Tools
   { name: "Git", level: 85, category: "Tools" },
@@ -57,12 +65,24 @@ const skills: Skill[] = [
   { name: "Docker", level: 25, category: "Tools" },
 ];
 
-const categories = ["Frontend", "Backend", "Database", "Frameworks", "Tools"];
+const categories = ["SoftSkills", "Frontend", "Backend", "Database", "Tools"];
 
 // Cores temáticas para cada categoria
 const CATEGORY_COLORS = {
+
+  SoftSkills: {
+    primary: "var(--chart-2)",
+    gradient: [
+      "var(--chart-1)",
+      "var(--chart-2)",
+      "var(--chart-3)",
+      "var(--chart-4)",
+      "var(--chart-5)",
+    ],
+  },
+
   Frontend: {
-    primary: "var(--chart-1)",
+    primary: "var(--chart-2)",
     gradient: [
       "var(--chart-1)",
       "var(--chart-2)",
@@ -141,7 +161,7 @@ export function SkillsSection() {
     const categoryColor = getCategoryColor(category);
 
     return (
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer height={300} width={"100%"}> 
         <RadarChart data={getCategoryRadarData(category)} outerRadius={105}>
           <PolarGrid stroke={CHART_THEME.grid} />
           <PolarAngleAxis
@@ -191,9 +211,10 @@ export function SkillsSection() {
             >
               <Card className="group rounded-xl border border-border/60 bg-card/40 shadow-none!">
                 <CardContent className="p-8 relative">
-                  <div className="absolute top-4 right-4 w-2 h-2 bg-blue-500 rounded-full animate-pulse opacity-60"></div>
                   <h3 className="text-2xl font-bold text-gradient mb-6 text-center group-hover:scale-105 transition-transform duration-300">
-                    {category === "Frontend"
+                    {category === "SoftSkills"
+                      ? "Soft Skills"
+                      : category === "Frontend"
                       ? "Frontend"
                       : category === "Backend"
                       ? "Backend"
